@@ -234,7 +234,7 @@ public class Appointment {
 
     /**
      * Sets User ID
-     * @param userId Integer
+     * @param  userId Integer
      */
     public void setUserId(int userId) {
         this.userId = userId;
