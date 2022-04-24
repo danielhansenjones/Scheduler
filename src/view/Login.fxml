@@ -21,7 +21,7 @@
         </ImageView>
     </AnchorPane>
     <AnchorPane layoutY="118.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="210.0" prefWidth="600.0"
-                style="-fx-background-color: whitesmoke;" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="0.0"
+                style="-fx-background-color: grey;" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="0.0"
                 AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="118.0">
         <Label fx:id="passwordLabel" layoutX="8.0" layoutY="88.0" prefHeight="30.0" prefWidth="140.0"
                text="Password:" AnchorPane.leftAnchor="8.0">
