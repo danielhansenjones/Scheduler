@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -13,6 +13,23 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CustomerData implements Initializable {
+    public TableView customerTableView;
+    public TableColumn customerIdColumn;
+    public TableColumn nameColumn;
+    public TableColumn addressColumn;
+    public TableColumn postalColumn;
+    public TableColumn phoneColumn;
+    public TableColumn countryColumn;
+    public TextField firstNameTextField;
+    public TextField lastNameTextField;
+    public TextField addressTextField;
+    public TextField postalTextField;
+    public TextField phoneTextField;
+    public Label regionLabel;
+    public ComboBox countryComboBox;
+    public ComboBox regionComboBox;
+    public Label customerIDLabel;
+    public Button addButton;
     Parent scene;
     Stage stage;
 
@@ -28,5 +45,23 @@ public class CustomerData implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    }
+
+    public void countrySelectionHandler(ActionEvent actionEvent) {
+    }
+
+    public void addButtonHandler(ActionEvent actionEvent) {
+    }
+
+    public void deleteButtonHandler(ActionEvent actionEvent) {
+    }
+
+    public void cancelButtonHandler(ActionEvent actionEvent) {
+    }
+
+    public void modifyButtonHandler(ActionEvent actionEvent) {
+    }
+
+    public void saveButtonHandler(ActionEvent actionEvent) {
     }
 }

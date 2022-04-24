@@ -17,7 +17,7 @@ public class Appointment {
     private int customerId;
     private int userId;
     private int contactId;
-/*  Last_Update Timestamp?? here?? */
+    /*  Last_Update Timestamp?? here?? */
 
     /**
      * @param appointmentId Int value of Appointment ID
@@ -46,8 +46,7 @@ public class Appointment {
                        int customerId,
                        int userId,
                        int contactId,
-                       String contactName)
-    {
+                       String contactName) {
         this.appointmentId = appointmentId;
         this.title = title;
         this.description = description;
@@ -65,7 +64,8 @@ public class Appointment {
 
     /**
      * Gets Appointment ID
-     * @return appointmentId Integer 
+     *
+     * @return appointmentId Integer
      */
     public int getAppointmentId() {
         return appointmentId;
@@ -73,7 +73,8 @@ public class Appointment {
 
     /**
      * Sets Appointment ID
-     * @param appointmentId Integer 
+     *
+     * @param appointmentId Integer
      */
     public void setAppointmentId(int appointmentId) {
         this.appointmentId = appointmentId;
@@ -81,7 +82,8 @@ public class Appointment {
 
     /**
      * Gets Appointment Title
-     * @return title String 
+     *
+     * @return title String
      */
     public String getTitle() {
         return title;
@@ -89,7 +91,8 @@ public class Appointment {
 
     /**
      * Sets Appointment Title
-     * @param title String 
+     *
+     * @param title String
      */
     public void setTitle(String title) {
         this.title = title;
@@ -97,7 +100,8 @@ public class Appointment {
 
     /**
      * Gets Appointment Description
-     * @return description String 
+     *
+     * @return description String
      */
     public String getDescription() {
         return description;
@@ -105,6 +109,7 @@ public class Appointment {
 
     /**
      * Sets Appointment Description
+     *
      * @param description String
      */
     public void setDescription(String description) {
@@ -113,6 +118,7 @@ public class Appointment {
 
     /**
      * Gets Appointment Location
+     *
      * @return location String
      */
     public String getLocation() {
@@ -121,6 +127,7 @@ public class Appointment {
 
     /**
      * Sets Appointment Location
+     *
      * @param location String
      */
     public void setLocation(String location) {
@@ -129,6 +136,7 @@ public class Appointment {
 
     /**
      * Gets Appointment Type
+     *
      * @return type String
      */
     public String getType() {
@@ -137,6 +145,7 @@ public class Appointment {
 
     /**
      * Sets Appointment Type
+     *
      * @param type String
      */
     public void setType(String type) {
@@ -145,6 +154,7 @@ public class Appointment {
 
     /**
      * Gets Start Date
+     *
      * @return startDate LocalDate
      */
     public LocalDate getStartDate() {
@@ -162,6 +172,7 @@ public class Appointment {
 
     /**
      * Gets Start Time
+     *
      * @return startTime LocalDateTime
      */
     public LocalDateTime getStartTime() {
@@ -170,6 +181,7 @@ public class Appointment {
 
     /**
      * Sets Appointment Start Time
+     *
      * @param startTime LocalDateTime
      */
     public void setStartTime(LocalDateTime startTime) {
@@ -178,6 +190,7 @@ public class Appointment {
 
     /**
      * Gets End Date
+     *
      * @return endDate LocalDate
      */
     public LocalDate getEndDate() {
@@ -186,6 +199,7 @@ public class Appointment {
 
     /**
      * Sets Appointment End Date
+     *
      * @param endDate LocalDate
      */
     public void setEndDate(LocalDate endDate) {
@@ -194,6 +208,7 @@ public class Appointment {
 
     /**
      * Gets End Time
+     *
      * @return endTime LocalDateTime
      */
     public LocalDateTime getEndTime() {
@@ -202,6 +217,7 @@ public class Appointment {
 
     /**
      * Sets Appointment End Time
+     *
      * @param endTime LocalDateTime
      */
     public void setEndTime(LocalDateTime endTime) {
@@ -210,6 +226,7 @@ public class Appointment {
 
     /**
      * Gets Customer ID
+     *
      * @return customerId Integer
      */
     public int getCustomerId() {
@@ -218,6 +235,7 @@ public class Appointment {
 
     /**
      * Sets Customer ID
+     *
      * @param customerId Integer
      */
     public void setCustomerId(int customerId) {
@@ -226,6 +244,7 @@ public class Appointment {
 
     /**
      * Gets User ID
+     *
      * @return userId Integer
      */
     public int getUserId() {
@@ -234,7 +253,8 @@ public class Appointment {
 
     /**
      * Sets User ID
-     * @param  userId Integer
+     *
+     * @param userId Integer
      */
     public void setUserId(int userId) {
         this.userId = userId;
@@ -242,6 +262,7 @@ public class Appointment {
 
     /**
      * Gets Contact ID
+     *
      * @return contactId Integer
      */
     public int getContactId() {
@@ -250,6 +271,7 @@ public class Appointment {
 
     /**
      * Sets Contact ID
+     *
      * @param contactId Integer
      */
     public void setContactId(int contactId) {
@@ -258,6 +280,7 @@ public class Appointment {
 
     /**
      * Gets Contact Name
+     *
      * @return contactName String
      */
     public String getContactName() {
@@ -266,6 +289,7 @@ public class Appointment {
 
     /**
      * Sets Contact Name
+     *
      * @param contactName String
      */
     public void setContactName(String contactName) {

@@ -7,7 +7,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Schedule">
     <children>
-        <ImageView fitHeight="600.0" fitWidth="900.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ImageView fitHeight="617.0" fitWidth="908.0" pickOnBounds="true" AnchorPane.bottomAnchor="-17.0" AnchorPane.topAnchor="0.0">
             <image>
                 <Image url="@../assets/black-background.jpg" />
             </image>
@@ -91,29 +91,29 @@
             </children>
         </AnchorPane>
         <Button fx:id="customerButton" layoutX="762.0" layoutY="14.0" mnemonicParsing="false" onAction="#customerButtonHandler" prefHeight="42.0" prefWidth="124.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Customers" AnchorPane.topAnchor="15.0" />
-        <Button fx:id="addButton" layoutX="660.0" layoutY="562.0" mnemonicParsing="false" onAction="#addButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Add" AnchorPane.bottomAnchor="10.0" />
-        <Button fx:id="deleteButton" layoutX="823.0" layoutY="562.0" mnemonicParsing="false" onAction="#deleteButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Delete" AnchorPane.bottomAnchor="10.0" />
-        <Button fx:id="updateButton" layoutX="741.0" layoutY="562.0" mnemonicParsing="false" onAction="#updateButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Update" AnchorPane.bottomAnchor="10.0" />
-        <Label fx:id="currentTimeLabel" layoutX="629.0" layoutY="18.0" prefHeight="36.0" prefWidth="116.0" style="-fx-text-fill: hotpink;" textFill="WHITE" AnchorPane.leftAnchor="625.0" AnchorPane.topAnchor="5.0">
+        <Button fx:id="addButton" layoutX="660.0" layoutY="572.0" mnemonicParsing="false" onAction="#addButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Add" AnchorPane.bottomAnchor="0.0" />
+        <Button fx:id="deleteButton" layoutX="824.0" layoutY="572.0" mnemonicParsing="false" onAction="#deleteButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Delete" AnchorPane.bottomAnchor="0.0" />
+        <Button fx:id="updateButton" layoutX="744.0" layoutY="572.0" mnemonicParsing="false" onAction="#updateButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Update" AnchorPane.bottomAnchor="0.0" />
+        <Label fx:id="currentTimeLabel" layoutX="518.0" layoutY="5.0" prefHeight="36.0" prefWidth="116.0" style="-fx-text-fill: hotpink;" textFill="WHITE" AnchorPane.leftAnchor="518.0" AnchorPane.topAnchor="5.0">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
-        <Label layoutX="502.0" layoutY="5.0" prefHeight="36.0" prefWidth="116.0" style="-fx-text-fill: White;" text="Current Time:" textFill="WHITE" AnchorPane.leftAnchor="502.0" AnchorPane.topAnchor="5.0">
+        <Label layoutX="392.0" layoutY="5.0" prefHeight="36.0" prefWidth="116.0" style="-fx-text-fill: White;" text="Current Time:" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
-        <Label layoutX="502.0" layoutY="35.0" prefHeight="36.0" prefWidth="116.0" style="-fx-text-fill: White;" text="Current Date:" textFill="WHITE" AnchorPane.topAnchor="35.0">
+        <Label layoutX="392.0" layoutY="35.0" prefHeight="36.0" prefWidth="116.0" style="-fx-text-fill: White;" text="Current Date:" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
-        <Label fx:id="currentDateLabel" layoutX="626.0" layoutY="35.0" prefHeight="36.0" prefWidth="116.0" style="-fx-text-fill: turquoise, linear-gradient(hotpink, turquoise);" textFill="WHITE" AnchorPane.leftAnchor="625.0" AnchorPane.topAnchor="35.0">
+        <Label fx:id="currentDateLabel" layoutX="508.0" layoutY="35.0" prefHeight="36.0" prefWidth="116.0" style="-fx-text-fill: turquoise, linear-gradient(hotpink, turquoise);" textFill="WHITE" AnchorPane.leftAnchor="508.0" AnchorPane.topAnchor="35.0">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
-        <Button fx:id="reportsButton" layoutX="22.0" layoutY="562.0" mnemonicParsing="false" onAction="#reportsButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Reports" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="22.0" />
+        <Button fx:id="reportsButton" layoutX="14.0" layoutY="572.0" mnemonicParsing="false" onAction="#reportsButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Reports" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" />
     </children>
 </AnchorPane>
