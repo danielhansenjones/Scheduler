@@ -30,6 +30,11 @@ public class CustomerData implements Initializable {
     public ComboBox regionComboBox;
     public Label customerIDLabel;
     public Button addButton;
+    public Button deleteButton;
+    public Button cancelButton;
+    public Button modifyButton;
+    public Button saveButton;
+    public Button backButton;
     Parent scene;
     Stage stage;
 
