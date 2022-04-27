@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -13,21 +14,33 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddAppointment implements Initializable {
-    public Button addButton;
-    public Button cancelButton;
-    public TextField titleTextField;
-    public TextField descriptionTextField;
-    public TextField locationTextField;
-    public ComboBox contactComboBox;
-    public Label appointmentIDLabel;
-    public ComboBox customerComboBox;
-    public DatePicker startDatePicker;
-    public TextField startDateHour;
-    public TextField startDateMinute;
-    public TextField endDateHour;
-    public TextField endDateMinute;
-    public ChoiceBox typeComboBox;
-    public ComboBox userComboBox;
+    @FXML
+    private TextField titleTextField;
+    @FXML
+    private TextField descriptionTextField;
+    @FXML
+    private TextField locationTextField;
+    @FXML
+    private ComboBox contactComboBox;
+    @FXML
+    private Label appointmentIDLabel;
+    @FXML
+    private ComboBox customerComboBox;
+    @FXML
+    private DatePicker startDatePicker;
+    @FXML
+    private TextField startDateHour;
+    @FXML
+    private TextField startDateMinute;
+    @FXML
+    private TextField endDateHour;
+    @FXML
+    private TextField endDateMinute;
+    @FXML
+    private ChoiceBox typeComboBox;
+    @FXML
+    private ComboBox userComboBox;
+
     Parent scene;
     Stage stage;
 

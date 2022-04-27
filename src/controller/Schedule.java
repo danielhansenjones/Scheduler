@@ -2,6 +2,7 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -14,46 +15,87 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Schedule implements Initializable {
-    public TableView appointmentTableView;
-    public TableColumn appointmentIdColumn;
-    public TableColumn titleColumn;
-    public Tab overviewTab;
-    public TableColumn descriptionColumn;
-    public TableColumn locationColumn;
-    public TableColumn contactColumn;
-    public TableColumn typeColumn;
-    public TableColumn endDateColumn;
-    public TableColumn startDateColumn;
-    public TableColumn customerIDColumn;
-    public Tab monthTab;
-    public TableColumn monthAppointmentIdColumn;
-    public TableView appointmentMonthTableview;
-    public TableColumn monthTitleColumn;
-    public TableColumn weekAppointmentIdColumn;
-    public TableColumn weekTitleColumn;
-    public TableView appointmentWeekTableview;
-    public Tab weekTab;
-    public TableColumn weekDescriptionColumn;
-    public TableColumn weekLocationColumn;
-    public TableColumn weekContactColumn;
-    public TableColumn weekTypeColumn;
-    public TableColumn weekStartDateColumn;
-    public TableColumn weekEndDateColumn;
-    public TableColumn weekCustomerIDColumn;
-    public Button customerButton;
-    public Button addButton;
-    public Button deleteButton;
-    public TableColumn monthLocationColumn;
-    public TableColumn monthDescriptionColumn;
-    public TableColumn monthContactColumn;
-    public TableColumn monthTypeColumn;
-    public TableColumn monthStartDateColumn;
-    public TableColumn monthCustomerIdColumn;
-    public TableColumn monthEndDateColumn;
-    public Button updateButton;
-    public Label currentTimeLabel;
-    public Label currentDateLabel;
-    public Button reportsButton;
+    @FXML
+    private TableView appointmentTableView;
+    @FXML
+    private TableColumn appointmentIdColumn;
+    @FXML
+    private TableColumn titleColumn;
+    @FXML
+    private Tab overviewTab;
+    @FXML
+    private TableColumn descriptionColumn;
+    @FXML
+    private TableColumn locationColumn;
+    @FXML
+    private TableColumn contactColumn;
+    @FXML
+    private TableColumn typeColumn;
+    @FXML
+    private TableColumn endDateColumn;
+    @FXML
+    private TableColumn startDateColumn;
+    @FXML
+    private TableColumn customerIDColumn;
+    @FXML
+    private Tab monthTab;
+    @FXML
+    private TableColumn monthAppointmentIdColumn;
+    @FXML
+    private TableView appointmentMonthTableview;
+    @FXML
+    private TableColumn monthTitleColumn;
+    @FXML
+    private TableColumn weekAppointmentIdColumn;
+    @FXML
+    private TableColumn weekTitleColumn;
+    @FXML
+    private TableView appointmentWeekTableview;
+    @FXML
+    private Tab weekTab;
+    @FXML
+    private TableColumn weekDescriptionColumn;
+    @FXML
+    private TableColumn weekLocationColumn;
+    @FXML
+    private TableColumn weekContactColumn;
+    @FXML
+    private TableColumn weekTypeColumn;
+    @FXML
+    private TableColumn weekStartDateColumn;
+    @FXML
+    private TableColumn weekEndDateColumn;
+    @FXML
+    private TableColumn weekCustomerIDColumn;
+    @FXML
+    private Button customerButton;
+    @FXML
+    private Button addButton;
+    @FXML
+    private Button deleteButton;
+    @FXML
+    private TableColumn monthLocationColumn;
+    @FXML
+    private TableColumn monthDescriptionColumn;
+    @FXML
+    private TableColumn monthContactColumn;
+    @FXML
+    private TableColumn monthTypeColumn;
+    @FXML
+    private TableColumn monthStartDateColumn;
+    @FXML
+    private TableColumn monthCustomerIdColumn;
+    @FXML
+    private TableColumn monthEndDateColumn;
+    @FXML
+    private Button updateButton;
+    @FXML
+    private Label currentTimeLabel;
+    @FXML
+    private Label currentDateLabel;
+    @FXML
+    private Button reportsButton;
+
     Parent scene;
     Stage stage;
 

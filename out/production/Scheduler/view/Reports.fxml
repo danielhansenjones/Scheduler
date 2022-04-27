@@ -5,97 +5,72 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-            prefWidth="900.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Reports">
-    <ImageView fitHeight="625.0" fitWidth="911.0" layoutY="-7.0" pickOnBounds="true" AnchorPane.bottomAnchor="-18.0"
-               AnchorPane.topAnchor="-7.0">
-        <Image url="@../assets/black-background.jpg"/>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Reports">
+    <ImageView fitHeight="618.0" fitWidth="900.0" pickOnBounds="true" AnchorPane.bottomAnchor="-18.0" AnchorPane.topAnchor="0.0">
+        <Image url="@../assets/black-background.jpg" />
     </ImageView>
-    <ImageView fitHeight="75.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0"
-               AnchorPane.topAnchor="0.0">
-        <Image url="@../assets/report.png"/>
+    <ImageView fitHeight="75.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Image url="@../assets/report.png" />
     </ImageView>
-    <AnchorPane layoutY="75.0" prefHeight="476.0" prefWidth="900.0" style="-fx-background-color: dimgrey;"
-                AnchorPane.bottomAnchor="50.0" AnchorPane.topAnchor="75.0">
+    <AnchorPane layoutY="75.0" prefHeight="476.0" prefWidth="900.0" style="-fx-background-color: dimgrey;" AnchorPane.bottomAnchor="50.0" AnchorPane.topAnchor="75.0">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="475.0" prefWidth="900.0">
             <TabPane layoutY="-3.0" prefHeight="484.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE">
-                <Tab fx:id="totalAppointmentsTab" onSelectionChanged="#totalTabHandler"
-                     text="Total Appointments">
+                <Tab fx:id="totalAppointmentsTab" onSelectionChanged="#totalTabHandler" text="Total Appointments">
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="387.0" prefWidth="778.0">
-                        <TableView fx:id="monthTypeTableview" layoutY="49.0" prefHeight="411.0"
-                                   prefWidth="900.0" style="-fx-background-color: dimgrey;">
+                        <TableView fx:id="monthTypeTableview" layoutY="49.0" prefHeight="411.0" prefWidth="900.0" style="-fx-background-color: dimgrey;">
                             <columns>
-                                <TableColumn fx:id="monthColumn" prefWidth="114.0" text="Month"/>
-                                <TableColumn fx:id="monthTypeColumn" prefWidth="125.0" text="Type"/>
-                                <TableColumn fx:id="amountColumn" prefWidth="125.0" text="Amount"/>
+                                <TableColumn fx:id="monthColumn" prefWidth="114.0" text="Month" />
+                                <TableColumn fx:id="monthTypeColumn" prefWidth="125.0" text="Type" />
+                                <TableColumn fx:id="amountColumn" prefWidth="125.0" text="Amount" />
                             </columns>
                         </TableView>
-                        <Label layoutX="8.0" layoutY="8.0" prefHeight="36.0" prefWidth="282.0"
-                               style="-fx-text-fill: White;" text="Amount During Month By Type:"
-                               textFill="WHITE">
+                        <Label layoutX="280.0" layoutY="6.0" prefHeight="36.0" prefWidth="282.0" style="-fx-text-fill: White;" text="Amount During Month By Type:" textFill="WHITE">
                             <font>
-                                <Font name="System Bold" size="18.0"/>
+                                <Font name="System Bold" size="18.0" />
                             </font>
                         </Label>
                     </AnchorPane>
                 </Tab>
-                <Tab fx:id="individualScheduleTab" onSelectionChanged="#individualTabHandler"
-                     text="Individual Schedule">
+                <Tab fx:id="individualScheduleTab" onSelectionChanged="#individualTabHandler" text="Individual Schedule">
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                        <TableView fx:id="contactScheduleTableview" layoutY="108.0"
-                                   prefHeight="344.0" prefWidth="900.0"
-                                   style="-fx-background-color: dimgrey;">
+                        <TableView fx:id="contactScheduleTableview" layoutY="108.0" prefHeight="344.0" prefWidth="900.0" style="-fx-background-color: dimgrey;">
                             <columns>
-                                <TableColumn fx:id="appointmentIDColumn" prefWidth="55.0"
-                                             text="AppID"/>
-                                <TableColumn fx:id="titleColumn" prefWidth="110.0" text="Title"/>
-                                <TableColumn fx:id="descriptionColumn" minWidth="0.0"
-                                             prefWidth="120.0" text="Description"/>
-                                <TableColumn fx:id="locationColumn" prefWidth="120.0"
-                                             text="Location"/>
-                                <TableColumn fx:id="contactColumn" prefWidth="85.0" text="Contact"/>
-                                <TableColumn fx:id="typeColumn" prefWidth="98.0" text="Type"/>
-                                <TableColumn fx:id="startDateColumn" prefWidth="115.0"
-                                             text="Start Date/Time"/>
-                                <TableColumn fx:id="endDateColumn" prefWidth="115.0"
-                                             text="End Date/Time"/>
-                                <TableColumn fx:id="customerIDColumn" text="Customer ID"/>
+                                <TableColumn fx:id="appointmentIDColumn" prefWidth="55.0" text="AppID" />
+                                <TableColumn fx:id="titleColumn" prefWidth="110.0" text="Title" />
+                                <TableColumn fx:id="descriptionColumn" minWidth="0.0" prefWidth="120.0" text="Description" />
+                                <TableColumn fx:id="locationColumn" prefWidth="120.0" text="Location" />
+                                <TableColumn fx:id="contactColumn" prefWidth="85.0" text="Contact" />
+                                <TableColumn fx:id="typeColumn" prefWidth="98.0" text="Type" />
+                                <TableColumn fx:id="startDateColumn" prefWidth="115.0" text="Start Date/Time" />
+                                <TableColumn fx:id="endDateColumn" prefWidth="115.0" text="End Date/Time" />
+                                <TableColumn fx:id="customerIDColumn" text="Customer ID" />
                             </columns>
                         </TableView>
-                        <ComboBox fx:id="contactComboBox" layoutX="366.0" layoutY="60.0"
-                                  onAction="#contactComboSelected" prefWidth="150.0"
-                                  AnchorPane.leftAnchor="366.0"/>
-                        <Label layoutX="400.0" layoutY="14.0" prefHeight="36.0" prefWidth="116.0"
-                               style="-fx-text-fill: White;" text="Contact:" textAlignment="CENTER"
-                               textFill="WHITE" AnchorPane.leftAnchor="400.0">
+                        <ComboBox fx:id="contactComboBox" layoutX="366.0" layoutY="60.0" onAction="#contactComboSelected" prefWidth="150.0" AnchorPane.leftAnchor="366.0" />
+                        <Label layoutX="400.0" layoutY="14.0" prefHeight="36.0" prefWidth="116.0" style="-fx-text-fill: White;" text="Contact:" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="400.0">
                             <font>
-                                <Font name="System Bold" size="18.0"/>
+                                <Font name="System Bold" size="18.0" />
                             </font>
                         </Label>
-                        <Label layoutX="10.0" layoutY="59.0" prefHeight="49.0" prefWidth="140.0"
-                               style="-fx-text-fill: White;" text="Schedule:" textFill="WHITE">
+                        <Label layoutX="10.0" layoutY="59.0" prefHeight="49.0" prefWidth="140.0" style="-fx-text-fill: White;" text="Schedule:" textFill="WHITE">
                             <font>
-                                <Font name="System Bold" size="18.0"/>
+                                <Font name="System Bold" size="18.0" />
                             </font>
                         </Label>
                     </AnchorPane>
                 </Tab>
                 <Tab fx:id="totalUserNumbers" onSelectionChanged="#totalUsersTabHandler" text="Total Users">
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="387.0" prefWidth="778.0">
-                        <TableView fx:id="monthTypeTableview1" layoutY="49.0" prefHeight="403.0"
-                                   prefWidth="900.0" style="-fx-background-color: dimgrey;">
+                        <TableView fx:id="monthTypeTableview1" layoutY="49.0" prefHeight="403.0" prefWidth="900.0" style="-fx-background-color: dimgrey;">
                             <columns>
-                                <TableColumn prefWidth="114.0" text="Amount"/>
-                                <TableColumn prefWidth="125.0"/>
-                                <TableColumn prefWidth="125.0"/>
+                                <TableColumn prefWidth="114.0" text="Amount" />
+                                <TableColumn prefWidth="125.0" />
+                                <TableColumn prefWidth="125.0" />
                             </columns>
                         </TableView>
-                        <Label layoutX="8.0" layoutY="8.0" prefHeight="36.0" prefWidth="375.0"
-                               style="-fx-text-fill: White;"
-                               text="Total Number of Independent Users" textFill="WHITE">
+                        <Label layoutX="243.0" layoutY="7.0" prefHeight="36.0" prefWidth="375.0" style="-fx-text-fill: White;" text="Total Number of Independent Users" textFill="WHITE">
                             <font>
-                                <Font name="System Bold" size="18.0"/>
+                                <Font name="System Bold" size="18.0" />
                             </font>
                         </Label>
                     </AnchorPane>
@@ -103,33 +78,25 @@
             </TabPane>
         </AnchorPane>
     </AnchorPane>
-    <Button fx:id="backButton" layoutX="823.0" layoutY="572.0" mnemonicParsing="false" onAction="#backButtonHandler"
-            prefHeight="28.0" prefWidth="63.0"
-            style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Back"
-            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="823.0"/>
-    <Label fx:id="currentTimeLabel" layoutX="508.0" layoutY="5.0" prefHeight="36.0" prefWidth="116.0"
-            textFill="WHITE" AnchorPane.leftAnchor="508.0" AnchorPane.topAnchor="5.0">
+    <Button fx:id="backButton" layoutX="823.0" layoutY="572.0" mnemonicParsing="false" onAction="#backButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Back" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="823.0" />
+    <Label fx:id="currentTimeLabel" layoutX="508.0" layoutY="5.0" prefHeight="36.0" prefWidth="116.0" textFill="WHITE" AnchorPane.leftAnchor="508.0" AnchorPane.topAnchor="5.0">
         <font>
-            <Font name="System Bold" size="18.0"/>
+            <Font name="System Bold" size="18.0" />
         </font>
     </Label>
-    <Label layoutX="392.0" layoutY="5.0" prefHeight="36.0" prefWidth="116.0" style="-fx-text-fill: White;"
-           text="Current Time:" textFill="WHITE">
+    <Label layoutX="392.0" layoutY="5.0" prefHeight="36.0" prefWidth="116.0" style="-fx-text-fill: White;" text="Current Time:" textFill="WHITE">
         <font>
-            <Font name="System Bold" size="18.0"/>
+            <Font name="System Bold" size="18.0" />
         </font>
     </Label>
-    <Label layoutX="392.0" layoutY="35.0" prefHeight="36.0" prefWidth="116.0" style="-fx-text-fill: White;"
-           text="Current Date:" textFill="WHITE">
+    <Label layoutX="392.0" layoutY="35.0" prefHeight="36.0" prefWidth="116.0" style="-fx-text-fill: White;" text="Current Date:" textFill="WHITE">
         <font>
-            <Font name="System Bold" size="18.0"/>
+            <Font name="System Bold" size="18.0" />
         </font>
     </Label>
-    <Label fx:id="currentDateLabel" layoutX="508.0" layoutY="35.0" prefHeight="36.0" prefWidth="116.0"
-            textFill="WHITE"
-           AnchorPane.leftAnchor="508.0" AnchorPane.topAnchor="35.0">
+    <Label fx:id="currentDateLabel" layoutX="508.0" layoutY="35.0" prefHeight="36.0" prefWidth="116.0" textFill="WHITE" AnchorPane.leftAnchor="508.0" AnchorPane.topAnchor="35.0">
         <font>
-            <Font name="System Bold" size="18.0"/>
+            <Font name="System Bold" size="18.0" />
         </font>
     </Label>
 </AnchorPane>

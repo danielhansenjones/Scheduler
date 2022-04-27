@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0"
-            prefWidth="759.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+            prefWidth="759.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controller.UpdateAppointment">
     <ImageView fitHeight="507.0" fitWidth="763.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@../assets/black-background.jpg"/>

@@ -5,90 +5,63 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-            prefWidth="900.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Schedule">
-    <ImageView fitHeight="617.0" fitWidth="908.0" pickOnBounds="true" AnchorPane.bottomAnchor="-17.0"
-               AnchorPane.topAnchor="0.0">
-        <Image url="@../assets/black-background.jpg"/>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Schedule">
+    <ImageView fitHeight="617.0" fitWidth="908.0" pickOnBounds="true" AnchorPane.bottomAnchor="-17.0" AnchorPane.topAnchor="0.0">
+        <Image url="@../assets/black-background.jpg" />
     </ImageView>
-    <ImageView fitHeight="75.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true"
-               AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <Image url="@../assets/schedule.png"/>
+    <ImageView fitHeight="75.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Image url="@../assets/schedule.png" />
     </ImageView>
-    <AnchorPane layoutY="75.0" prefHeight="476.0" prefWidth="900.0" style="-fx-background-color: dimgrey;"
-                AnchorPane.bottomAnchor="50.0" AnchorPane.topAnchor="75.0">
+    <AnchorPane layoutY="75.0" prefHeight="476.0" prefWidth="900.0" style="-fx-background-color: dimgrey;" AnchorPane.bottomAnchor="50.0" AnchorPane.topAnchor="75.0">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="475.0" prefWidth="900.0">
-            <TabPane prefHeight="481.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane prefHeight="481.0" prefWidth="908.0" tabClosingPolicy="UNAVAILABLE">
                 <Tab fx:id="overviewTab" onSelectionChanged="#overviewTabHandler" text="Overview">
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="387.0" prefWidth="778.0">
-                        <TableView fx:id="appointmentTableView" prefHeight="452.0" prefWidth="900.0"
-                                   style="-fx-background-color: dimgrey;">
+                        <TableView fx:id="appointmentTableView" prefHeight="452.0" prefWidth="908.0" style="-fx-background-color: dimgrey;">
                             <columns>
-                                <TableColumn fx:id="appointmentIdColumn" prefWidth="55.0"
-                                             text="AppID"/>
-                                <TableColumn fx:id="titleColumn" prefWidth="110.0" text="Title"/>
-                                <TableColumn fx:id="descriptionColumn" minWidth="0.0"
-                                             prefWidth="120.0" text="Description"/>
-                                <TableColumn fx:id="locationColumn" prefWidth="120.0"
-                                             text="Location"/>
-                                <TableColumn fx:id="contactColumn" prefWidth="85.0" text="Contact"/>
-                                <TableColumn fx:id="typeColumn" prefWidth="98.0" text="Type"/>
-                                <TableColumn fx:id="startDateColumn" prefWidth="115.0"
-                                             text="Start Date/Time"/>
-                                <TableColumn fx:id="endDateColumn" prefWidth="115.0"
-                                             text="End Date/Time"/>
-                                <TableColumn fx:id="customerIDColumn" text="Customer ID"/>
+                                <TableColumn fx:id="appointmentIdColumn" prefWidth="55.0" text="AppID" />
+                                <TableColumn fx:id="titleColumn" prefWidth="110.0" text="Title" />
+                                <TableColumn fx:id="descriptionColumn" minWidth="0.0" prefWidth="120.0" text="Description" />
+                                <TableColumn fx:id="locationColumn" prefWidth="120.0" text="Location" />
+                                <TableColumn fx:id="contactColumn" prefWidth="85.0" text="Contact" />
+                                <TableColumn fx:id="typeColumn" prefWidth="98.0" text="Type" />
+                                <TableColumn fx:id="startDateColumn" prefWidth="115.0" text="Start Date/Time" />
+                                <TableColumn fx:id="endDateColumn" prefWidth="115.0" text="End Date/Time" />
+                                <TableColumn fx:id="customerIDColumn" text="Customer ID" />
                             </columns>
                         </TableView>
                     </AnchorPane>
                 </Tab>
                 <Tab fx:id="monthTab" onSelectionChanged="#monthTabHandler" text="Month">
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                        <TableView fx:id="appointmentMonthTableview" prefHeight="452.0"
-                                   prefWidth="900.0" style="-fx-background-color: dimgrey;">
+                        <TableView fx:id="appointmentMonthTableview" prefHeight="452.0" prefWidth="915.0" style="-fx-background-color: dimgrey;">
                             <columns>
-                                <TableColumn fx:id="monthAppointmentIdColumn" prefWidth="55.0"
-                                             text="AppID"/>
-                                <TableColumn fx:id="monthTitleColumn" prefWidth="110.0"
-                                             text="Title"/>
-                                <TableColumn fx:id="monthDescriptionColumn" minWidth="0.0"
-                                             prefWidth="120.0" text="Description"/>
-                                <TableColumn fx:id="monthLocationColumn" prefWidth="120.0"
-                                             text="Location"/>
-                                <TableColumn fx:id="monthContactColumn" prefWidth="85.0"
-                                             text="Contact"/>
-                                <TableColumn fx:id="monthTypeColumn" prefWidth="98.0" text="Type"/>
-                                <TableColumn fx:id="monthStartDateColumn" prefWidth="115.0"
-                                             text="Start Date/Time"/>
-                                <TableColumn fx:id="monthEndDateColumn" prefWidth="115.0"
-                                             text="End Date/Time"/>
-                                <TableColumn fx:id="monthCustomerIdColumn" text="Customer ID"/>
+                                <TableColumn fx:id="monthAppointmentIdColumn" prefWidth="55.0" text="AppID" />
+                                <TableColumn fx:id="monthTitleColumn" prefWidth="110.0" text="Title" />
+                                <TableColumn fx:id="monthDescriptionColumn" minWidth="0.0" prefWidth="120.0" text="Description" />
+                                <TableColumn fx:id="monthLocationColumn" prefWidth="120.0" text="Location" />
+                                <TableColumn fx:id="monthContactColumn" prefWidth="85.0" text="Contact" />
+                                <TableColumn fx:id="monthTypeColumn" prefWidth="98.0" text="Type" />
+                                <TableColumn fx:id="monthStartDateColumn" prefWidth="115.0" text="Start Date/Time" />
+                                <TableColumn fx:id="monthEndDateColumn" prefWidth="115.0" text="End Date/Time" />
+                                <TableColumn fx:id="monthCustomerIdColumn" text="Customer ID" />
                             </columns>
                         </TableView>
                     </AnchorPane>
                 </Tab>
                 <Tab fx:id="weekTab" onSelectionChanged="#weekTabHandler" text="Week">
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                        <TableView fx:id="appointmentWeekTableview" prefHeight="452.0"
-                                   prefWidth="900.0" style="-fx-background-color: dimgrey;">
+                        <TableView fx:id="appointmentWeekTableview" prefHeight="452.0" prefWidth="916.0" style="-fx-background-color: dimgrey;">
                             <columns>
-                                <TableColumn fx:id="weekAppointmentIdColumn" prefWidth="55.0"
-                                             text="AppID"/>
-                                <TableColumn fx:id="weekTitleColumn" prefWidth="110.0"
-                                             text="Title"/>
-                                <TableColumn fx:id="weekDescriptionColumn" minWidth="0.0"
-                                             prefWidth="120.0" text="Description"/>
-                                <TableColumn fx:id="weekLocationColumn" prefWidth="120.0"
-                                             text="Location"/>
-                                <TableColumn fx:id="weekContactColumn" prefWidth="85.0"
-                                             text="Contact"/>
-                                <TableColumn fx:id="weekTypeColumn" prefWidth="98.0" text="Type"/>
-                                <TableColumn fx:id="weekStartDateColumn" prefWidth="115.0"
-                                             text="Start Date/Time"/>
-                                <TableColumn fx:id="weekEndDateColumn" prefWidth="115.0"
-                                             text="End Date/Time"/>
-                                <TableColumn fx:id="weekCustomerIDColumn" text="Customer ID"/>
+                                <TableColumn fx:id="weekAppointmentIdColumn" prefWidth="55.0" text="AppID" />
+                                <TableColumn fx:id="weekTitleColumn" prefWidth="110.0" text="Title" />
+                                <TableColumn fx:id="weekDescriptionColumn" minWidth="0.0" prefWidth="120.0" text="Description" />
+                                <TableColumn fx:id="weekLocationColumn" prefWidth="120.0" text="Location" />
+                                <TableColumn fx:id="weekContactColumn" prefWidth="85.0" text="Contact" />
+                                <TableColumn fx:id="weekTypeColumn" prefWidth="98.0" text="Type" />
+                                <TableColumn fx:id="weekStartDateColumn" prefWidth="115.0" text="Start Date/Time" />
+                                <TableColumn fx:id="weekEndDateColumn" prefWidth="115.0" text="End Date/Time" />
+                                <TableColumn fx:id="weekCustomerIDColumn" text="Customer ID" />
                             </columns>
                         </TableView>
                     </AnchorPane>
@@ -96,49 +69,29 @@
             </TabPane>
         </AnchorPane>
     </AnchorPane>
-    <Button fx:id="customerButton" layoutX="762.0" layoutY="14.0" mnemonicParsing="false"
-            onAction="#customerButtonHandler" prefHeight="42.0" prefWidth="124.0"
-            style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Customers"
-            AnchorPane.topAnchor="15.0"/>
-    <Button fx:id="addButton" layoutX="660.0" layoutY="572.0" mnemonicParsing="false" onAction="#addButtonHandler"
-            prefHeight="28.0" prefWidth="63.0"
-            style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Add"
-            AnchorPane.bottomAnchor="0.0"/>
-    <Button fx:id="deleteButton" layoutX="824.0" layoutY="572.0" mnemonicParsing="false" onAction="#deleteButtonHandler"
-            prefHeight="28.0" prefWidth="63.0"
-            style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Delete"
-            AnchorPane.bottomAnchor="0.0"/>
-    <Button fx:id="updateButton" layoutX="744.0" layoutY="572.0" mnemonicParsing="false" onAction="#updateButtonHandler"
-            prefHeight="28.0" prefWidth="63.0"
-            style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Update"
-            AnchorPane.bottomAnchor="0.0"/>
-    <Label fx:id="currentTimeLabel" layoutX="518.0" layoutY="5.0" prefHeight="36.0" prefWidth="116.0"
-           style="-fx-text-fill: hotpink;" textFill="WHITE" AnchorPane.leftAnchor="518.0" AnchorPane.topAnchor="5.0">
+    <Button fx:id="customerButton" layoutX="762.0" layoutY="14.0" mnemonicParsing="false" onAction="#customerButtonHandler" prefHeight="42.0" prefWidth="124.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Customers" AnchorPane.topAnchor="15.0" />
+    <Button fx:id="addButton" layoutX="660.0" layoutY="572.0" mnemonicParsing="false" onAction="#addButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Add" AnchorPane.bottomAnchor="0.0" />
+    <Button fx:id="deleteButton" layoutX="824.0" layoutY="572.0" mnemonicParsing="false" onAction="#deleteButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Delete" AnchorPane.bottomAnchor="0.0" />
+    <Button fx:id="updateButton" layoutX="744.0" layoutY="572.0" mnemonicParsing="false" onAction="#updateButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Update" AnchorPane.bottomAnchor="0.0" />
+    <Label fx:id="currentTimeLabel" layoutX="518.0" layoutY="5.0" prefHeight="36.0" prefWidth="116.0" textFill="WHITE" AnchorPane.leftAnchor="518.0" AnchorPane.topAnchor="5.0">
         <font>
-            <Font name="System Bold" size="18.0"/>
+            <Font name="System Bold" size="18.0" />
         </font>
     </Label>
-    <Label layoutX="392.0" layoutY="5.0" prefHeight="36.0" prefWidth="116.0" style="-fx-text-fill: White;"
-           text="Current Time:" textFill="WHITE">
+    <Label layoutX="392.0" layoutY="5.0" prefHeight="36.0" prefWidth="116.0" style="-fx-text-fill: White;" text="Current Time:" textFill="WHITE">
         <font>
-            <Font name="System Bold" size="18.0"/>
+            <Font name="System Bold" size="18.0" />
         </font>
     </Label>
-    <Label layoutX="392.0" layoutY="35.0" prefHeight="36.0" prefWidth="116.0" style="-fx-text-fill: White;"
-           text="Current Date:" textFill="WHITE">
+    <Label layoutX="392.0" layoutY="35.0" prefHeight="36.0" prefWidth="116.0" style="-fx-text-fill: White;" text="Current Date:" textFill="WHITE">
         <font>
-            <Font name="System Bold" size="18.0"/>
+            <Font name="System Bold" size="18.0" />
         </font>
     </Label>
-    <Label fx:id="currentDateLabel" layoutX="508.0" layoutY="35.0" prefHeight="36.0" prefWidth="116.0"
-           style="-fx-text-fill: turquoise, linear-gradient(hotpink, turquoise);" textFill="WHITE"
-           AnchorPane.leftAnchor="508.0" AnchorPane.topAnchor="35.0">
+    <Label fx:id="currentDateLabel" layoutX="508.0" layoutY="35.0" prefHeight="36.0" prefWidth="116.0" textFill="WHITE" AnchorPane.leftAnchor="508.0" AnchorPane.topAnchor="35.0">
         <font>
-            <Font name="System Bold" size="18.0"/>
+            <Font name="System Bold" size="18.0" />
         </font>
     </Label>
-    <Button fx:id="reportsButton" layoutX="14.0" layoutY="572.0" mnemonicParsing="false"
-            onAction="#reportsButtonHandler" prefHeight="28.0" prefWidth="63.0"
-            style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Reports"
-            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0"/>
+    <Button fx:id="reportsButton" layoutX="14.0" layoutY="572.0" mnemonicParsing="false" onAction="#reportsButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Reports" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" />
 </AnchorPane>

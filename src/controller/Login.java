@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -16,14 +17,23 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Login implements Initializable {
-    public Label passwordLabel;
-    public Label userIdLabel;
-    public TextField userIdTextField;
-    public Button loginButton;
-    public PasswordField passwordTextField;
-    public Label locationLabel;
-    public Label languageLabel;
-    public Label languageTextLabel;
+    @FXML
+    private Label passwordLabel;
+    @FXML
+    private Label userIdLabel;
+    @FXML
+    private TextField userIdTextField;
+    @FXML
+    private Button loginButton;
+    @FXML
+    private PasswordField passwordTextField;
+    @FXML
+    private Label locationLabel;
+    @FXML
+    private Label languageLabel;
+    @FXML
+    private Label languageTextLabel;
+
     Parent scene;
     Stage stage;
 

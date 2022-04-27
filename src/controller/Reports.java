@@ -2,6 +2,7 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -14,28 +15,51 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Reports implements Initializable {
-    public Tab totalAppointmentsTab;
-    public TableView monthTypeTableview;
-    public TableColumn monthColumn;
-    public TableColumn monthTypeColumn;
-    public TableColumn amountColumn;
-    public Tab individualScheduleTab;
-    public TableView contactScheduleTableview;
-    public TableColumn appointmentIDColumn;
-    public TableColumn titleColumn;
-    public TableColumn descriptionColumn;
-    public TableColumn locationColumn;
-    public TableColumn contactColumn;
-    public TableColumn typeColumn;
-    public TableColumn startDateColumn;
-    public TableColumn endDateColumn;
-    public TableColumn customerIDColumn;
-    public ComboBox contactComboBox;
-    public Tab totalUserNumbers;
-    public TableView monthTypeTableview1;
-    public Button backButton;
-    public Label currentTimeLabel;
-    public Label currentDateLabel;
+
+    private Tab totalAppointmentsTab;
+    @FXML
+    private TableView monthTypeTableview;
+    @FXML
+    private TableColumn monthColumn;
+    @FXML
+    private TableColumn monthTypeColumn;
+    @FXML
+    private TableColumn amountColumn;
+    @FXML
+    private Tab individualScheduleTab;
+    @FXML
+    private TableView contactScheduleTableview;
+    @FXML
+    private TableColumn appointmentIDColumn;
+    @FXML
+    private TableColumn titleColumn;
+    @FXML
+    private TableColumn descriptionColumn;
+    @FXML
+    private TableColumn locationColumn;
+    @FXML
+    private TableColumn contactColumn;
+    @FXML
+    private TableColumn typeColumn;
+    @FXML
+    private TableColumn startDateColumn;
+    @FXML
+    private TableColumn endDateColumn;
+    @FXML
+    private TableColumn customerIDColumn;
+    @FXML
+    private ComboBox contactComboBox;
+    @FXML
+    private Tab totalUserNumbers;
+    @FXML
+    private TableView monthTypeTableview1;
+    @FXML
+    private Button backButton;
+    @FXML
+    private Label currentTimeLabel;
+    @FXML
+    private Label currentDateLabel;
+
     Parent scene;
     Stage stage;
 
