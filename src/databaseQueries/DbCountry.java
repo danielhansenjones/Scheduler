@@ -1,25 +1,21 @@
+
 package databaseQueries;
-import databaseAccess.DatabaseAccess;
-import model.Country;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
+import model.Country;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DbCountry {
 
-    public static ObservableList<Country> getCountries() throws SQLException {
+    public static ObservableList<Country> selectCountries() throws SQLException {
         ObservableList<Country> countries = FXCollections.observableArrayList();
-
-        String searchStatement = "SELECT * FROM countries;";
-        DBQuery.setPreparedStatement(DatabaseAccess.getConnection(), searchStatement);
-        PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
-
+        String sqlQuery = "SELECT * FROM countries;";
+        PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
+        ResultSet resultSet = preparedStatement.getResultSet();
         try {
             preparedStatement.execute();
-            ResultSet resultSet = preparedStatement.getResultSet();
 
             // Forward scroll resultSet
             while (resultSet.next()) {
@@ -38,23 +34,14 @@ public class DbCountry {
         }
     }
 
-    /** This method gets a Country Object by Country Name
-     * @param country String value of Country Name
-     * @return Country Country Object
-     * @throws SQLException Catches SQLException and prints stacktrace.
-     */
-    public static Country getCountryId(String country) throws SQLException {
-
-        String queryStatement = "SELECT * FROM countries WHERE Country=?";
-
-        DBQuery.setPreparedStatement(DatabaseAccess.getConnection(), queryStatement);
-        PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
-
+    public static Country selectCountryId(String country) throws SQLException {
+        String sqlQuery = "SELECT * FROM countries WHERE Country=?";
+        PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
         preparedStatement.setString(1, country);
+        ResultSet resultSet = preparedStatement.getResultSet();
 
         try {
             preparedStatement.execute();
-            ResultSet resultSet = preparedStatement.getResultSet();
 
             while (resultSet.next()) {
                 return new Country(

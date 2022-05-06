@@ -11,7 +11,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+
 
 public class AddAppointment implements Initializable {
     @FXML
@@ -44,7 +46,7 @@ public class AddAppointment implements Initializable {
     Parent scene;
     Stage stage;
 
-    public void cancelButtonHandler (ActionEvent actionEvent) throws IOException {
+    public void cancelButtonHandler(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
         stage.setScene(new Scene(scene));
@@ -56,6 +58,11 @@ public class AddAppointment implements Initializable {
         scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
+    }
+
+
+    void addButtonClicked(ActionEvent event) throws IOException, SQLException {
+
     }
 
     @Override

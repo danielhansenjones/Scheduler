@@ -1,5 +1,7 @@
 package controller;
 
+import databaseQueries.DbCountry;
+import databaseQueries.DbCustomer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,10 +9,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Customer;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class CustomerData implements Initializable {
@@ -29,9 +34,7 @@ public class CustomerData implements Initializable {
     @FXML
     private TableColumn countryColumn;
     @FXML
-    private TextField firstNameTextField;
-    @FXML
-    private TextField lastNameTextField;
+    private TextField nameTextField;
     @FXML
     private TextField addressTextField;
     @FXML
@@ -60,6 +63,7 @@ public class CustomerData implements Initializable {
     private Button backButton;
     Parent scene;
     Stage stage;
+    int createId;
 
     public void backButtonHandler(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -72,10 +76,29 @@ public class CustomerData implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        customerIDLabel.setText(String.valueOf(createId));
+        try {
+            customerTableView.setItems(DbCustomer.selectCustomers());
+            countryComboBox.setItems(DbCountry.selectCountries());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+        postalColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
+
+
+        saveButton.setVisible(false);
+    }
+ // combo boxes
+    public void countrySelectionHandler(ActionEvent actionEvent) {
 
     }
-
-    public void countrySelectionHandler(ActionEvent actionEvent) {
+    //combo boxes
+    public void regionSelectionHandler(ActionEvent actionEvent) {
     }
 
     public void addButtonHandler(ActionEvent actionEvent) {
@@ -86,9 +109,8 @@ public class CustomerData implements Initializable {
 
     @FXML
     private void cancelButtonHandler(ActionEvent actionEvent) {
-            customerIDLabel.setText(String.valueOf(generateID));
-            firstNameTextField.clear();
-            lastNameTextField.clear();
+            customerIDLabel.setText(String.valueOf(createId));
+            nameTextField.clear();
             addressTextField.clear();
             postalTextField.clear();
             countryComboBox.getSelectionModel().clearSelection();
@@ -98,8 +120,20 @@ public class CustomerData implements Initializable {
 
 
     public void modifyButtonHandler(ActionEvent actionEvent) {
+
+        Customer customer = (Customer) customerTableView.getSelectionModel().getSelectedItem();
+        customerIDLabel.setText(String.valueOf(customer.getCustomerId()));
+        nameTextField.setText(String.valueOf((customer).getCustomerName()));
+        addressTextField.setText(String.valueOf((customer).getAddress()));
+        postalTextField.setText(String.valueOf((customer).getPostalCode()));
+        countryComboBox.setValue(customer.getCountry());
+        regionComboBox.setValue(customer.getDivision());
+        phoneTextField.setText(String.valueOf((customer).getPhoneNumber()));
+
     }
 
     public void saveButtonHandler(ActionEvent actionEvent) {
     }
+
+
 }

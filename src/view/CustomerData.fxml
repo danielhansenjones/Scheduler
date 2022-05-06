@@ -48,55 +48,48 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <Label text="Customer ID" textFill="WHITE">
                                 <font>
                                     <Font name="System Bold" size="15.0" />
                                 </font>
                             </Label>
-                            <Label text="First Name" textFill="WHITE" GridPane.rowIndex="1">
+                            <Label text="Name" textFill="WHITE" GridPane.rowIndex="1">
                                 <font>
                                     <Font name="System Bold" size="15.0" />
                                 </font>
                             </Label>
-                            <Label text="Last Name" textFill="WHITE" GridPane.rowIndex="2">
+                            <Label text="Address" textFill="WHITE" GridPane.rowIndex="2">
                                 <font>
                                     <Font name="System Bold" size="15.0" />
                                 </font>
                             </Label>
-                            <Label text="Address" textFill="WHITE" GridPane.rowIndex="3">
+                            <Label text="Postal" textFill="WHITE" GridPane.rowIndex="3">
                                 <font>
                                     <Font name="System Bold" size="15.0" />
                                 </font>
                             </Label>
-                            <Label text="Postal" textFill="WHITE" GridPane.rowIndex="4">
+                            <Label text="Phone" textFill="WHITE" GridPane.rowIndex="6">
                                 <font>
                                     <Font name="System Bold" size="15.0" />
                                 </font>
                             </Label>
-                            <Label text="Phone" textFill="WHITE" GridPane.rowIndex="7">
+                            <TextField fx:id="nameTextField" prefWidth="315.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                            <TextField fx:id="addressTextField" prefWidth="315.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                            <TextField fx:id="postalTextField" prefWidth="315.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                            <TextField fx:id="phoneTextField" prefWidth="315.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                            <Label text="Country" textFill="WHITE" GridPane.rowIndex="4">
                                 <font>
                                     <Font name="System Bold" size="15.0" />
                                 </font>
                             </Label>
-                            <TextField fx:id="firstNameTextField" prefWidth="315.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                            <TextField fx:id="lastNameTextField" prefWidth="315.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                            <TextField fx:id="addressTextField" prefWidth="315.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                            <TextField fx:id="postalTextField" prefWidth="315.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                            <TextField fx:id="phoneTextField" prefWidth="315.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                            <Label text="Country" textFill="WHITE" GridPane.rowIndex="5">
+                            <Label fx:id="regionLabel" prefHeight="21.0" prefWidth="85.0" text="State" textFill="WHITE" GridPane.rowIndex="5">
                                 <font>
                                     <Font name="System Bold" size="15.0" />
                                 </font>
                             </Label>
-                            <Label fx:id="regionLabel" prefHeight="21.0" prefWidth="85.0" text="State" textFill="WHITE" GridPane.rowIndex="6">
-                                <font>
-                                    <Font name="System Bold" size="15.0" />
-                                </font>
-                            </Label>
-                            <ComboBox fx:id="countryComboBox" onAction="#countrySelectionHandler" prefHeight="25.0" prefWidth="293.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                            <ComboBox fx:id="regionComboBox" prefHeight="25.0" prefWidth="313.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                            <ComboBox fx:id="countryComboBox" onAction="#countrySelectionHandler" prefHeight="25.0" prefWidth="293.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                            <ComboBox fx:id="regionComboBox" onAction="#regionSelectionHandler" prefHeight="25.0" prefWidth="313.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                             <Label fx:id="customerIDLabel" prefHeight="21.0" prefWidth="282.0" textFill="WHITE" GridPane.columnIndex="1">
                                 <font>
                                     <Font name="System Bold" size="15.0" />

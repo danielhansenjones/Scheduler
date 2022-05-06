@@ -17,7 +17,7 @@ public class Appointment {
     private int customerId;
     private int userId;
     private int contactId;
-    /*  Last_Update Timestamp?? here?? */
+    /*  timestamps are retrieved from SQL database */
 
     /**
      * @param appointmentId Int value of Appointment ID
