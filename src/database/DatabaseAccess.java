@@ -1,4 +1,4 @@
-package databaseQueries;
+package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -31,7 +31,7 @@ public class DatabaseAccess {
         {
             System.out.println("Error:" + e.getMessage());
         }
-        return null;
+        return connection;
     }
 
 

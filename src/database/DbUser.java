@@ -1,4 +1,4 @@
-package databaseQueries;
+package database;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,18 +11,16 @@ import java.sql.SQLException;
 public class DbUser {
 
     public static boolean authentication(String username, String password) throws SQLException {
-        String sqlQuery = "SELECT * FROM users WHERE User_Name=? AND Password=?";
-
-        PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-        ResultSet resultSet = preparedStatement.getResultSet();
-
-        preparedStatement.setString(1, username);
-        preparedStatement.setString(2, password);
-
         try {
+            String sqlQuery = "SELECT * FROM users WHERE User_Name=? AND Password=?";
+            PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
+            ResultSet resultSet = preparedStatement.getResultSet();
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
             preparedStatement.execute();
 
             return (resultSet.next());
+
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             return false;
@@ -30,14 +28,12 @@ public class DbUser {
     }
 
     public static ObservableList<User> selectUsers() throws SQLException {
-        ObservableList<User> users = FXCollections.observableArrayList();
-
-        String sqlQuery = "SELECT * FROM users;";
-
-        PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-        ResultSet resultSet = preparedStatement.getResultSet();
-
         try {
+            ObservableList<User> users = FXCollections.observableArrayList();
+            String sqlQuery = "SELECT * FROM users;";
+            PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
+            ResultSet resultSet = preparedStatement.getResultSet();
+
             preparedStatement.execute();
             ;
 

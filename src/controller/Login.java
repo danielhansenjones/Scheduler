@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class Login implements Initializable {
@@ -44,10 +45,27 @@ public class Login implements Initializable {
 
     }
 
-    public void loginButtonHandler(ActionEvent actionEvent) throws IOException {
-        stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
-    }
+    public void loginButtonHandler(ActionEvent actionEvent) throws IOException, SQLException {
+        String username = userIdTextField.getText();
+        String password = passwordTextField.getText();
+
+        boolean valid = database.DbUser.authentication(username, password);
+
+        try {
+            if (valid) {
+                    stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+                    scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
+                    stage.setScene(new Scene(scene));
+                    stage.show();
+                }
+
+           else
+               model.ConfirmationScreens.warningScreen("Incorrect Password", "Check caps lock", "Try again");
+
+                }
+             catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 }
+

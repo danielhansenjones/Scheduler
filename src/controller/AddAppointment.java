@@ -1,5 +1,6 @@
 package controller;
 
+import database.DbAppointment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 
@@ -62,11 +65,32 @@ public class AddAppointment implements Initializable {
 
 
     void addButtonClicked(ActionEvent event) throws IOException, SQLException {
+        //int appointmentID= ????
+        String appointmentTitle = titleTextField.getText();
+        String appointmentLocation = locationTextField.getText();
+        String appointmentDescription = descriptionTextField.getText();
+        String appointmentContact = (String) contactComboBox.getValue();
+        String appointmentType = (String) typeComboBox.getValue();
+        LocalDateTime startDate = startDatePicker.getValue().atTime(Integer.parseInt(startDateHour.getText()), Integer.parseInt(startDateMinute.getText()));
+        Timestamp startTime = Timestamp.valueOf(startDate);
+        LocalDateTime endDate = startDatePicker.getValue().atTime(Integer.parseInt(endDateHour.getText()), Integer.parseInt(endDateMinute.getText()));
+        Timestamp endTime = Timestamp.valueOf(endDate);
+        Integer appointmentCustomer = (Integer) customerComboBox.getValue();
+        Integer appointmentUser = (Integer) userComboBox.getValue();
 
+        DbAppointment.insertAppointment(appointmentContact, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, startDate, endDate, appointmentCustomer, appointmentUser);
+
+
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("Schedule.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
 }

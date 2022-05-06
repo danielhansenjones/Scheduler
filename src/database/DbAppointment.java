@@ -1,19 +1,24 @@
-package databaseQueries;
-import model.Appointment;
-import model.Contact;
+package database;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import java.sql.*;
+import model.Appointment;
+import model.Contact;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
     public class DbAppointment {
 
         public static ObservableList<Appointment> selectAppointments() throws SQLException {
-            ObservableList<Appointment> appointments = FXCollections.observableArrayList();
-            String sqlQuery = "SELECT * FROM appointments AS a INNER JOIN contacts AS c ON a.Contact_ID=c.Contact_ID;";
-            PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.getResultSet();
             try {
+                ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+                String sqlQuery = "SELECT * FROM appointments AS a INNER JOIN contacts AS c ON a.Contact_ID=c.Contact_ID;";
+                PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
+                ResultSet resultSet = preparedStatement.getResultSet();
                 preparedStatement.execute();
 
                 while (resultSet.next()) {
@@ -44,20 +49,15 @@ import java.time.LocalDateTime;
 
 
         public static ObservableList<Appointment> selectAppointmentsByMonth() throws SQLException {
-            ObservableList<Appointment> appointments = FXCollections.observableArrayList();
-
-            LocalDateTime currentDate = LocalDateTime.now();
-            LocalDateTime lastMonth = currentDate.minusDays(30);
-
-            String sqlQuery = "SELECT * FROM appointments AS a INNER JOIN contacts AS c ON a.Contact_ID=c.Contact_ID WHERE Start < ? AND Start > ?;";
-
-            PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.getResultSet();
-
-            preparedStatement.setDate(1, java.sql.Date.valueOf(currentDate.toLocalDate()));
-            preparedStatement.setDate(2, java.sql.Date.valueOf(lastMonth.toLocalDate()));
-
             try {
+                ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+                LocalDateTime currentDate = LocalDateTime.now();
+                LocalDateTime lastMonth = currentDate.minusDays(30);
+                String sqlQuery = "SELECT * FROM appointments AS a INNER JOIN contacts AS c ON a.Contact_ID=c.Contact_ID WHERE Start < ? AND Start > ?;";
+                PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
+                ResultSet resultSet = preparedStatement.getResultSet();
+                preparedStatement.setDate(1, java.sql.Date.valueOf(currentDate.toLocalDate()));
+                preparedStatement.setDate(2, java.sql.Date.valueOf(lastMonth.toLocalDate()));
                 preparedStatement.execute();
 
 
@@ -131,26 +131,22 @@ import java.time.LocalDateTime;
         }
 
       public static boolean insertAppointment(String contactName, String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, Integer customerId, Integer userID) throws SQLException {
-
-            Contact contact = DbContact.selectContactId(contactName);
-
-            String sqlQuery = "INSERT INTO appointments(Title, Description, Location, Type, Start, End, Customer_ID, Contact_ID, User_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-            PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.getResultSet();
-
-            preparedStatement.setString(1, title);
-            preparedStatement.setString(2, description);
-            preparedStatement.setString(3, location);
-            preparedStatement.setString(4, type);
-            preparedStatement.setTimestamp(5, Timestamp.valueOf(start));
-            preparedStatement.setTimestamp(6, Timestamp.valueOf(end));
-            preparedStatement.setInt(7, customerId);
-            preparedStatement.setInt(8, contact.getContactId());
-            preparedStatement.setInt(9, userID);
-
             try {
-                preparedStatement.execute();
+                Contact contact = DbContact.selectContactId(contactName);
+                String sqlQuery = "INSERT INTO appointments(Title, Description, Location, Type, Start, End, Customer_ID, Contact_ID, User_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
+                ResultSet resultSet = preparedStatement.getResultSet();
+
+                preparedStatement.setString(1, title);
+                preparedStatement.setString(2, description);
+                preparedStatement.setString(3, location);
+                preparedStatement.setString(4, type);
+                preparedStatement.setTimestamp(5, Timestamp.valueOf(start));
+                preparedStatement.setTimestamp(6, Timestamp.valueOf(end));
+                preparedStatement.setInt(7, customerId);
+                preparedStatement.setInt(8, contact.getContactId());
+                preparedStatement.setInt(9, userID);
+
                 if (preparedStatement.getUpdateCount() > 0) {
                     System.out.println("Rows affected: " + preparedStatement.getUpdateCount());
                 } else {
@@ -165,14 +161,11 @@ import java.time.LocalDateTime;
 
 
         public static boolean deleteAppointment(int appointmentId) throws SQLException {
-            String sqlQuery = "DELETE from appointments WHERE Appointment_Id=?";
-
-            PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.getResultSet();
-
-            preparedStatement.setInt(1, appointmentId);
-
             try {
+                String sqlQuery = "DELETE from appointments WHERE Appointment_Id=?";
+                PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
+                ResultSet resultSet = preparedStatement.getResultSet();
+                preparedStatement.setInt(1, appointmentId);
                 preparedStatement.execute();
                 if (preparedStatement.getUpdateCount() > 0) {
                     System.out.println("Rows affected: " + preparedStatement.getUpdateCount());
@@ -188,26 +181,29 @@ import java.time.LocalDateTime;
 
 
         public static boolean updateAppointment(String contactName, String title, String description, String location, String type, LocalDateTime start_time, LocalDateTime end, Integer customerId, Integer userID, Integer appointmentID) throws SQLException {
-            Contact contact = DbContact.selectContactId(contactName);
 
-            String sqlQuery = "UPDATE appointments SET Title=?, Description=?, Location=?, Type=?, Start=?, End=?, Customer_ID=?, Contact_ID=?, User_ID=? WHERE Appointment_ID = ?;";
-
-            PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.getResultSet();
-
-            preparedStatement.setString(1, title);
-            preparedStatement.setString(2, description);
-            preparedStatement.setString(3, location);
-            preparedStatement.setString(4, type);
-            preparedStatement.setTimestamp(5, Timestamp.valueOf(start_time));
-            preparedStatement.setTimestamp(6, Timestamp.valueOf(end));
-            preparedStatement.setInt(7, customerId);
-            preparedStatement.setInt(8, contact.getContactId());
-            preparedStatement.setInt(9, userID);
-            preparedStatement.setInt(10, appointmentID);
 
             try {
+
+                Contact contact = DbContact.selectContactId(contactName);
+
+                String sqlQuery = "UPDATE appointments SET Title=?, Description=?, Location=?, Type=?, Start=?, End=?, Customer_ID=?, Contact_ID=?, User_ID=? WHERE Appointment_ID = ?;";
+
+                PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
+                ResultSet resultSet = preparedStatement.getResultSet();
+
+                preparedStatement.setString(1, title);
+                preparedStatement.setString(2, description);
+                preparedStatement.setString(3, location);
+                preparedStatement.setString(4, type);
+                preparedStatement.setTimestamp(5, Timestamp.valueOf(start_time));
+                preparedStatement.setTimestamp(6, Timestamp.valueOf(end));
+                preparedStatement.setInt(7, customerId);
+                preparedStatement.setInt(8, contact.getContactId());
+                preparedStatement.setInt(9, userID);
+                preparedStatement.setInt(10, appointmentID);
                 preparedStatement.execute();
+
                 if (preparedStatement.getUpdateCount() > 0) {
                     System.out.println("Rows affected: " + preparedStatement.getUpdateCount());
                 } else {
@@ -221,17 +217,13 @@ import java.time.LocalDateTime;
         }
 
 
-        public static ObservableList<Appointment> getAppointmentsByCustomerId(int CustomerID) throws SQLException {
-            ObservableList<Appointment> appointments = FXCollections.observableArrayList();
-
-            String sqlQuery = "SELECT * FROM appointments AS a INNER JOIN contacts AS c ON a.Contact_ID=c.Contact_ID WHERE Customer_ID=?;";
-
-            PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.getResultSet();
-
-            preparedStatement.setInt(1, CustomerID);
-
+        public static ObservableList<Appointment> selectAppointmentsByCustomerId(int CustomerID) throws SQLException {
             try {
+                ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+                String sqlQuery = "SELECT * FROM appointments AS a INNER JOIN contacts AS c ON a.Contact_ID=c.Contact_ID WHERE Customer_ID=?;";
+                PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
+                ResultSet resultSet = preparedStatement.getResultSet();
+                preparedStatement.setInt(1, CustomerID);
                 preparedStatement.execute();
 
                 // Forward scroll resultSet
@@ -263,13 +255,12 @@ import java.time.LocalDateTime;
 
 
         public static ObservableList<Appointment> selectAppointmentsByContactId(int contactID) throws SQLException {
-            ObservableList<Appointment> appointments = FXCollections.observableArrayList();
-            String sqlQuery = "SELECT * FROM appointments AS a INNER JOIN contacts AS c ON a.Contact_ID=c.Contact_ID WHERE a.Contact_ID=?;";
-            PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.getResultSet();
-            preparedStatement.setInt(1, contactID);
-
             try {
+                ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+                String sqlQuery = "SELECT * FROM appointments AS a INNER JOIN contacts AS c ON a.Contact_ID=c.Contact_ID WHERE a.Contact_ID=?;";
+                PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
+                ResultSet resultSet = preparedStatement.getResultSet();
+                preparedStatement.setInt(1, contactID);
                 preparedStatement.execute();
 
 
@@ -301,13 +292,12 @@ import java.time.LocalDateTime;
         }
 
         public static Appointment selectAppointmentById(int AppointmentID) throws SQLException {
-            ObservableList<Appointment> appointments = FXCollections.observableArrayList();
-            String sqlQuery = "SELECT * FROM appointments AS a INNER JOIN contacts AS c ON a.Contact_ID=c.Contact_ID WHERE Appointment_ID=?;";
-            PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.getResultSet();
-            preparedStatement.setInt(1, AppointmentID);
-
             try {
+                ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+                String sqlQuery = "SELECT * FROM appointments AS a INNER JOIN contacts AS c ON a.Contact_ID=c.Contact_ID WHERE Appointment_ID=?;";
+                PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
+                ResultSet resultSet = preparedStatement.getResultSet();
+                preparedStatement.setInt(1, AppointmentID);
                 preparedStatement.execute();
 
 

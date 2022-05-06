@@ -1,5 +1,5 @@
 
-package databaseQueries;
+package database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Country;
@@ -10,11 +10,11 @@ import java.sql.SQLException;
 public class DbCountry {
 
     public static ObservableList<Country> selectCountries() throws SQLException {
-        ObservableList<Country> countries = FXCollections.observableArrayList();
-        String sqlQuery = "SELECT * FROM countries;";
-        PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-        ResultSet resultSet = preparedStatement.getResultSet();
         try {
+            ObservableList<Country> countries = FXCollections.observableArrayList();
+            String sqlQuery = "SELECT * FROM countries;";
+            PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
+            ResultSet resultSet = preparedStatement.getResultSet();
             preparedStatement.execute();
 
             // Forward scroll resultSet
@@ -35,12 +35,11 @@ public class DbCountry {
     }
 
     public static Country selectCountryId(String country) throws SQLException {
-        String sqlQuery = "SELECT * FROM countries WHERE Country=?";
-        PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-        preparedStatement.setString(1, country);
-        ResultSet resultSet = preparedStatement.getResultSet();
-
         try {
+            String sqlQuery = "SELECT * FROM countries WHERE Country=?";
+            PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
+            preparedStatement.setString(1, country);
+            ResultSet resultSet = preparedStatement.getResultSet();
             preparedStatement.execute();
 
             while (resultSet.next()) {

@@ -1,4 +1,4 @@
-package databaseQueries;
+package database;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,12 +14,12 @@ public class DbDivision {
     public static ObservableList<Division> selectDivisions() throws SQLException {
     ObservableList<Division> divisions = FXCollections.observableArrayList();
 
-    String sqlQuery = "SELECT * FROM first_level_divisions;";
-
-    PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-    ResultSet resultSet = preparedStatement.getResultSet();
 
     try {
+        String sqlQuery = "SELECT * FROM first_level_divisions;";
+
+        PreparedStatement preparedStatement = database.DatabaseAccess.getConnection().prepareStatement(sqlQuery);
+        ResultSet resultSet = preparedStatement.getResultSet();
         preparedStatement.execute();
 
 

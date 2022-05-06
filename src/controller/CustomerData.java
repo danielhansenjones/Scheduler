@@ -1,7 +1,7 @@
 package controller;
 
-import databaseQueries.DbCountry;
-import databaseQueries.DbCustomer;
+import database.DbCountry;
+import database.DbCustomer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
