@@ -1,5 +1,6 @@
 package controller;
 
+import database.DbAppointment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,10 +9,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Contact;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 
 public class UpdateAppointment implements Initializable {
     @FXML
@@ -57,12 +65,32 @@ public class UpdateAppointment implements Initializable {
 
 
 
+    public void saveButtonHandler(ActionEvent actionEvent) throws SQLException {
+        int appointmentId = Integer.parseInt(appointmentIDLabel.getText());
+        String appointmentTitle = titleTextField.getText();
+        String appointmentLocation = locationTextField.getText();
+        String appointmentDescription = descriptionTextField.getText();
+        Contact appointmentContact = (Contact) contactComboBox.getValue();
+        String appointmentType = (String) typeChoiceBox.getValue();
+        LocalDateTime startDate = startDatePicker.getValue().atTime(Integer.parseInt(startDateHour.getText()), Integer.parseInt(startDateMinute.getText()));
+        Timestamp start_time = Timestamp.valueOf(startDate);
+        LocalDateTime endDate = startDatePicker.getValue().atTime(Integer.parseInt(endDateHour.getText()), Integer.parseInt(endDateMinute.getText()));
+        Timestamp end_time = Timestamp.valueOf(endDate);
+        Integer appointmentCustomer = (Integer) customerComboBox.getValue();
+        Integer appointmentUser = (Integer) userComboBox.getValue();
+        LocalDateTime updateDate = LocalDateTime.now();
+        Timestamp updateTS = Timestamp.valueOf(updateDate);
+
+        ZoneId zoneID = TimeZone.getDefault().toZoneId();
+        ZonedDateTime startZD = ZonedDateTime.of(startDate, zoneID);
+        ZonedDateTime endZD = ZonedDateTime.of(endDate,zoneID);
+
+        DbAppointment.updateAppointment(String.valueOf(appointmentContact),appointmentTitle,appointmentDescription,appointmentLocation,appointmentType,startDate,endDate,appointmentCustomer,appointmentUser,appointmentId);
+
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-    }
-
-    public void saveButtonHandler(ActionEvent actionEvent) {
     }
 }

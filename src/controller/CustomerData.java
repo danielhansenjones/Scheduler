@@ -2,6 +2,7 @@ package controller;
 
 import database.DbCountry;
 import database.DbCustomer;
+import database.DbDivision;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -63,7 +64,7 @@ public class CustomerData implements Initializable {
     private Button backButton;
     Parent scene;
     Stage stage;
-    int createId;
+   public static int createId;
 
     public void backButtonHandler(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -94,14 +95,25 @@ public class CustomerData implements Initializable {
         saveButton.setVisible(false);
     }
  // combo boxes
-    public void countrySelectionHandler(ActionEvent actionEvent) {
-
+    public void countrySelectionHandler(ActionEvent actionEvent) throws SQLException {
+        {
+            if(countryComboBox.getValue() == null )
+            {
+                regionComboBox.getSelectionModel().clearSelection();
+            }
+            else
+            {
+                regionComboBox.setItems(DbDivision.selectDivisions());// need to figure out country combo boxes...
+            }
+        }
     }
     //combo boxes
     public void regionSelectionHandler(ActionEvent actionEvent) {
     }
 
     public void addButtonHandler(ActionEvent actionEvent) {
+
+
     }
 
     public void deleteButtonHandler(ActionEvent actionEvent) {

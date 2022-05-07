@@ -37,35 +37,34 @@ public class Login implements Initializable {
 
     Parent scene;
     Stage stage;
-
+    private ResourceBundle rb;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 
     public void loginButtonHandler(ActionEvent actionEvent) throws IOException, SQLException {
-        String username = userIdTextField.getText();
+      /*  String username = userIdTextField.getText();
         String password = passwordTextField.getText();
 
         boolean valid = database.DbUser.authentication(username, password);
 
         try {
-            if (valid) {
+            if (valid) {*/
                     stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
                     scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
                     stage.setScene(new Scene(scene));
                     stage.show();
-                }
+            } /*
 
-           else
+
+          else
                model.ConfirmationScreens.warningScreen("Incorrect Password", "Check caps lock", "Try again");
 
                 }
              catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+        }*/
 }
-

@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Reports">
-    <ImageView fitHeight="618.0" fitWidth="900.0" pickOnBounds="true" AnchorPane.bottomAnchor="-18.0" AnchorPane.topAnchor="0.0">
+    <ImageView fitHeight="620.0" fitWidth="900.0" pickOnBounds="true" AnchorPane.bottomAnchor="-18.0" AnchorPane.topAnchor="0.0">
         <Image url="@../assets/black-background.jpg" />
     </ImageView>
     <ImageView fitHeight="75.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">

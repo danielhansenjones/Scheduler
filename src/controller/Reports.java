@@ -63,6 +63,7 @@ public class Reports implements Initializable {
     Parent scene;
     Stage stage;
 
+
     public void backButtonHandler(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));

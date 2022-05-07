@@ -1,5 +1,6 @@
 package controller;
 
+import database.DbAppointment;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -8,10 +9,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Appointment;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class Schedule implements Initializable {
@@ -127,21 +131,76 @@ public class Schedule implements Initializable {
         stage.show();
     }
 
-    public void deleteButtonHandler(ActionEvent actionEvent) throws IOException {
+    public void deleteButtonHandler(ActionEvent actionEvent) throws IOException, SQLException {
+        Appointment appointment = (Appointment) appointmentTableView.getSelectionModel().getSelectedItem();
+        DbAppointment.deleteAppointment(appointment.getAppointmentId());
+    }
 
+
+    public void overviewTabHandler(Event event) throws SQLException {
+        appointmentTableView.setItems(DbAppointment.selectAppointments());
+
+        appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>(""));
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentLocation"));
+        locationColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
+        contactColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentContact"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
+        startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentCustomer"));
+    }
+
+    public void monthTabHandler(Event event) throws SQLException {
+
+        appointmentTableView.setItems(DbAppointment.selectAppointmentsByMonth());
+
+        appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentLocation"));
+        locationColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
+        contactColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentContact"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
+        startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentCustomer"));
+
+    }
+
+    public void weekTabHandler(Event event) throws SQLException {
+        appointmentTableView.setItems(DbAppointment.selectAppointmentsByWeek());
+
+        appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentLocation"));
+        locationColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
+        contactColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentContact"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
+        startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentCustomer"));
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        try {
+            appointmentTableView.setItems(DbAppointment.selectAppointments());
+
+            appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+            titleColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
+            descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentLocation"));
+            locationColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
+            contactColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentContact"));
+            typeColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
+            startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+            endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+            customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentCustomer"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
-    public void overviewTabHandler(Event event) {
-    }
-
-    public void monthTabHandler(Event event) {
-    }
-
-    public void weekTabHandler(Event event) {
-    }
 }
+
