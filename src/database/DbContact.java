@@ -13,8 +13,8 @@ public class DbContact {
             ObservableList<Contact> contacts = FXCollections.observableArrayList();
             String sqlQuery = "SELECT * FROM contacts AS c INNER JOIN appointments AS a ON c.Contact_ID = a.Contact_ID;";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.getResultSet();
-            preparedStatement.execute();
+            ResultSet resultSet = preparedStatement.executeQuery();
+
 
 
             // Forward scroll resultSet
@@ -36,12 +36,12 @@ public class DbContact {
 
     public static Contact selectContactId(String contactName) throws SQLException {
         try {
-            String sqlQuery = "SELECT * FROM contacts WHERE Contact_Name=?";
+            String sqlQuery = "SELECT * FROM contacts WHERE Contact_Name = ?";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.getResultSet();
+            ResultSet resultSet = preparedStatement.executeQuery();
             preparedStatement.setString(1, contactName);
 
-            preparedStatement.execute();
+
 
             // Forward scroll resultSet
             while (resultSet.next()) {

@@ -12,12 +12,11 @@ public class DbUser {
 
     public static boolean authentication(String username, String password) throws SQLException {
         try {
-            String sqlQuery = "SELECT * FROM users WHERE User_Name=? AND Password=?";
+            String sqlQuery = "SELECT * FROM users WHERE User_Name = ? AND Password = ?";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.getResultSet();
+            ResultSet resultSet = preparedStatement.executeQuery();
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
-            preparedStatement.execute();
 
             return (resultSet.next());
 
@@ -32,10 +31,10 @@ public class DbUser {
             ObservableList<User> users = FXCollections.observableArrayList();
             String sqlQuery = "SELECT * FROM users;";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.getResultSet();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            preparedStatement.execute();
-            ;
+
+
 
             while (resultSet.next()) {
                 User newUser = new User(

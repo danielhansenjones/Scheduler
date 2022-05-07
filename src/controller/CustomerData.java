@@ -85,12 +85,12 @@ public class CustomerData implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
         postalColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
-        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
-
+        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
 
         saveButton.setVisible(false);
     }

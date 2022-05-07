@@ -19,7 +19,7 @@ public class DatabaseAccess {
     public static Connection connection;  // Connection Interface
 
     /** This method starts the connection with the MYSQL Database
-     * @return*/
+     */
     public static Connection getConnection()
     {
         try {

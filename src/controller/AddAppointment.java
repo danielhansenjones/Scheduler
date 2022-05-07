@@ -72,7 +72,7 @@ public class AddAppointment implements Initializable {
 
     void addButtonClicked(ActionEvent event) throws IOException, SQLException {
         try {
-            //int appointmentID= ????
+            int appointmentID = createId++;
             String appointmentTitle = titleTextField.getText();
             String appointmentLocation = locationTextField.getText();
             String appointmentDescription = descriptionTextField.getText();
@@ -109,7 +109,7 @@ public class AddAppointment implements Initializable {
             contactComboBox.setItems(DbContact.selectContacts());
             customerComboBox.setItems(DbCustomer.selectCustomers());
             userComboBox.setItems((DbUser.selectUsers()));
-            typeComboBox.getItems().setAll(Type);
+           /* typeComboBox.getItems().setAll(Type);*/ // This line is causing failures needs to be rewritten.
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -14,9 +14,7 @@ public class DbCustomer {
             ObservableList<Customer> customers = FXCollections.observableArrayList();
             String sqlQuery = "SELECT * FROM customers AS c INNER JOIN first_level_divisions AS d ON c.Division_ID = d.Division_ID INNER JOIN countries AS co ON co.Country_ID=d.COUNTRY_ID;";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.getResultSet();
-            preparedStatement.execute();
-
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             // Forward scroll resultSet
             while (resultSet.next()) {
@@ -50,7 +48,7 @@ public class DbCustomer {
             String sqlQuery = "INSERT INTO customers(Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.getResultSet();
+            preparedStatement.executeQuery();
 
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, address);
@@ -76,10 +74,10 @@ public class DbCustomer {
         try {
             Division newDivision = DbDivision.selectDivisionId(division);
 
-            String sqlQuery = "UPDATE customers SET Customer_Name=?, Address=?, Postal_Code=?, Phone=?, Division_ID=? WHERE Customer_ID=?";
+            String sqlQuery = "UPDATE customers SET Customer_Name=?, Address=?, Postal_Code=?, Phone=?, Division_ID=? WHERE Customer_ID = ?";
 
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.getResultSet();
+            preparedStatement.executeQuery();
 
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, address);
@@ -102,13 +100,12 @@ public class DbCustomer {
 
     public static boolean deleteCustomer(int customerId) throws SQLException {
         try {
-            String sqlQuery = "DELETE from customers WHERE Customer_Id=?";
+            String sqlQuery = "DELETE from customers WHERE Customer_Id = ?";
 
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.getResultSet();
-
+            preparedStatement.executeQuery();
             preparedStatement.setInt(1, customerId);
-            preparedStatement.execute();
+
             if (preparedStatement.getUpdateCount() > 0) {
                 System.out.println("Rows affected: " + preparedStatement.getUpdateCount());
             } else {

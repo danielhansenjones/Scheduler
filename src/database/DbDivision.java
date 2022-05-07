@@ -19,8 +19,8 @@ public class DbDivision {
         String sqlQuery = "SELECT * FROM first_level_divisions;";
 
         PreparedStatement preparedStatement = database.DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-        ResultSet resultSet = preparedStatement.getResultSet();
-        preparedStatement.execute();
+        ResultSet resultSet = preparedStatement.executeQuery();
+
 
 
         while (resultSet.next()) {
@@ -45,7 +45,7 @@ public class DbDivision {
         String sqlQuery = "SELECT * FROM first_level_divisions WHERE Division=?";
 
         PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-        ResultSet resultSet = preparedStatement.getResultSet();
+        ResultSet resultSet = preparedStatement.executeQuery();
 
         preparedStatement.setString(1, division);
 
@@ -74,15 +74,14 @@ public class DbDivision {
 
         ObservableList<Division> divisions = FXCollections.observableArrayList();
 
-        String sqlQuery = "SELECT * FROM first_level_divisions WHERE COUNTRY_ID=?;";
-
-        PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-        ResultSet resultSet = preparedStatement.getResultSet();
-
-        preparedStatement.setInt(1, newCountry.getCountryId());
-
         try {
-            preparedStatement.execute();
+            String sqlQuery = "SELECT * FROM first_level_divisions WHERE COUNTRY_ID = ?;";
+
+            PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            preparedStatement.setInt(1, newCountry.getCountryId());
+
 
             // Forward scroll resultSet
             while (resultSet.next()) {

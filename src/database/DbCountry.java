@@ -14,8 +14,8 @@ public class DbCountry {
             ObservableList<Country> countries = FXCollections.observableArrayList();
             String sqlQuery = "SELECT * FROM countries;";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.getResultSet();
-            preparedStatement.execute();
+            ResultSet resultSet = preparedStatement.executeQuery();
+
 
             // Forward scroll resultSet
             while (resultSet.next()) {
@@ -36,11 +36,11 @@ public class DbCountry {
 
     public static Country selectCountryId(String country) throws SQLException {
         try {
-            String sqlQuery = "SELECT * FROM countries WHERE Country=?";
+            String sqlQuery = "SELECT * FROM countries WHERE Country = ?";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
             preparedStatement.setString(1, country);
-            ResultSet resultSet = preparedStatement.getResultSet();
-            preparedStatement.execute();
+            ResultSet resultSet = preparedStatement.executeQuery();
+
 
             while (resultSet.next()) {
                 return new Country(

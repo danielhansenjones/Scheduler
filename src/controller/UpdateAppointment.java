@@ -1,6 +1,9 @@
 package controller;
 
 import database.DbAppointment;
+import database.DbContact;
+import database.DbCustomer;
+import database.DbUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,6 +58,8 @@ public class UpdateAppointment implements Initializable {
 
     Parent scene;
     Stage stage;
+    public static int createId;
+    String[] Type = {"Planning Session", "Debriefing", "Debugging", "Implementing", "On-boarding"};
 
     public void cancelButtonHandler(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -91,6 +96,16 @@ public class UpdateAppointment implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        appointmentIDLabel.setText(String.valueOf(createId));
+        try {
+
+            contactComboBox.setItems(DbContact.selectContacts());
+            customerComboBox.setItems(DbCustomer.selectCustomers());
+            userComboBox.setItems((DbUser.selectUsers()));
+            /* typeComboBox.getItems().setAll(Type);*/ // This line is causing failures needs to be rewritten.
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 }
