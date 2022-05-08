@@ -4,6 +4,8 @@ import database.DbAppointment;
 import database.DbContact;
 import database.DbCustomer;
 import database.DbUser;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,7 +47,7 @@ public class AddAppointment implements Initializable {
     @FXML
     private TextField endDateMinute;
     @FXML
-    private ChoiceBox typeComboBox;
+    private ChoiceBox typeChoiceBox;
     @FXML
     private ComboBox userComboBox;
 
@@ -53,7 +55,7 @@ public class AddAppointment implements Initializable {
     Parent scene;
     Stage stage;
     public static int createId;
-    String[] Type = {"Planning Session", "Debriefing", "Debugging", "Implementing", "On-boarding"};
+
 
     public void cancelButtonHandler(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -69,7 +71,7 @@ public class AddAppointment implements Initializable {
             String appointmentLocation = locationTextField.getText();
             String appointmentDescription = descriptionTextField.getText();
             String appointmentContact = (String) contactComboBox.getValue();
-            String appointmentType = (String) typeComboBox.getValue();
+            String appointmentType = (String) typeChoiceBox.getValue();
             LocalDateTime startDate = startDatePicker.getValue().atTime(Integer.parseInt(startDateHour.getText()), Integer.parseInt(startDateMinute.getText()));
             Timestamp startTime = Timestamp.valueOf(startDate);
             LocalDateTime endDate = startDatePicker.getValue().atTime(Integer.parseInt(endDateHour.getText()), Integer.parseInt(endDateMinute.getText()));
@@ -92,16 +94,23 @@ public class AddAppointment implements Initializable {
 
     }
 
+    private void appointmentTypeComboBox() {
+        ObservableList<String> typeList = FXCollections.observableArrayList();
+
+        typeList.addAll("Planning Session", "Debriefing", "Debugging", "Implementing", "On-boarding");
+
+        typeChoiceBox.setItems(typeList);
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         appointmentIDLabel.setText(String.valueOf(createId));
+        appointmentTypeComboBox();
         try {
-
             contactComboBox.setItems(DbContact.selectContacts());
             customerComboBox.setItems(DbCustomer.selectCustomers());
             userComboBox.setItems((DbUser.selectUsers()));
-           /* typeComboBox.getItems().setAll(Type);*/ // This line is causing failures needs to be rewritten.
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

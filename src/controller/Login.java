@@ -45,8 +45,11 @@ public class Login implements Initializable {
     }
 
     public void loginButtonHandler(ActionEvent actionEvent) throws IOException, SQLException {
-
-        boolean valid = database.DbUser.authentication(userIdTextField.getText(), passwordTextField.getText());
+        stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+      /*  boolean valid = database.DbUser.authentication(userIdTextField.getText(), passwordTextField.getText());
 
         try {
             if (valid) {
@@ -62,6 +65,6 @@ public class Login implements Initializable {
                 }
              catch (Exception e) {
                 e.printStackTrace();
-            }
+            }*/
         }
-}
+    }
