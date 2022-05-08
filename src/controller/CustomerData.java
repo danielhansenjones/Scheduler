@@ -12,7 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.Country;
+import model.ConfirmationScreens;
 import model.Customer;
 import model.Division;
 
@@ -95,10 +95,9 @@ public class CustomerData implements Initializable {
     }
 
     public void addButtonHandler(ActionEvent actionEvent) throws SQLException {
-        String customerName = nameColumn.getText();
+        String customerName = nameTextField.getText();
         String address = addressTextField.getText();
         String postalCode = postalTextField.getText();
-        Country country = (Country) countryComboBox.getValue();
         Division division = (Division) divisionComboBox.getValue();
         String phone = phoneTextField.getText();
 
@@ -109,10 +108,20 @@ public class CustomerData implements Initializable {
     public void deleteButtonHandler(ActionEvent actionEvent) throws SQLException {
         Customer selectedCustomer = (Customer) customerTableView.getSelectionModel().getSelectedItem();
 
-        DbCustomer.deleteCustomer(((Customer) customerTableView.getSelectionModel().getSelectedItem()).getCustomerId());
+        if (selectedCustomer == null) {
+            ConfirmationScreens.warningScreen("Error", "A customer was not selected", "You must select a customer to delete");
+        }
+        if (ConfirmationScreens.confirmationScreen("Delete Selected", "Are you sure you want to delete?  "+selectedCustomer)) {
+                try {
+                    DbCustomer.deleteCustomer(((Customer) customerTableView.getSelectionModel().getSelectedItem()).getCustomerId());
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+            }
 
     }
-
     @FXML
     private void cancelButtonHandler(ActionEvent actionEvent) {
             customerIDLabel.setText(String.valueOf(createId));
@@ -122,6 +131,9 @@ public class CustomerData implements Initializable {
             countryComboBox.getSelectionModel().clearSelection();
             divisionComboBox.getSelectionModel().clearSelection();
             phoneTextField.clear();
+
+        deleteButton.setVisible(true);
+        addButton.setVisible(true);
     }
 
 
@@ -135,9 +147,21 @@ public class CustomerData implements Initializable {
         divisionComboBox.setValue(customer.getDivision());
         phoneTextField.setText(String.valueOf((customer).getPhoneNumber()));
 
+        saveButton.setVisible(true);
+        deleteButton.setVisible(false);
+        addButton.setVisible(false);
     }
 
-    public void saveButtonHandler(ActionEvent actionEvent) {
+    public void saveButtonHandler(ActionEvent actionEvent) throws SQLException {
+/// bug found but not fixed yet, need to reselect division to save, problem is with the modify buttons auto generation of the combo box. unsure of fix.
+        int customerId = Integer.parseInt(customerIDLabel.getText());
+        String customerName = nameTextField.getText();
+        String address = addressTextField.getText();
+        String postalCode = postalTextField.getText();
+        Division division = (Division) divisionComboBox.getValue();
+        String phone = phoneTextField.getText();
+
+        DbCustomer.updateCustomer(customerId,customerName,address,postalCode,phone, String.valueOf(division));
     }
 
 

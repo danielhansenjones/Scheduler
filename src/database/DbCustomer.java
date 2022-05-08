@@ -49,7 +49,6 @@ public class DbCustomer {
 
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
 
-
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, address);
             preparedStatement.setString(3, postalCode);
@@ -77,7 +76,6 @@ public class DbCustomer {
             String sqlQuery = "UPDATE customers SET Customer_Name=?, Address=?, Postal_Code=?, Phone=?, Division_ID=? WHERE Customer_ID = ?";
 
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            preparedStatement.executeQuery();
 
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, address);
