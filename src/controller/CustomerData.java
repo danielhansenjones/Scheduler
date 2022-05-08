@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Country;
 import model.Customer;
+import model.Division;
 
 import java.io.IOException;
 import java.net.URL;
@@ -48,7 +49,7 @@ public class CustomerData implements Initializable {
     @FXML
     private ComboBox countryComboBox;
     @FXML
-    private ComboBox regionComboBox;
+    private ComboBox divisionComboBox;
     @FXML
     private Label customerIDLabel;
     @FXML
@@ -81,11 +82,11 @@ public class CustomerData implements Initializable {
         {
             if(countryComboBox.getValue() == null )
             {
-                regionComboBox.getSelectionModel().clearSelection();
+                divisionComboBox.getSelectionModel().clearSelection();
             }
             else
             {
-                regionComboBox.setItems(DbDivision.selectDivisions());// need to figure out country combo boxes...
+                divisionComboBox.setItems(DbDivision.selectDivisions());// need to figure out country combo boxes...
             }
         }
     }
@@ -97,13 +98,19 @@ public class CustomerData implements Initializable {
         String customerName = nameColumn.getText();
         String address = addressTextField.getText();
         String postalCode = postalTextField.getText();
-        Country country = (Country) regionComboBox.getValue();
+        Country country = (Country) countryComboBox.getValue();
+        Division division = (Division) divisionComboBox.getValue();
         String phone = phoneTextField.getText();
-        DbCustomer.insertCustomer(customerName,address,postalCode,phone, String.valueOf(country));
+
+        DbCustomer.insertCustomer(customerName,address,postalCode,phone, String.valueOf(division));
 
     }
 
-    public void deleteButtonHandler(ActionEvent actionEvent) {
+    public void deleteButtonHandler(ActionEvent actionEvent) throws SQLException {
+        Customer selectedCustomer = (Customer) customerTableView.getSelectionModel().getSelectedItem();
+
+        DbCustomer.deleteCustomer(((Customer) customerTableView.getSelectionModel().getSelectedItem()).getCustomerId());
+
     }
 
     @FXML
@@ -113,7 +120,7 @@ public class CustomerData implements Initializable {
             addressTextField.clear();
             postalTextField.clear();
             countryComboBox.getSelectionModel().clearSelection();
-            regionComboBox.getSelectionModel().clearSelection();
+            divisionComboBox.getSelectionModel().clearSelection();
             phoneTextField.clear();
     }
 
@@ -125,7 +132,7 @@ public class CustomerData implements Initializable {
         addressTextField.setText(String.valueOf((customer).getAddress()));
         postalTextField.setText(String.valueOf((customer).getPostalCode()));
         countryComboBox.setValue(customer.getCountry());
-        regionComboBox.setValue(customer.getDivision());
+        divisionComboBox.setValue(customer.getDivision());
         phoneTextField.setText(String.valueOf((customer).getPhoneNumber()));
 
     }

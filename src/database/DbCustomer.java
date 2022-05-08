@@ -48,14 +48,14 @@ public class DbCustomer {
             String sqlQuery = "INSERT INTO customers(Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            preparedStatement.executeQuery();
+
 
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, address);
             preparedStatement.setString(3, postalCode);
             preparedStatement.setString(4, phone);
             preparedStatement.setInt(5, newDivision.getDivisionId());
-
+            preparedStatement.execute();
 
             if (preparedStatement.getUpdateCount() > 0) {
                 System.out.println("Rows affected: " + preparedStatement.getUpdateCount());
@@ -104,8 +104,9 @@ public class DbCustomer {
             String sqlQuery = "DELETE from customers WHERE Customer_Id = ?";
 
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            preparedStatement.executeQuery();
             preparedStatement.setInt(1, customerId);
+            preparedStatement.execute();
+
 
             if (preparedStatement.getUpdateCount() > 0) {
                 System.out.println("Rows affected: " + preparedStatement.getUpdateCount());

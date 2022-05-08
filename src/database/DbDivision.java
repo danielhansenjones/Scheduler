@@ -43,20 +43,17 @@ public class DbDivision {
     public static Division selectDivisionId(String division) throws SQLException {
 
         try {
-            String sqlQuery = "SELECT * FROM first_level_divisions WHERE Division=?";
+            String sqlQuery = "SELECT * FROM first_level_divisions WHERE Division = ?";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.executeQuery();
             preparedStatement.setString(1, division);
-
-
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                Division newDivision = new Division(
+                return new Division(
                         resultSet.getInt("Division_ID"),
                         resultSet.getString("Division"),
                         resultSet.getInt("Country_ID")
                 );
-                return newDivision;
             }
 
         } catch (Exception e) {

@@ -23,7 +23,7 @@ public class Division {
      *
      * @return divisionId Integer
      */
-    public int getDivisionId() {
+    public  int getDivisionId() {
         return divisionId;
     }
 
