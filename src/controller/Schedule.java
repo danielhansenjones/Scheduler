@@ -155,30 +155,30 @@ public class Schedule implements Initializable {
 
         appointmentMonthTableview.setItems(DbAppointment.selectAppointmentsByMonth());
 
-        appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
-        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
-        locationColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-        contactColumn.setCellValueFactory(new PropertyValueFactory<>("contactName"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
-        customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        monthAppointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        monthTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        monthDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+        monthLocationColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        monthContactColumn.setCellValueFactory(new PropertyValueFactory<>("contactName"));
+        monthTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        monthStartDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        monthEndDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        monthCustomerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
 
     }
 
     public void weekTabHandler(Event event) throws SQLException {
         appointmentWeekTableview.setItems(DbAppointment.selectAppointmentsByWeek());
 
-        appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
-        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
-        locationColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-        contactColumn.setCellValueFactory(new PropertyValueFactory<>("contactName"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
-        customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        weekAppointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        weekTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        weekDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+        weekLocationColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        weekContactColumn.setCellValueFactory(new PropertyValueFactory<>("contactName"));
+        weekTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        weekStartDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        weekEndDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        weekCustomerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
     }
 
     @Override

@@ -14,10 +14,9 @@ public class DbUser {
         try {
             String sqlQuery = "SELECT * FROM users WHERE User_Name = ? AND Password = ?";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.executeQuery();
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
-
+            ResultSet resultSet = preparedStatement.executeQuery();
             return (resultSet.next());
 
         } catch (Exception e) {

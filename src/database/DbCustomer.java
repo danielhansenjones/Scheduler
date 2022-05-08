@@ -55,7 +55,7 @@ public class DbCustomer {
             preparedStatement.setString(3, postalCode);
             preparedStatement.setString(4, phone);
             preparedStatement.setInt(5, newDivision.getDivisionId());
-            preparedStatement.execute();
+
 
             if (preparedStatement.getUpdateCount() > 0) {
                 System.out.println("Rows affected: " + preparedStatement.getUpdateCount());
@@ -86,6 +86,7 @@ public class DbCustomer {
             preparedStatement.setInt(5, newDivision.getDivisionId());
             preparedStatement.setInt(6, customerId);
             preparedStatement.execute();
+
             if (preparedStatement.getUpdateCount() > 0) {
                 System.out.println("Rows affected: " + preparedStatement.getUpdateCount());
             } else {

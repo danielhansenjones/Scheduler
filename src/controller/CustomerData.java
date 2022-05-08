@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Country;
 import model.Customer;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class CustomerData implements Initializable {
+    public Label divisionLabel;
     @FXML
     private TableView customerTableView;
     @FXML
@@ -42,8 +44,7 @@ public class CustomerData implements Initializable {
     private TextField postalTextField;
     @FXML
     private TextField phoneTextField;
-    @FXML
-    private Label regionLabel;
+
     @FXML
     private ComboBox countryComboBox;
     @FXML
@@ -75,25 +76,6 @@ public class CustomerData implements Initializable {
 
 
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        customerIDLabel.setText(String.valueOf(createId));
-        try {
-            customerTableView.setItems(DbCustomer.selectCustomers());
-            countryComboBox.setItems(DbCountry.selectCountries());
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
-        postalColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
-        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-        countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
-
-        saveButton.setVisible(false);
-    }
  // combo boxes
     public void countrySelectionHandler(ActionEvent actionEvent) throws SQLException {
         {
@@ -111,8 +93,13 @@ public class CustomerData implements Initializable {
     public void regionSelectionHandler(ActionEvent actionEvent) {
     }
 
-    public void addButtonHandler(ActionEvent actionEvent) {
-
+    public void addButtonHandler(ActionEvent actionEvent) throws SQLException {
+        String customerName = nameColumn.getText();
+        String address = addressTextField.getText();
+        String postalCode = postalTextField.getText();
+        Country country = (Country) regionComboBox.getValue();
+        String phone = phoneTextField.getText();
+        DbCustomer.insertCustomer(customerName,address,postalCode,phone, String.valueOf(country));
 
     }
 
@@ -132,7 +119,6 @@ public class CustomerData implements Initializable {
 
 
     public void modifyButtonHandler(ActionEvent actionEvent) {
-
         Customer customer = (Customer) customerTableView.getSelectionModel().getSelectedItem();
         customerIDLabel.setText(String.valueOf(customer.getCustomerId()));
         nameTextField.setText(String.valueOf((customer).getCustomerName()));
@@ -147,5 +133,26 @@ public class CustomerData implements Initializable {
     public void saveButtonHandler(ActionEvent actionEvent) {
     }
 
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        customerIDLabel.setText(String.valueOf(createId));
+        try {
+            customerTableView.setItems(DbCustomer.selectCustomers());
+            countryComboBox.setItems(DbCountry.selectCountries());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+        postalColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
+
+        saveButton.setVisible(false);
+    }
 
 }

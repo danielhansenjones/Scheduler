@@ -43,6 +43,7 @@ public class Customer {
 
     /**
      * Gets Customer ID
+     *
      * @return customerId Integer
      */
     public int getCustomerId() {
@@ -51,6 +52,7 @@ public class Customer {
 
     /**
      * Sets Customer ID
+     *
      * @param customerId Integer
      */
     public void setCustomerId(int customerId) {
@@ -59,6 +61,7 @@ public class Customer {
 
     /**
      * Gets Customer Name
+     *
      * @return customerName String
      */
     public String getCustomerName() {
@@ -67,6 +70,7 @@ public class Customer {
 
     /**
      * Sets Customer Name
+     *
      * @param customerName String
      */
     public void setCustomerName(String customerName) {
@@ -75,6 +79,7 @@ public class Customer {
 
     /**
      * Gets Address
+     *
      * @return address String
      */
     public String getAddress() {
@@ -83,6 +88,7 @@ public class Customer {
 
     /**
      * Sets Address
+     *
      * @param address String
      */
     public void setAddress(String address) {
@@ -91,6 +97,7 @@ public class Customer {
 
     /**
      * Gets Postal Code
+     *
      * @return postalCode String
      */
     public String getPostalCode() {
@@ -99,6 +106,7 @@ public class Customer {
 
     /**
      * Sets Postal Code
+     *
      * @param postalCode String
      */
     public void setPostalCode(String postalCode) {
@@ -107,6 +115,7 @@ public class Customer {
 
     /**
      * Gets Phone Number
+     *
      * @return phoneNumber String
      */
     public String getPhoneNumber() {
@@ -115,6 +124,7 @@ public class Customer {
 
     /**
      * Sets Phone Number
+     *
      * @param phoneNumber String
      */
     public void setPhoneNumber(String phoneNumber) {
@@ -123,6 +133,7 @@ public class Customer {
 
     /**
      * Gets Division
+     *
      * @return division String
      */
     public String getDivision() {
@@ -131,6 +142,7 @@ public class Customer {
 
     /**
      * Sets Division Name
+     *
      * @param division String
      */
     public void setDivision(String division) {
@@ -139,6 +151,7 @@ public class Customer {
 
     /**
      * Gets Country Name
+     *
      * @return country String
      */
     public String getCountry() {
@@ -147,6 +160,7 @@ public class Customer {
 
     /**
      * Sets Country Name
+     *
      * @param country String
      */
     public void setCountry(String country) {
@@ -169,5 +183,10 @@ public class Customer {
      */
     public void setDivisionId(int divisionId) {
         this.divisionId = divisionId;
+    }
+
+    @Override
+    public String toString() {
+        return ("#" +Integer.toString(customerId) + " " + customerName);
     }
 }

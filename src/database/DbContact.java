@@ -38,9 +38,8 @@ public class DbContact {
         try {
             String sqlQuery = "SELECT * FROM contacts WHERE Contact_Name = ?";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.executeQuery();
             preparedStatement.setString(1, contactName);
-
+            ResultSet resultSet = preparedStatement.executeQuery();
 
 
             // Forward scroll resultSet

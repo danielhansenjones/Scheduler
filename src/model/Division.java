@@ -20,6 +20,7 @@ public class Division {
 
     /**
      * Gets Division ID
+     *
      * @return divisionId Integer
      */
     public int getDivisionId() {
@@ -28,6 +29,7 @@ public class Division {
 
     /**
      * Sets Division ID
+     *
      * @param divisionId Integer
      */
     public void setDivisionId(int divisionId) {
@@ -36,6 +38,7 @@ public class Division {
 
     /**
      * Gets Division
+     *
      * @return division String
      */
     public String getDivision() {
@@ -44,6 +47,7 @@ public class Division {
 
     /**
      * Sets Division
+     *
      * @param division String
      */
     public void setDivision(String division) {
@@ -52,6 +56,7 @@ public class Division {
 
     /**
      * Gets Country ID
+     *
      * @return countryId Integer
      */
     public int getCountryId() {
@@ -60,9 +65,15 @@ public class Division {
 
     /**
      * Sets Country ID
+     *
      * @param countryId Integer value
      */
     public void setCountryId(int countryId) {
         this.countryId = countryId;
+    }
+
+    @Override
+    public String toString() {
+        return (division);
     }
 }

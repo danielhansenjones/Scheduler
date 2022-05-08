@@ -45,19 +45,16 @@ public class Login implements Initializable {
     }
 
     public void loginButtonHandler(ActionEvent actionEvent) throws IOException, SQLException {
-      /*  String username = userIdTextField.getText();
-        String password = passwordTextField.getText();
 
-        boolean valid = database.DbUser.authentication(username, password);
+        boolean valid = database.DbUser.authentication(userIdTextField.getText(), passwordTextField.getText());
 
         try {
-            if (valid) {*/
+            if (valid) {
                     stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
                     scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
                     stage.setScene(new Scene(scene));
                     stage.show();
-            } /*
-
+            }
 
           else
                model.ConfirmationScreens.warningScreen("Incorrect Password", "Check caps lock", "Try again");
@@ -66,5 +63,5 @@ public class Login implements Initializable {
              catch (Exception e) {
                 e.printStackTrace();
             }
-        }*/
+        }
 }

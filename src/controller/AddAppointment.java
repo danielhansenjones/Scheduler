@@ -62,17 +62,9 @@ public class AddAppointment implements Initializable {
         stage.show();
     }
 
-    public void addButtonHandler(ActionEvent actionEvent) throws IOException {
-        stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
-    }
 
-
-    void addButtonClicked(ActionEvent event) throws IOException, SQLException {
+   public void addButtonHandler(ActionEvent event) throws IOException, SQLException {
         try {
-            int appointmentID = createId++;
             String appointmentTitle = titleTextField.getText();
             String appointmentLocation = locationTextField.getText();
             String appointmentDescription = descriptionTextField.getText();
@@ -85,7 +77,7 @@ public class AddAppointment implements Initializable {
             Integer appointmentCustomer = (Integer) customerComboBox.getValue();
             Integer appointmentUser = (Integer) userComboBox.getValue();
 
-            DbAppointment.insertAppointment(appointmentContact, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, startDate, endDate, appointmentCustomer, appointmentUser);
+            DbAppointment.insertAppointment(appointmentContact, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, startTime, endTime, appointmentCustomer, appointmentUser);
 
 
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();

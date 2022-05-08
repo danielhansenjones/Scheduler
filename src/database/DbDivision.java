@@ -17,7 +17,6 @@ public class DbDivision {
 
     try {
         String sqlQuery = "SELECT * FROM first_level_divisions;";
-
         PreparedStatement preparedStatement = database.DatabaseAccess.getConnection().prepareStatement(sqlQuery);
         ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -42,15 +41,13 @@ public class DbDivision {
 
 
     public static Division selectDivisionId(String division) throws SQLException {
-        String sqlQuery = "SELECT * FROM first_level_divisions WHERE Division=?";
-
-        PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        preparedStatement.setString(1, division);
 
         try {
-            preparedStatement.execute();
+            String sqlQuery = "SELECT * FROM first_level_divisions WHERE Division=?";
+            PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            preparedStatement.setString(1, division);
+
 
 
             while (resultSet.next()) {
@@ -78,10 +75,8 @@ public class DbDivision {
             String sqlQuery = "SELECT * FROM first_level_divisions WHERE COUNTRY_ID = ?;";
 
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
             preparedStatement.setInt(1, newCountry.getCountryId());
-
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             // Forward scroll resultSet
             while (resultSet.next()) {
