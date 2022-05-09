@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Appointment;
 import model.Contact;
 import model.Customer;
 import model.User;
@@ -24,6 +25,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
+
 
 public class UpdateAppointment implements Initializable {
     @FXML
@@ -63,6 +65,7 @@ public class UpdateAppointment implements Initializable {
     Stage stage;
     public static int createId;
     String[] Type = {"Planning Session", "Debriefing", "Debugging", "Implementing", "On-boarding"};
+    private Appointment appointmentMod;
 
     public void cancelButtonHandler(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -96,7 +99,6 @@ public class UpdateAppointment implements Initializable {
         typeChoiceBox.setItems(typeList);
     }
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         appointmentIDLabel.setText(String.valueOf(createId));
@@ -112,4 +114,5 @@ public class UpdateAppointment implements Initializable {
         }
 
     }
+
 }

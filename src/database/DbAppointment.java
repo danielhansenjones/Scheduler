@@ -131,9 +131,8 @@ import java.time.LocalDateTime;
                 preparedStatement.setString(2, description);
                 preparedStatement.setString(3, location);
                 preparedStatement.setString(4, type);
-                /*preparedStatement.setTimestamp(5, Timestamp.valueOf(String.valueOf(start)));*/
-                preparedStatement.setTimestamp(5,Timestamp.valueOf(start));
-                preparedStatement.setTimestamp(6, Timestamp.valueOf(String.valueOf(end)));
+                preparedStatement.setTimestamp(5,Timestamp.valueOf((start)));
+                preparedStatement.setTimestamp(6, Timestamp.valueOf((end)));
                 preparedStatement.setInt(7, customerId);
                 preparedStatement.setInt(8, contact.getContactId());
                 preparedStatement.setInt(9, userID);

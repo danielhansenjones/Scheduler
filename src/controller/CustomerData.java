@@ -101,10 +101,14 @@ public class CustomerData implements Initializable {
         Division division = (Division) divisionComboBox.getValue();
         String phone = phoneTextField.getText();
 
-        DbCustomer.insertCustomer(customerName,address,postalCode,phone, String.valueOf(division));
+        DbCustomer.insertCustomer(customerName, address, postalCode, phone, String.valueOf(division));
+        try {
+            customerTableView.setItems(DbCustomer.selectCustomers());
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-
     public void deleteButtonHandler(ActionEvent actionEvent) throws SQLException {
         Customer selectedCustomer = (Customer) customerTableView.getSelectionModel().getSelectedItem();
 
@@ -115,6 +119,7 @@ public class CustomerData implements Initializable {
                 try {
                     DbCustomer.deleteCustomer(((Customer) customerTableView.getSelectionModel().getSelectedItem()).getCustomerId());
                      ConfirmationScreens.informationScreen("Customer Deleted","" + selectedCustomer,"1 Line Updated");
+                     customerTableView.setItems(DbCustomer.selectCustomers());
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -144,7 +149,6 @@ public class CustomerData implements Initializable {
         addressTextField.setText(String.valueOf((customer).getAddress()));
         postalTextField.setText(String.valueOf((customer).getPostalCode()));
         countryComboBox.setValue(customer.getCountry());
-        ///division combo box set items method to call divisions per country based id
         divisionComboBox.setValue(customer.getDivision());
         phoneTextField.setText(String.valueOf((customer).getPhoneNumber()));
 
@@ -161,8 +165,14 @@ public class CustomerData implements Initializable {
         String postalCode = postalTextField.getText();
         Division division = (Division) divisionComboBox.getValue();
         String phone = phoneTextField.getText();
+        try {
 
-        DbCustomer.updateCustomer(customerId,customerName,address,postalCode,phone, String.valueOf(division));
+
+            DbCustomer.updateCustomer(customerId, customerName, address, postalCode, phone, String.valueOf(division));
+            customerTableView.setItems(DbCustomer.selectCustomers());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

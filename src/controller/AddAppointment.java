@@ -73,7 +73,6 @@ public class AddAppointment implements Initializable {
 
 
    public void addButtonHandler(ActionEvent event) throws IOException, SQLException {
-
            String appointmentTitle = titleTextField.getText();
            String appointmentLocation = locationTextField.getText();
            String appointmentDescription = descriptionTextField.getText();

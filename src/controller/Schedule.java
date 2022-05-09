@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointment;
 
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -111,8 +112,8 @@ public class Schedule implements Initializable {
     }
 
     public void updateButtonHandler(ActionEvent actionEvent) throws IOException {
-        stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/UpdateAppointment.fxml"));
+        stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(scene));
         stage.show();
     }
