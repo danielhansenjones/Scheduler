@@ -96,7 +96,7 @@
                 <rowConstraints>
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 </rowConstraints>
-                <DatePicker fx:id="startDatePicker" prefHeight="25.0" prefWidth="168.0" promptText="Date" />
+                <DatePicker fx:id="startDatePicker" prefHeight="25.0" prefWidth="168.0" promptText="Start Date" />
                 <TextField fx:id="startDateHour" prefHeight="25.0" prefWidth="31.0" promptText="Hour" GridPane.columnIndex="1" />
                 <TextField fx:id="startDateMinute" promptText="Minute" GridPane.columnIndex="2" />
             </GridPane>

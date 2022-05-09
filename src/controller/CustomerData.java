@@ -111,10 +111,10 @@ public class CustomerData implements Initializable {
         if (selectedCustomer == null) {
             ConfirmationScreens.warningScreen("Error", "A customer was not selected", "You must select a customer to delete");
         }
-        if (ConfirmationScreens.confirmationScreen("Delete Selected", "Are you sure you want to delete?  "+selectedCustomer)) {
+        if (ConfirmationScreens.confirmationScreen("Delete Selected", "Are you sure you want to delete?  " + selectedCustomer)) {
                 try {
                     DbCustomer.deleteCustomer(((Customer) customerTableView.getSelectionModel().getSelectedItem()).getCustomerId());
-
+                     ConfirmationScreens.informationScreen("Customer Deleted","" + selectedCustomer,"1 Line Updated");
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -144,6 +144,7 @@ public class CustomerData implements Initializable {
         addressTextField.setText(String.valueOf((customer).getAddress()));
         postalTextField.setText(String.valueOf((customer).getPostalCode()));
         countryComboBox.setValue(customer.getCountry());
+        ///division combo box set items method to call divisions per country based id
         divisionComboBox.setValue(customer.getDivision());
         phoneTextField.setText(String.valueOf((customer).getPhoneNumber()));
 
@@ -172,6 +173,7 @@ public class CustomerData implements Initializable {
         try {
             customerTableView.setItems(DbCustomer.selectCustomers());
             countryComboBox.setItems(DbCountry.selectCountries());
+            divisionComboBox.setItems(DbDivision.selectDivisions());
 
         } catch (SQLException e) {
             e.printStackTrace();

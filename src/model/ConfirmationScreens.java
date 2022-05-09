@@ -29,6 +29,14 @@ public class ConfirmationScreens {
         alert.setHeaderText(header);
         alert.setContentText(content);
         Optional<ButtonType> result = alert.showAndWait();
+    }
+    public static void informationScreen(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        Optional<ButtonType> result = alert.showAndWait();
 
     }
+
 }

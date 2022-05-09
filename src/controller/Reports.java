@@ -2,6 +2,7 @@ package controller;
 
 import database.DbAppointment;
 import database.DbContact;
+import database.DbCustomer;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -99,6 +100,7 @@ public class Reports implements Initializable {
     }
 
     public void totalTabHandler(Event event) {
+     /*   monthTypeTableview.setItems(Db);*/
     }
 
     public void individualTabHandler(Event event) {
@@ -108,6 +110,22 @@ public class Reports implements Initializable {
     }
 
     public void customerTabHandler(Event event) {
+        try {
+
+            customerComboBox1.setItems(DbCustomer.selectCustomers());
+            contactScheduleTableview1.setItems(DbAppointment.selectAppointments());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        appointmentIDColumn1.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        titleColumn1.setCellValueFactory(new PropertyValueFactory<>("title"));
+        descriptionColumn1.setCellValueFactory(new PropertyValueFactory<>("location"));
+        locationColumn1.setCellValueFactory(new PropertyValueFactory<>("description"));
+        contactColumn1.setCellValueFactory(new PropertyValueFactory<>("contactName"));
+        typeColumn1.setCellValueFactory(new PropertyValueFactory<>("type"));
+        startDateColumn1.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        endDateColumn1.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        customerIDColumn1.setCellValueFactory(new PropertyValueFactory<>("customerId"));
     }
 
 

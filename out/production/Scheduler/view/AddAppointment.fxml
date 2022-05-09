@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="707.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddAppointment">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="707.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddAppointment">
     <ImageView fitHeight="500.0" fitWidth="695.0" layoutX="14.0" pickOnBounds="true" AnchorPane.topAnchor="0.0">
         <Image url="@../assets/black-background.jpg" />
     </ImageView>
@@ -96,7 +96,7 @@
                 <rowConstraints>
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 </rowConstraints>
-                <DatePicker fx:id="startDatePicker" prefHeight="25.0" prefWidth="168.0" promptText="Date" />
+                <DatePicker fx:id="startDatePicker" prefHeight="25.0" prefWidth="168.0" promptText="Start Date" />
                 <TextField fx:id="startDateHour" prefHeight="25.0" prefWidth="31.0" promptText="Hour" GridPane.columnIndex="1" />
                 <TextField fx:id="startDateMinute" promptText="Minute" GridPane.columnIndex="2" />
             </GridPane>

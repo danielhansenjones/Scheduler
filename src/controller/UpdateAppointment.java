@@ -94,6 +94,21 @@ public class UpdateAppointment implements Initializable {
 
         DbAppointment.updateAppointment(String.valueOf(appointmentContact),appointmentTitle,appointmentDescription,appointmentLocation,appointmentType,startDate,endDate,appointmentCustomer,appointmentUser,appointmentId);
 
+
+       /* String appointmentTitle = titleTextField.getText();
+        String appointmentLocation = locationTextField.getText();
+        String appointmentDescription = descriptionTextField.getText();
+        Contact contact = (Contact) contactComboBox.getValue();
+        String appointmentType = (String) typeChoiceBox.getValue();
+        LocalDateTime startDate = startDatePicker.getValue().atTime(Integer.parseInt(startDateHour.getText()), Integer.parseInt(startDateMinute.getText()));
+        Timestamp startTime = Timestamp.valueOf(startDate);
+        LocalDateTime endDate = startDatePicker.getValue().atTime(Integer.parseInt(endDateHour.getText()), Integer.parseInt(endDateMinute.getText()));
+        Timestamp endTime = Timestamp.valueOf(endDate);
+        Integer appointmentCustomer = customerComboBox.getValue().getCustomerId();
+        Integer appointmentUser = userComboBox.getValue().getUserId();
+        LocalDateTime juanTime = LocalDateTime.of(startDatePicker.getValue(), LocalTime.of(Integer.parseInt(startDateHour.getText()),Integer.parseInt(startDateMinute.getText())));
+*/
+
     }
 
     private void appointmentTypeComboBox() {
