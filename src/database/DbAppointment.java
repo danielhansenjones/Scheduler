@@ -120,7 +120,7 @@ import java.time.LocalDateTime;
             }
         }
 
-      public static boolean insertAppointment(String contactName, String title, String description, String location, String type, LocalDateTime start, Timestamp end, Integer customerId, Integer userID) throws SQLException {
+      public static boolean insertAppointment(String contactName, String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, Integer customerId, Integer userID) throws SQLException {
             try {
                 Contact contact = DbContact.selectContactId(contactName);
                 String sqlQuery = "INSERT INTO appointments(Title, Description, Location, Type, Start, End, Customer_ID, Contact_ID, User_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";

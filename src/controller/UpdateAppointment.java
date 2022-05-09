@@ -15,18 +15,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Contact;
+import model.Customer;
+import model.User;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
-import java.util.TimeZone;
 
 public class UpdateAppointment implements Initializable {
+    @FXML
+    private DatePicker endDatePicker;
     @FXML
     private Button saveButton;
     @FXML
@@ -42,7 +43,7 @@ public class UpdateAppointment implements Initializable {
     @FXML
     private Label appointmentIDLabel;
     @FXML
-    private ComboBox customerComboBox;
+    private ComboBox<Customer> customerComboBox;
     @FXML
     private DatePicker startDatePicker;
     @FXML
@@ -54,7 +55,7 @@ public class UpdateAppointment implements Initializable {
     @FXML
     private TextField endDateMinute;
     @FXML
-    private ComboBox userComboBox;
+    private ComboBox<User> userComboBox;
     @FXML
     private ChoiceBox typeChoiceBox;
 
@@ -79,35 +80,11 @@ public class UpdateAppointment implements Initializable {
         String appointmentDescription = descriptionTextField.getText();
         Contact appointmentContact = (Contact) contactComboBox.getValue();
         String appointmentType = (String) typeChoiceBox.getValue();
-        LocalDateTime startDate = startDatePicker.getValue().atTime(Integer.parseInt(startDateHour.getText()), Integer.parseInt(startDateMinute.getText()));
-        Timestamp start_time = Timestamp.valueOf(startDate);
-        LocalDateTime endDate = startDatePicker.getValue().atTime(Integer.parseInt(endDateHour.getText()), Integer.parseInt(endDateMinute.getText()));
-        Timestamp end_time = Timestamp.valueOf(endDate);
-        Integer appointmentCustomer = (Integer) customerComboBox.getValue();
-        Integer appointmentUser = (Integer) userComboBox.getValue();
-        LocalDateTime updateDate = LocalDateTime.now();
-        Timestamp updateTS = Timestamp.valueOf(updateDate);
-
-        ZoneId zoneID = TimeZone.getDefault().toZoneId();
-        ZonedDateTime startZD = ZonedDateTime.of(startDate, zoneID);
-        ZonedDateTime endZD = ZonedDateTime.of(endDate,zoneID);
-
-        DbAppointment.updateAppointment(String.valueOf(appointmentContact),appointmentTitle,appointmentDescription,appointmentLocation,appointmentType,startDate,endDate,appointmentCustomer,appointmentUser,appointmentId);
-
-
-       /* String appointmentTitle = titleTextField.getText();
-        String appointmentLocation = locationTextField.getText();
-        String appointmentDescription = descriptionTextField.getText();
-        Contact contact = (Contact) contactComboBox.getValue();
-        String appointmentType = (String) typeChoiceBox.getValue();
-        LocalDateTime startDate = startDatePicker.getValue().atTime(Integer.parseInt(startDateHour.getText()), Integer.parseInt(startDateMinute.getText()));
-        Timestamp startTime = Timestamp.valueOf(startDate);
-        LocalDateTime endDate = startDatePicker.getValue().atTime(Integer.parseInt(endDateHour.getText()), Integer.parseInt(endDateMinute.getText()));
-        Timestamp endTime = Timestamp.valueOf(endDate);
+        LocalDateTime startTime = LocalDateTime.of(startDatePicker.getValue(), LocalTime.of(Integer.parseInt(startDateHour.getText()),Integer.parseInt(startDateMinute.getText())));
+        LocalDateTime endTime = LocalDateTime.of(endDatePicker.getValue(),LocalTime.of(Integer.parseInt(endDateHour.getText()),Integer.parseInt(endDateMinute.getText())));
         Integer appointmentCustomer = customerComboBox.getValue().getCustomerId();
         Integer appointmentUser = userComboBox.getValue().getUserId();
-        LocalDateTime juanTime = LocalDateTime.of(startDatePicker.getValue(), LocalTime.of(Integer.parseInt(startDateHour.getText()),Integer.parseInt(startDateMinute.getText())));
-*/
+        DbAppointment.updateAppointment(String.valueOf(appointmentContact),appointmentTitle,appointmentDescription,appointmentLocation,appointmentType,startTime,endTime,appointmentCustomer,appointmentUser,appointmentId);
 
     }
 

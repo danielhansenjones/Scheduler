@@ -21,7 +21,6 @@ import model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
@@ -29,6 +28,8 @@ import java.util.ResourceBundle;
 
 public class AddAppointment implements Initializable {
 
+    @FXML
+    private DatePicker endDatePicker;
     @FXML
     private TextField titleTextField;
     @FXML
@@ -78,16 +79,14 @@ public class AddAppointment implements Initializable {
            String appointmentDescription = descriptionTextField.getText();
            Contact contact = (Contact) contactComboBox.getValue();
            String appointmentType = (String) typeChoiceBox.getValue();
-           LocalDateTime startDate = startDatePicker.getValue().atTime(Integer.parseInt(startDateHour.getText()), Integer.parseInt(startDateMinute.getText()));
-           Timestamp startTime = Timestamp.valueOf(startDate);
-           LocalDateTime endDate = startDatePicker.getValue().atTime(Integer.parseInt(endDateHour.getText()), Integer.parseInt(endDateMinute.getText()));
-           Timestamp endTime = Timestamp.valueOf(endDate);
+           LocalDateTime startTime = LocalDateTime.of(startDatePicker.getValue(), LocalTime.of(Integer.parseInt(startDateHour.getText()),Integer.parseInt(startDateMinute.getText())));
+           LocalDateTime endTime = LocalDateTime.of(endDatePicker.getValue(),LocalTime.of(Integer.parseInt(endDateHour.getText()),Integer.parseInt(endDateMinute.getText())));
            Integer appointmentCustomer = customerComboBox.getValue().getCustomerId();
            Integer appointmentUser = userComboBox.getValue().getUserId();
-           LocalDateTime juanTime = LocalDateTime.of(startDatePicker.getValue(), LocalTime.of(Integer.parseInt(startDateHour.getText()),Integer.parseInt(startDateMinute.getText())));
+
 
        try {
-           DbAppointment.insertAppointment(String.valueOf(contact), appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, juanTime, endTime, appointmentCustomer, appointmentUser);
+           DbAppointment.insertAppointment(String.valueOf(contact), appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, startTime, endTime, appointmentCustomer, appointmentUser);
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
