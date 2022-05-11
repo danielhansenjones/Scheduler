@@ -120,7 +120,7 @@ import java.time.LocalDateTime;
             }
         }
 
-      public static boolean insertAppointment(String contactName, String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, Integer customerId, Integer userID) throws SQLException {
+        public static boolean insertAppointment(String contactName, String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, Integer customerId, Integer userID) throws SQLException {
             try {
                 Contact contact = DbContact.selectContactId(contactName);
                 String sqlQuery = "INSERT INTO appointments(Title, Description, Location, Type, Start, End, Customer_ID, Contact_ID, User_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -131,7 +131,7 @@ import java.time.LocalDateTime;
                 preparedStatement.setString(2, description);
                 preparedStatement.setString(3, location);
                 preparedStatement.setString(4, type);
-                preparedStatement.setTimestamp(5,Timestamp.valueOf((start)));
+                preparedStatement.setTimestamp(5, Timestamp.valueOf((start)));
                 preparedStatement.setTimestamp(6, Timestamp.valueOf((end)));
                 preparedStatement.setInt(7, customerId);
                 preparedStatement.setInt(8, contact.getContactId());
@@ -250,7 +250,6 @@ import java.time.LocalDateTime;
                 preparedStatement.setInt(1, contactID);
                 ResultSet resultSet = preparedStatement.executeQuery();
 
-
                 // Forward scroll resultSet
                 while (resultSet.next()) {
                     Appointment newAppointment = new Appointment(
@@ -313,5 +312,3 @@ import java.time.LocalDateTime;
         }
 
     }
-
-

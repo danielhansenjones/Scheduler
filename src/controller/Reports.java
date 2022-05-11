@@ -1,8 +1,11 @@
 package controller;
 
+import database.DatabaseAccess;
 import database.DbAppointment;
 import database.DbContact;
 import database.DbCustomer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -13,9 +16,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Appointment;
+import model.Report;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -92,6 +99,7 @@ public class Reports implements Initializable {
     Parent scene;
     Stage stage;
 
+
     public void backButtonHandler(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
@@ -99,16 +107,49 @@ public class Reports implements Initializable {
         stage.show();
     }
 
-    public void totalTabHandler(Event event) {
-     /*   monthTypeTableview.setItems(Db);*/
+    public void totalTabHandler(Event event) throws SQLException {
+        try {
+            ObservableList<Appointment> typeMonthReport = FXCollections.observableArrayList();
+            String sqlQuery = "SELECT MonthName(Start) AS monthName , Type AS typeName, COUNT(*) AS amount FROM appointments GROUP BY MONTHNAME (Start), Type";
+            PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+
+                String month = resultSet.getString("monthName");
+
+                String type = resultSet.getString("typeName");
+
+                String amount = resultSet.getString("amount");
+
+                typeMonthReport.add(new Report(month, type, amount));
+            }
+            monthColumn.setCellValueFactory(new PropertyValueFactory<>("month"));
+            monthTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+            amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+            monthTypeTableview.getItems().setAll(typeMonthReport);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void individualTabHandler(Event event) {
     }
 
-    public void contactComboSelected(ActionEvent actionEvent) {
-    }
+    public void contactComboSelected(ActionEvent actionEvent) throws SQLException {
+        {
+            if (contactComboBox.getValue() == null) {
+                contactScheduleTableview.getSelectionModel().clearSelection();
+            } else
+                try {
+                    contactScheduleTableview.setItems(DbAppointment.selectAppointmentsByContactId((Integer) contactComboBox.getValue()));
 
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
+    }
     public void customerTabHandler(Event event) {
         try {
 
@@ -129,7 +170,17 @@ public class Reports implements Initializable {
     }
 
 
-    public void customerComboBoxSelected(ActionEvent actionEvent) {
+    public void customerComboBoxSelected(ActionEvent actionEvent) throws SQLException {
+        {
+            if(customerComboBox1.getValue() == null )
+            {
+                contactScheduleTableview1.getSelectionModel().clearSelection();
+            }
+            else
+            {
+                contactScheduleTableview1.setItems(DbAppointment.selectAppointmentsByCustomerId((Integer)customerComboBox1.getValue()));
+            }
+        }
     }
 
     @Override

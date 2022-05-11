@@ -12,7 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointment;
-
+import model.ConfirmationScreens;
 
 import java.io.IOException;
 import java.net.URL;
@@ -133,8 +133,20 @@ public class Schedule implements Initializable {
     }
 
     public void deleteButtonHandler(ActionEvent actionEvent) throws IOException, SQLException {
+
         Appointment appointment = (Appointment) appointmentTableView.getSelectionModel().getSelectedItem();
-      /*  DbAppointment.deleteAppointment(appointment.getAppointmentId());*/ // this line is also crashing the program needs a rewrite.
+
+        if (ConfirmationScreens.confirmationScreen("You are about to delete: ", " Appointment ID: " + appointment.getAppointmentId()+ " of type:  " + appointment.getType())) {
+            try {
+                ConfirmationScreens.informationScreen("Appointment Deleted", "" + appointment, "1 Line Updated");
+                DbAppointment.deleteAppointment(appointment.getAppointmentId());
+                appointmentTableView.setItems(DbAppointment.selectAppointments());
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
 

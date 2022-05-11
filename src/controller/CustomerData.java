@@ -166,8 +166,6 @@ public class CustomerData implements Initializable {
         Division division = (Division) divisionComboBox.getValue();
         String phone = phoneTextField.getText();
         try {
-
-
             DbCustomer.updateCustomer(customerId, customerName, address, postalCode, phone, String.valueOf(division));
             customerTableView.setItems(DbCustomer.selectCustomers());
         } catch (SQLException e) {

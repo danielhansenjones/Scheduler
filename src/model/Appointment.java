@@ -62,6 +62,10 @@ public class Appointment {
         this.contactName = contactName;
     }
 
+    public Appointment() {
+
+    }
+
     /**
      * Gets Appointment ID
      *
