@@ -19,6 +19,7 @@ public class Country {
 
     /**
      * Gets Country ID
+     *
      * @return countryID Integer
      */
     public int getCountryId() {
@@ -27,6 +28,7 @@ public class Country {
 
     /**
      * Sets Country ID
+     *
      * @param countryId String
      */
     public void setCountryId(int countryId) {
@@ -35,6 +37,7 @@ public class Country {
 
     /**
      * Gets Country
+     *
      * @return country String
      */
     public String getCountry() {
@@ -43,6 +46,7 @@ public class Country {
 
     /**
      * Sets Country
+     *
      * @param country String
      */
     public void setCountry(String country) {

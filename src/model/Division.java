@@ -1,4 +1,5 @@
 package model;
+
 /**
  * This class is an object constructor used to create Division objects and get/set their values.
  */
@@ -23,7 +24,7 @@ public class Division {
      *
      * @return divisionId Integer
      */
-    public  int getDivisionId() {
+    public int getDivisionId() {
         return divisionId;
     }
 

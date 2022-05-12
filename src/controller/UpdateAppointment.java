@@ -64,6 +64,7 @@ public class UpdateAppointment implements Initializable {
     Parent scene;
     Stage stage;
     public static int createId;
+    private static Appointment updateAppointment;
     String[] Type = {"Planning Session", "Debriefing", "Debugging", "Implementing", "On-boarding"};
     private Appointment appointmentMod;
 
@@ -75,7 +76,6 @@ public class UpdateAppointment implements Initializable {
     }
 
 
-
     public void saveButtonHandler(ActionEvent actionEvent) throws SQLException {
         int appointmentId = Integer.parseInt(appointmentIDLabel.getText());
         String appointmentTitle = titleTextField.getText();
@@ -83,12 +83,11 @@ public class UpdateAppointment implements Initializable {
         String appointmentDescription = descriptionTextField.getText();
         Contact appointmentContact = (Contact) contactComboBox.getValue();
         String appointmentType = (String) typeChoiceBox.getValue();
-        LocalDateTime startTime = LocalDateTime.of(startDatePicker.getValue(), LocalTime.of(Integer.parseInt(startDateHour.getText()),Integer.parseInt(startDateMinute.getText())));
-        LocalDateTime endTime = LocalDateTime.of(endDatePicker.getValue(),LocalTime.of(Integer.parseInt(endDateHour.getText()),Integer.parseInt(endDateMinute.getText())));
+        LocalDateTime startTime = LocalDateTime.of(startDatePicker.getValue(), LocalTime.of(Integer.parseInt(startDateHour.getText()), Integer.parseInt(startDateMinute.getText())));
+        LocalDateTime endTime = LocalDateTime.of(endDatePicker.getValue(), LocalTime.of(Integer.parseInt(endDateHour.getText()), Integer.parseInt(endDateMinute.getText())));
         Integer appointmentCustomer = customerComboBox.getValue().getCustomerId();
         Integer appointmentUser = userComboBox.getValue().getUserId();
-        DbAppointment.updateAppointment(String.valueOf(appointmentContact),appointmentTitle,appointmentDescription,appointmentLocation,appointmentType,startTime,endTime,appointmentCustomer,appointmentUser,appointmentId);
-
+        DbAppointment.updateAppointment(String.valueOf(appointmentContact), appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, startTime, endTime, appointmentCustomer, appointmentUser, appointmentId);
     }
 
     private void appointmentTypeComboBox() {
@@ -99,20 +98,19 @@ public class UpdateAppointment implements Initializable {
         typeChoiceBox.setItems(typeList);
     }
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        appointmentIDLabel.setText(String.valueOf(createId));
-       appointmentTypeComboBox();
+        appointmentTypeComboBox();
         try {
 
             contactComboBox.setItems(DbContact.selectContacts());
             customerComboBox.setItems(DbCustomer.selectCustomers());
             userComboBox.setItems((DbUser.selectUsers()));
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
 
     }
-
 }

@@ -76,6 +76,6 @@ public class User {
 
     @Override
     public String toString() {
-        return ("#" + Integer.toString(userId) + " " + username);
+        return ("#" + userId + " " + username);
     }
 }

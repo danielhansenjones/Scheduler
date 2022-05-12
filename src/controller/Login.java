@@ -66,5 +66,5 @@ public class Login implements Initializable {
              catch (Exception e) {
                 e.printStackTrace();
             }*/
-        }
     }
+}

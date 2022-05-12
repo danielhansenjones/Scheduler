@@ -3,6 +3,7 @@ package controller;
 import database.DbCountry;
 import database.DbCustomer;
 import database.DbDivision;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.ConfirmationScreens;
+import model.Country;
 import model.Customer;
 import model.Division;
 
@@ -22,6 +24,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class CustomerData implements Initializable {
+
     public Label divisionLabel;
     @FXML
     private TableView customerTableView;
@@ -47,9 +50,9 @@ public class CustomerData implements Initializable {
     private TextField phoneTextField;
 
     @FXML
-    private ComboBox countryComboBox;
+    private ComboBox <Country> countryComboBox;
     @FXML
-    private ComboBox divisionComboBox;
+    private ComboBox <Division> divisionComboBox;
     @FXML
     private Label customerIDLabel;
     @FXML
@@ -64,9 +67,11 @@ public class CustomerData implements Initializable {
     private Button saveButton;
     @FXML
     private Button backButton;
+
     Parent scene;
     Stage stage;
-   public static int createId;
+    public static int createId;
+    static ObservableList<Country> country;
 
     public void backButtonHandler(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -76,20 +81,19 @@ public class CustomerData implements Initializable {
     }
 
 
-
- // combo boxes
+    // combo boxes
     public void countrySelectionHandler(ActionEvent actionEvent) throws SQLException {
         {
-            if(countryComboBox.getValue() == null )
-            {
+            if (countryComboBox.getValue() == null) {
                 divisionComboBox.getSelectionModel().clearSelection();
-            }
-            else
-            {
-                divisionComboBox.setItems(DbDivision.selectDivisions());// need to figure out country combo boxes...
+            } else {
+                Country country= countryComboBox.getValue();
+                int countryId = country.getCountryId();
+                divisionComboBox.setItems(DbDivision.selectDivisionsByCountry((countryId)));
             }
         }
     }
+
     //combo boxes
     public void regionSelectionHandler(ActionEvent actionEvent) {
     }
@@ -109,6 +113,7 @@ public class CustomerData implements Initializable {
             e.printStackTrace();
         }
     }
+
     public void deleteButtonHandler(ActionEvent actionEvent) throws SQLException {
         Customer selectedCustomer = (Customer) customerTableView.getSelectionModel().getSelectedItem();
 
@@ -116,26 +121,27 @@ public class CustomerData implements Initializable {
             ConfirmationScreens.warningScreen("Error", "A customer was not selected", "You must select a customer to delete");
         }
         if (ConfirmationScreens.confirmationScreen("Delete Selected", "Are you sure you want to delete?  " + selectedCustomer)) {
-                try {
-                    DbCustomer.deleteCustomer(((Customer) customerTableView.getSelectionModel().getSelectedItem()).getCustomerId());
-                     ConfirmationScreens.informationScreen("Customer Deleted","" + selectedCustomer,"1 Line Updated");
-                     customerTableView.setItems(DbCustomer.selectCustomers());
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-
+            try {
+                DbCustomer.deleteCustomer(((Customer) customerTableView.getSelectionModel().getSelectedItem()).getCustomerId());
+                ConfirmationScreens.informationScreen("Customer Deleted", "" + selectedCustomer, "1 Line Updated");
+                customerTableView.setItems(DbCustomer.selectCustomers());
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
 
+        }
+
     }
+
     @FXML
     private void cancelButtonHandler(ActionEvent actionEvent) {
-            customerIDLabel.setText(String.valueOf(createId));
-            nameTextField.clear();
-            addressTextField.clear();
-            postalTextField.clear();
-            countryComboBox.getSelectionModel().clearSelection();
-            divisionComboBox.getSelectionModel().clearSelection();
-            phoneTextField.clear();
+        customerIDLabel.setText(String.valueOf(createId));
+        nameTextField.clear();
+        addressTextField.clear();
+        postalTextField.clear();
+        countryComboBox.getSelectionModel().clearSelection();
+        divisionComboBox.getSelectionModel().clearSelection();
+        phoneTextField.clear();
 
         deleteButton.setVisible(true);
         addButton.setVisible(true);
@@ -148,8 +154,8 @@ public class CustomerData implements Initializable {
         nameTextField.setText(String.valueOf((customer).getCustomerName()));
         addressTextField.setText(String.valueOf((customer).getAddress()));
         postalTextField.setText(String.valueOf((customer).getPostalCode()));
-        countryComboBox.setValue(customer.getCountry());
-        divisionComboBox.setValue(customer.getDivision());
+        /*countryComboBox.setValue(customer.getCountry());
+        divisionComboBox.setValue(customer.getDivision());*/
         phoneTextField.setText(String.valueOf((customer).getPhoneNumber()));
 
         saveButton.setVisible(true);
@@ -174,13 +180,14 @@ public class CustomerData implements Initializable {
     }
 
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         customerIDLabel.setText(String.valueOf(createId));
+
         try {
+            country = DbCountry.selectCountries();
             customerTableView.setItems(DbCustomer.selectCustomers());
-            countryComboBox.setItems(DbCountry.selectCountries());
+            countryComboBox.setItems(country);
             divisionComboBox.setItems(DbDivision.selectDivisions());
 
         } catch (SQLException e) {

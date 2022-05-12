@@ -57,12 +57,9 @@ public class AddAppointment implements Initializable {
     @FXML
     private ComboBox<User> userComboBox;
 
-
     Parent scene;
     Stage stage;
     public static int createId;
-
-
 
     public void cancelButtonHandler(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -72,32 +69,31 @@ public class AddAppointment implements Initializable {
     }
 
 
-   public void addButtonHandler(ActionEvent event) throws IOException, SQLException {
-           String appointmentTitle = titleTextField.getText();
-           String appointmentLocation = locationTextField.getText();
-           String appointmentDescription = descriptionTextField.getText();
-           Contact contact = (Contact) contactComboBox.getValue();
-           String appointmentType = (String) typeChoiceBox.getValue();
-           LocalDateTime startTime = LocalDateTime.of(startDatePicker.getValue(), LocalTime.of(Integer.parseInt(startDateHour.getText()),Integer.parseInt(startDateMinute.getText())));
-           LocalDateTime endTime = LocalDateTime.of(endDatePicker.getValue(),LocalTime.of(Integer.parseInt(endDateHour.getText()),Integer.parseInt(endDateMinute.getText())));
-           Integer appointmentCustomer = customerComboBox.getValue().getCustomerId();
-           Integer appointmentUser = userComboBox.getValue().getUserId();
+    public void addButtonHandler(ActionEvent event) throws IOException, SQLException {
+        String appointmentTitle = titleTextField.getText();
+        String appointmentLocation = locationTextField.getText();
+        String appointmentDescription = descriptionTextField.getText();
+        Contact contact = contactComboBox.getValue();
+        String appointmentType = (String) typeChoiceBox.getValue();
+        LocalDateTime startTime = LocalDateTime.of(startDatePicker.getValue(), LocalTime.of(Integer.parseInt(startDateHour.getText()), Integer.parseInt(startDateMinute.getText())));
+        LocalDateTime endTime = LocalDateTime.of(endDatePicker.getValue(), LocalTime.of(Integer.parseInt(endDateHour.getText()), Integer.parseInt(endDateMinute.getText())));
+        Integer appointmentCustomer = customerComboBox.getValue().getCustomerId();
+        Integer appointmentUser = userComboBox.getValue().getUserId();
 
 
-       try {
-           DbAppointment.insertAppointment(String.valueOf(contact), appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, startTime, endTime, appointmentCustomer, appointmentUser);
+        try {
+            DbAppointment.insertAppointment(String.valueOf(contact), appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, startTime, endTime, appointmentCustomer, appointmentUser);
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
 
         }
-       stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-       scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
-       stage.setScene(new Scene(scene));
-       stage.show();
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
 
     }
-
 
 
     private void appointmentTypeComboBox() {
@@ -107,6 +103,7 @@ public class AddAppointment implements Initializable {
 
         typeChoiceBox.setItems(typeList);
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

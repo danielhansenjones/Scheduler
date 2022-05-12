@@ -1,8 +1,9 @@
-
 package database;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Country;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -22,6 +22,7 @@ public class Contact {
 
     /**
      * Gets Contact ID
+     *
      * @return contactId Integer value
      */
     public int getContactId() {
@@ -30,6 +31,7 @@ public class Contact {
 
     /**
      * Sets Contact ID
+     *
      * @param contactId Integer value
      */
     public void setContactId(int contactId) {
@@ -38,6 +40,7 @@ public class Contact {
 
     /**
      * Gets Contact Name
+     *
      * @return contactName String value
      */
     public String getContactName() {
@@ -46,6 +49,7 @@ public class Contact {
 
     /**
      * Sets Contact Name
+     *
      * @param contactName String value
      */
     public void setContactName(String contactName) {
@@ -54,6 +58,7 @@ public class Contact {
 
     /**
      * Gets Contact Email
+     *
      * @return contactEmail String value
      */
     public String getContactEmail() {
@@ -62,14 +67,15 @@ public class Contact {
 
     /**
      * Sets Contact Email
+     *
      * @param contactEmail String value
      */
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
     }
 
-@Override
-public String toString(){
+    @Override
+    public String toString() {
         return (contactName);
-}
+    }
 }

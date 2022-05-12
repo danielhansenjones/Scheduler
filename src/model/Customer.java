@@ -187,6 +187,6 @@ public class Customer {
 
     @Override
     public String toString() {
-        return ("#" +Integer.toString(customerId) + " " + customerName);
+        return ("#" + customerId + " " + customerName);
     }
 }

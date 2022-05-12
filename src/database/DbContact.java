@@ -1,7 +1,9 @@
 package database;
+
 import model.Contact;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +16,6 @@ public class DbContact {
             String sqlQuery = "SELECT * FROM contacts AS c INNER JOIN appointments AS a ON c.Contact_ID = a.Contact_ID;";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
             ResultSet resultSet = preparedStatement.executeQuery();
-
 
 
             // Forward scroll resultSet

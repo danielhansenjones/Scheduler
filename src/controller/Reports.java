@@ -17,6 +17,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointment;
+import model.Contact;
+import model.Customer;
 import model.Report;
 
 import java.io.IOException;
@@ -28,7 +30,7 @@ import java.util.ResourceBundle;
 
 public class Reports implements Initializable {
     @FXML
-    private ComboBox customerComboBox1;
+    private ComboBox<Customer> customerComboBox1;
     @FXML
     private Tab CustomerScheduleTab;
     @FXML
@@ -84,7 +86,7 @@ public class Reports implements Initializable {
     @FXML
     private TableColumn customerIDColumn;
     @FXML
-    private ComboBox contactComboBox;
+    private ComboBox<Contact> contactComboBox;
     @FXML
     private Tab totalUserNumbers;
     @FXML
@@ -143,13 +145,16 @@ public class Reports implements Initializable {
                 contactScheduleTableview.getSelectionModel().clearSelection();
             } else
                 try {
-                    contactScheduleTableview.setItems(DbAppointment.selectAppointmentsByContactId((Integer) contactComboBox.getValue()));
+                    Contact aContact = contactComboBox.getValue();
+                    int contactId = aContact.getContactId();
+                    contactScheduleTableview.setItems(DbAppointment.selectAppointmentsByContactId(contactId));
 
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
         }
     }
+
     public void customerTabHandler(Event event) {
         try {
 
@@ -171,14 +176,13 @@ public class Reports implements Initializable {
 
 
     public void customerComboBoxSelected(ActionEvent actionEvent) throws SQLException {
-        {
-            if(customerComboBox1.getValue() == null )
-            {
+       {
+            if (customerComboBox1.getValue() == null) {
                 contactScheduleTableview1.getSelectionModel().clearSelection();
-            }
-            else
-            {
-                contactScheduleTableview1.setItems(DbAppointment.selectAppointmentsByCustomerId((Integer)customerComboBox1.getValue()));
+            } else {
+                Customer customer= customerComboBox1.getValue();
+                    int customerId = customer.getCustomerId();
+                    contactScheduleTableview1.setItems(DbAppointment.selectAppointmentsByCustomerId(customerId));
             }
         }
     }
@@ -204,7 +208,6 @@ public class Reports implements Initializable {
         customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
 
     }
-
 
 
 }

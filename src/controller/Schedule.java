@@ -112,6 +112,8 @@ public class Schedule implements Initializable {
     }
 
     public void updateButtonHandler(ActionEvent actionEvent) throws IOException {
+        Appointment appointment = (Appointment) appointmentTableView.getSelectionModel().getSelectedItem();
+
         scene = FXMLLoader.load(getClass().getResource("/view/UpdateAppointment.fxml"));
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(scene));
@@ -133,10 +135,9 @@ public class Schedule implements Initializable {
     }
 
     public void deleteButtonHandler(ActionEvent actionEvent) throws IOException, SQLException {
-
         Appointment appointment = (Appointment) appointmentTableView.getSelectionModel().getSelectedItem();
 
-        if (ConfirmationScreens.confirmationScreen("You are about to delete: ", " Appointment ID: " + appointment.getAppointmentId()+ " of type:  " + appointment.getType())) {
+        if (ConfirmationScreens.confirmationScreen("You are about to delete: ", " Appointment ID: " + appointment.getAppointmentId() + " of type:  " + appointment.getType())) {
             try {
                 ConfirmationScreens.informationScreen("Appointment Deleted", "" + appointment, "1 Line Updated");
                 DbAppointment.deleteAppointment(appointment.getAppointmentId());

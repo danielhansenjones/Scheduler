@@ -3,12 +3,13 @@ package model;
 
 public class Report extends Appointment {
 
-    private String month;
-    private String amount;
-    private String type;
+    private final String month;
+    private final String amount;
+    private final String type;
 
     /**
      * A constructor used to create an Appointment object
+     *
      * @param month
      * @param type
      * @param amount

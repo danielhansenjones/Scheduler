@@ -33,8 +33,6 @@ public class DbUser {
             ResultSet resultSet = preparedStatement.executeQuery();
 
 
-
-
             while (resultSet.next()) {
                 User newUser = new User(
                         resultSet.getInt("User_ID"),

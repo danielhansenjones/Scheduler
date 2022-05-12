@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Schedule">
-    <ImageView fitHeight="617.0" fitWidth="908.0" pickOnBounds="true" AnchorPane.bottomAnchor="-17.0" AnchorPane.topAnchor="0.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="912.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Schedule">
+    <ImageView fitHeight="616.0" fitWidth="916.0" pickOnBounds="true" AnchorPane.topAnchor="0.0">
         <Image url="@../assets/black-background.jpg" />
     </ImageView>
     <ImageView fitHeight="75.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -70,9 +76,9 @@
         </AnchorPane>
     </AnchorPane>
     <Button fx:id="customerButton" layoutX="762.0" layoutY="14.0" mnemonicParsing="false" onAction="#customerButtonHandler" prefHeight="42.0" prefWidth="124.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Customers" AnchorPane.topAnchor="15.0" />
-    <Button fx:id="addButton" layoutX="660.0" layoutY="572.0" mnemonicParsing="false" onAction="#addButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Add" AnchorPane.bottomAnchor="0.0" />
-    <Button fx:id="deleteButton" layoutX="824.0" layoutY="572.0" mnemonicParsing="false" onAction="#deleteButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Delete" AnchorPane.bottomAnchor="0.0" />
-    <Button fx:id="updateButton" layoutX="744.0" layoutY="572.0" mnemonicParsing="false" onAction="#updateButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Update" AnchorPane.bottomAnchor="0.0" />
+    <Button fx:id="addButton" layoutX="659.0" layoutY="562.0" mnemonicParsing="false" onAction="#addButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Add" AnchorPane.bottomAnchor="14.0" />
+    <Button fx:id="deleteButton" layoutX="824.0" layoutY="562.0" mnemonicParsing="false" onAction="#deleteButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Delete" AnchorPane.bottomAnchor="14.0" />
+    <Button fx:id="updateButton" layoutX="743.0" layoutY="562.0" mnemonicParsing="false" onAction="#updateButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Update" AnchorPane.bottomAnchor="14.0" />
     <Label fx:id="currentTimeLabel" layoutX="518.0" layoutY="5.0" prefHeight="36.0" prefWidth="116.0" textFill="WHITE" AnchorPane.leftAnchor="518.0" AnchorPane.topAnchor="5.0">
         <font>
             <Font name="System Bold" size="18.0" />
@@ -93,5 +99,5 @@
             <Font name="System Bold" size="18.0" />
         </font>
     </Label>
-    <Button fx:id="reportsButton" layoutX="14.0" layoutY="572.0" mnemonicParsing="false" onAction="#reportsButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Reports" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" />
+    <Button fx:id="reportsButton" layoutX="20.0" layoutY="562.0" mnemonicParsing="false" onAction="#reportsButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Reports" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="20.0" />
 </AnchorPane>
