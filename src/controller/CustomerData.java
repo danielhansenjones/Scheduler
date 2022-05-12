@@ -102,7 +102,7 @@ public class CustomerData implements Initializable {
         String customerName = nameTextField.getText();
         String address = addressTextField.getText();
         String postalCode = postalTextField.getText();
-        Division division = (Division) divisionComboBox.getValue();
+        Division division = divisionComboBox.getValue();
         String phone = phoneTextField.getText();
 
         DbCustomer.insertCustomer(customerName, address, postalCode, phone, String.valueOf(division));
@@ -169,7 +169,7 @@ public class CustomerData implements Initializable {
         String customerName = nameTextField.getText();
         String address = addressTextField.getText();
         String postalCode = postalTextField.getText();
-        Division division = (Division) divisionComboBox.getValue();
+        Division division = divisionComboBox.getValue();
         String phone = phoneTextField.getText();
         try {
             DbCustomer.updateCustomer(customerId, customerName, address, postalCode, phone, String.valueOf(division));
