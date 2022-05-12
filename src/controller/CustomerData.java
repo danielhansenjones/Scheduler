@@ -148,14 +148,14 @@ public class CustomerData implements Initializable {
     }
 
 
-    public void modifyButtonHandler(ActionEvent actionEvent) {
+    public void modifyButtonHandler(ActionEvent actionEvent) throws SQLException {
         Customer customer = (Customer) customerTableView.getSelectionModel().getSelectedItem();
         customerIDLabel.setText(String.valueOf(customer.getCustomerId()));
         nameTextField.setText(String.valueOf((customer).getCustomerName()));
         addressTextField.setText(String.valueOf((customer).getAddress()));
         postalTextField.setText(String.valueOf((customer).getPostalCode()));
-        /*countryComboBox.setValue(customer.getCountry());
-        divisionComboBox.setValue(customer.getDivision());*/
+        countryComboBox.setValue(DbCountry.selectCountryId(customer.getCountry()));
+        divisionComboBox.setValue(DbDivision.selectDivisionId(customer.getDivision()));
         phoneTextField.setText(String.valueOf((customer).getPhoneNumber()));
 
         saveButton.setVisible(true);
