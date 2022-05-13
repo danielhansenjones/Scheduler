@@ -21,6 +21,12 @@ import java.util.ResourceBundle;
 
 public class Schedule implements Initializable {
     @FXML
+    private TableColumn weekUserIdColumn;
+    @FXML
+    private TableColumn monthUserIdColumn;
+    @FXML
+    private TableColumn userIdColumn;
+    @FXML
     private TableView appointmentTableView;
     @FXML
     private TableColumn appointmentIdColumn;
@@ -112,8 +118,7 @@ public class Schedule implements Initializable {
     }
 
     public void updateButtonHandler(ActionEvent actionEvent) throws IOException {
-        Appointment appointment = (Appointment) appointmentTableView.getSelectionModel().getSelectedItem();
-
+        UpdateAppointment.sendUpdateAppointment((Appointment) appointmentTableView.getSelectionModel().getSelectedItem());
         scene = FXMLLoader.load(getClass().getResource("/view/UpdateAppointment.fxml"));
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(scene));
@@ -139,7 +144,7 @@ public class Schedule implements Initializable {
 
         if (ConfirmationScreens.confirmationScreen("You are about to delete: ", " Appointment ID: " + appointment.getAppointmentId() + " of type:  " + appointment.getType())) {
             try {
-                ConfirmationScreens.informationScreen("Appointment Deleted", "" + appointment, "1 Line Updated");
+                ConfirmationScreens.informationScreen("Appointment Deleted", "Appointment ID #  " + appointment.getAppointmentId(), "1 Line Updated");
                 DbAppointment.deleteAppointment(appointment.getAppointmentId());
                 appointmentTableView.setItems(DbAppointment.selectAppointments());
 
@@ -150,19 +155,19 @@ public class Schedule implements Initializable {
         }
     }
 
-
     public void overviewTabHandler(Event event) throws SQLException {
         appointmentTableView.setItems(DbAppointment.selectAppointments());
 
         appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
-        locationColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         contactColumn.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
 
     public void monthTabHandler(Event event) throws SQLException {
@@ -171,14 +176,14 @@ public class Schedule implements Initializable {
 
         monthAppointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         monthTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-        monthDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
-        monthLocationColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        monthDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        monthLocationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         monthContactColumn.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         monthTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         monthStartDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         monthEndDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         monthCustomerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
-
+        monthUserIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
 
     public void weekTabHandler(Event event) throws SQLException {
@@ -186,13 +191,14 @@ public class Schedule implements Initializable {
 
         weekAppointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         weekTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-        weekDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
-        weekLocationColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        weekDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        weekLocationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         weekContactColumn.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         weekTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         weekStartDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         weekEndDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         weekCustomerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        weekUserIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
 
     @Override
@@ -203,13 +209,14 @@ public class Schedule implements Initializable {
 
             appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
             titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-            descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
-            locationColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+            descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+            locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
             contactColumn.setCellValueFactory(new PropertyValueFactory<>("contactName"));
             typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
             startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
             endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
             customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+            userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
         } catch (SQLException e) {
             e.printStackTrace();
         }

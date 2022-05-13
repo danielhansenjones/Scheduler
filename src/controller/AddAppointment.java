@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.ConfirmationScreens;
 import model.Contact;
 import model.Customer;
 import model.User;
@@ -81,6 +82,18 @@ public class AddAppointment implements Initializable {
         Integer appointmentUser = userComboBox.getValue().getUserId();
 
 
+      if (startTime.isAfter(endTime) | (endTime.isEqual(startTime))){
+            ConfirmationScreens.warningScreen("Check Fields","Start Time Cannot be after or during end Time","Please choose a different Time");
+            return;
+        }
+
+
+     /*
+            ConfirmationScreens.warningScreen("Outside Of Business Hours","Business hours are 8AM to 10PM EST, including Weekends","Please choose a different Time");
+            return;
+
+        }*/
+
         try {
             DbAppointment.insertAppointment(String.valueOf(contact), appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, startTime, endTime, appointmentCustomer, appointmentUser);
 
@@ -103,6 +116,9 @@ public class AddAppointment implements Initializable {
 
         typeChoiceBox.setItems(typeList);
     }
+
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

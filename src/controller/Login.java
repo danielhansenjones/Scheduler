@@ -49,22 +49,73 @@ public class Login implements Initializable {
         scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
-      /*  boolean valid = database.DbUser.authentication(userIdTextField.getText(), passwordTextField.getText());
+        boolean valid = database.DbUser.authentication(userIdTextField.getText(), passwordTextField.getText());
 
-        try {
+        /*try {
             if (valid) {
-                    stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-                    scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
-                    stage.setScene(new Scene(scene));
-                    stage.show();
+
+                stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+                scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
+
+
+                } else
+                    model.ConfirmationScreens.warningScreen("Incorrect Password", "Check caps lock", "Try again");
+
+        }
+
+             catch(Exception e){
+                e.printStackTrace();
             }
 
-          else
-               model.ConfirmationScreens.warningScreen("Incorrect Password", "Check caps lock", "Try again");
 
-                }
-             catch (Exception e) {
-                e.printStackTrace();
-            }*/
     }
-}
+
+
+
+    public static void loginSuccessful(String username) {
+
+        try {
+            String activityLog = "login_activity.txt";
+            File file = new File(activityLog);
+            FileWriter fw = new FileWriter(activityLog, true);
+            PrintWriter results = new PrintWriter(fw);
+            LocalDateTime localDateTime = LocalDateTime.now();
+
+            results.println("User: " + username + " Successfully logged in at: " + Timestamp.valueOf(localDateTime));
+            results.close();
+            //Lambda expression prints out message when users login is successful.
+            new Thread(() -> System.out.println(username + " Logged In Successfully"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+        public static void loginFailed(String username) {
+
+            try {
+                String activityLog = "login_activity.txt";
+                File file = new File(activityLog);
+                FileWriter fw = new FileWriter(activityLog, true);
+                PrintWriter results = new PrintWriter(fw);
+                LocalDateTime localDateTime = LocalDateTime.now();
+
+                results.println("User: " + username +  " Unsuccessful log in at: " + Timestamp.valueOf(localDateTime) );
+                results.close();
+                //Lambda expression prints out message when users login is unsuccessful.
+                new Thread(() -> System.out.println(username + "Login Incorrect"));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+    }
+*/
+
+
+    }}

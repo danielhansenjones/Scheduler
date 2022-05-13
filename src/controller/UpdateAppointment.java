@@ -14,16 +14,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import model.Appointment;
-import model.Contact;
-import model.Customer;
-import model.User;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
 
 
@@ -41,7 +40,7 @@ public class UpdateAppointment implements Initializable {
     @FXML
     private TextField locationTextField;
     @FXML
-    private ComboBox contactComboBox;
+    private ComboBox<Contact> contactComboBox;
     @FXML
     private Label appointmentIDLabel;
     @FXML
@@ -63,10 +62,8 @@ public class UpdateAppointment implements Initializable {
 
     Parent scene;
     Stage stage;
-    public static int createId;
     private static Appointment updateAppointment;
-    String[] Type = {"Planning Session", "Debriefing", "Debugging", "Implementing", "On-boarding"};
-    private Appointment appointmentMod;
+
 
     public void cancelButtonHandler(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -81,12 +78,22 @@ public class UpdateAppointment implements Initializable {
         String appointmentTitle = titleTextField.getText();
         String appointmentLocation = locationTextField.getText();
         String appointmentDescription = descriptionTextField.getText();
-        Contact appointmentContact = (Contact) contactComboBox.getValue();
+        Contact appointmentContact = contactComboBox.getValue();
         String appointmentType = (String) typeChoiceBox.getValue();
         LocalDateTime startTime = LocalDateTime.of(startDatePicker.getValue(), LocalTime.of(Integer.parseInt(startDateHour.getText()), Integer.parseInt(startDateMinute.getText())));
         LocalDateTime endTime = LocalDateTime.of(endDatePicker.getValue(), LocalTime.of(Integer.parseInt(endDateHour.getText()), Integer.parseInt(endDateMinute.getText())));
         Integer appointmentCustomer = customerComboBox.getValue().getCustomerId();
         Integer appointmentUser = userComboBox.getValue().getUserId();
+
+        ZonedDateTime zonedStartTimeLocal = startTime.atZone(ZoneId.systemDefault());
+        ZonedDateTime startEst = zonedStartTimeLocal.withZoneSameInstant(ZoneId.of("America/New_York"));
+        LocalTime  proposedStartEst = startEst.toLocalTime();
+
+        if (startTime.isAfter(endTime) | (endTime.isEqual(startTime))) {
+            ConfirmationScreens.warningScreen("Check Fields", "Start Time Cannot be after or during end Time", "Please choose a different Time");
+            return;
+        }
+
         DbAppointment.updateAppointment(String.valueOf(appointmentContact), appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, startTime, endTime, appointmentCustomer, appointmentUser, appointmentId);
     }
 
@@ -99,18 +106,47 @@ public class UpdateAppointment implements Initializable {
     }
 
 
+    public static void sendUpdateAppointment(Appointment appointment) {
+        updateAppointment = appointment;
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         appointmentTypeComboBox();
         try {
-
+            userComboBox.setItems((DbUser.selectUsers()));
             contactComboBox.setItems(DbContact.selectContacts());
             customerComboBox.setItems(DbCustomer.selectCustomers());
-            userComboBox.setItems((DbUser.selectUsers()));
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            Appointment appointment = DbAppointment.selectAppointmentById(updateAppointment.getAppointmentId());
+
+            if (appointment != null) {
+                appointmentIDLabel.setText(String.valueOf(appointment.getAppointmentId()));
+                titleTextField.setText(appointment.getTitle());
+                descriptionTextField.setText(appointment.getDescription());
+                locationTextField.setText(appointment.getLocation());
+                startDatePicker.setValue(appointment.getStartDate());
+                startDateHour.setText(String.valueOf((appointment).getStartTime().getHour()));
+                startDateMinute.setText(String.valueOf((appointment).getStartTime().getMinute()));
+                endDatePicker.setValue(appointment.getEndDate());
+                endDateHour.setText(String.valueOf((appointment).getStartTime().getHour()));
+                endDateMinute.setText(String.valueOf((appointment).getStartTime().getMinute()));
+                typeChoiceBox.getSelectionModel().select(appointment.getType());
+
+                for(Contact contact: contactComboBox.getItems()){
+                    if (contact.getContactId()==appointment.getContactId()){
+                        contactComboBox.setValue(contact);
+                        break;
+                    }
+                }
+                /*contactComboBox.getSelectionModel().select(appointment.getContactName());*/
+                customerComboBox.getSelectionModel().select(appointment.getCustomerId());
+                userComboBox.getSelectionModel().select(appointment.getUserId());
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
     }
 }

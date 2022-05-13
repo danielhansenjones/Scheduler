@@ -25,7 +25,9 @@ import java.util.ResourceBundle;
 
 public class CustomerData implements Initializable {
 
-    public Label divisionLabel;
+    private Label divisionLabel;
+   @FXML
+    private TableColumn divisonColumn;
     @FXML
     private TableView customerTableView;
     @FXML
@@ -164,7 +166,6 @@ public class CustomerData implements Initializable {
     }
 
     public void saveButtonHandler(ActionEvent actionEvent) throws SQLException {
-/// bug found but not fixed yet, need to reselect division to save, problem is with the modify buttons auto generation of the combo box. unsure of fix.
         int customerId = Integer.parseInt(customerIDLabel.getText());
         String customerName = nameTextField.getText();
         String address = addressTextField.getText();
@@ -199,7 +200,7 @@ public class CustomerData implements Initializable {
         postalColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
-
+        divisonColumn.setCellValueFactory(new PropertyValueFactory<>("division"));
         saveButton.setVisible(false);
     }
 

@@ -71,7 +71,7 @@ public class Appointment {
      *
      * @return appointmentId Integer
      */
-    public int getAppointmentId() {
+    public  int getAppointmentId() {
         return appointmentId;
     }
 
@@ -179,7 +179,7 @@ public class Appointment {
      *
      * @return startTime LocalDateTime
      */
-    public LocalDateTime getStartTime() {
+    public  LocalDateTime getStartTime() {
         return startTime;
     }
 
