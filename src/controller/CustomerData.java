@@ -110,7 +110,8 @@ public class CustomerData implements Initializable {
         DbCustomer.insertCustomer(customerName, address, postalCode, phone, String.valueOf(division));
         try {
             customerTableView.setItems(DbCustomer.selectCustomers());
-
+            //Lambda expression prints out message when adding the customer is successful.
+            new Thread(() -> System.out.println(customerName + "Added Successfully"));
         } catch (SQLException e) {
             e.printStackTrace();
         }

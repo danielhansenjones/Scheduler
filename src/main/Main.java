@@ -14,15 +14,15 @@ import java.util.ResourceBundle;
 public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("language/Lang", Locale.getDefault());
+
+        Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"),resourceBundle);
         primaryStage.setTitle("Scheduling System");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
 
         DatabaseAccess.getConnection();
         DatabaseAccess.closeConnection();
-
-        ResourceBundle rb = ResourceBundle.getBundle("language/Nat", Locale.getDefault());
 
 
     }

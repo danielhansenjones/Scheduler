@@ -24,6 +24,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
 
 
@@ -82,12 +84,15 @@ public class AddAppointment implements Initializable {
         Integer appointmentUser = userComboBox.getValue().getUserId();
 
 
+        ZonedDateTime zonedStartTimeLocal = startTime.atZone(ZoneId.systemDefault());
+        ZonedDateTime startEst = zonedStartTimeLocal.withZoneSameInstant(ZoneId.of("America/New_York"));
+        LocalTime  proposedStartEst = startEst.toLocalTime();
+
+
       if (startTime.isAfter(endTime) | (endTime.isEqual(startTime))){
             ConfirmationScreens.warningScreen("Check Fields","Start Time Cannot be after or during end Time","Please choose a different Time");
             return;
         }
-
-
      /*
             ConfirmationScreens.warningScreen("Outside Of Business Hours","Business hours are 8AM to 10PM EST, including Weekends","Please choose a different Time");
             return;
@@ -96,7 +101,8 @@ public class AddAppointment implements Initializable {
 
         try {
             DbAppointment.insertAppointment(String.valueOf(contact), appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, startTime, endTime, appointmentCustomer, appointmentUser);
-
+            //Lambda expression prints out message when adding the appointment is successful.
+            new Thread(() -> System.out.println(appointmentTitle + "Added Successfully"));
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
 

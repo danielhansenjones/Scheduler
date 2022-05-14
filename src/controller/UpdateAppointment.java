@@ -140,9 +140,18 @@ public class UpdateAppointment implements Initializable {
                         break;
                     }
                 }
-                /*contactComboBox.getSelectionModel().select(appointment.getContactName());*/
-                customerComboBox.getSelectionModel().select(appointment.getCustomerId());
-                userComboBox.getSelectionModel().select(appointment.getUserId());
+                for(Customer customer: customerComboBox.getItems()){
+                    if (customer.getCustomerId()==appointment.getCustomerId()){
+                        customerComboBox.setValue(customer);
+                        break;
+                    }
+                }
+                for(User user: userComboBox.getItems()){
+                    if (user.getUserId()==appointment.getUserId()){
+                        userComboBox.setValue(user);
+                        break;
+                    }
+                }
 
             }
         } catch (SQLException e) {
