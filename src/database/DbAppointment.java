@@ -16,7 +16,7 @@ public class DbAppointment {
     public static ObservableList<Appointment> selectAppointments() throws SQLException {
         try {
             ObservableList<Appointment> appointments = FXCollections.observableArrayList();
-            String sqlQuery = "SELECT * FROM appointments AS a INNER JOIN contacts AS b ON a.Contact_ID = b.Contact_ID;";
+            String sqlQuery = "SELECT * FROM appointments AS appoint INNER JOIN contacts AS contact ON appoint.Contact_ID = contact.Contact_ID;";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -52,7 +52,7 @@ public class DbAppointment {
 
         try {
             ObservableList<Appointment> appointments = FXCollections.observableArrayList();
-            String sqlQuery = "SELECT * FROM appointments AS a INNER JOIN contacts AS b ON a.Contact_ID = b.Contact_ID WHERE MONTH(START) = MONTH(Now());";
+            String sqlQuery = "SELECT * FROM appointments AS appoint INNER JOIN contacts AS contact ON appoint.Contact_ID = contact.Contact_ID WHERE MONTH(START) = MONTH(Now());";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -86,7 +86,7 @@ public class DbAppointment {
     public static ObservableList<Appointment> selectAppointmentsByWeek() throws SQLException {
         ObservableList<Appointment> appointments = FXCollections.observableArrayList();
         try {
-            String sqlQuery = "SELECT * FROM appointments AS a INNER JOIN contacts AS b ON a.Contact_ID = b.Contact_ID WHERE YEARWEEK(START) = YEARWEEK(Now());";
+            String sqlQuery = "SELECT * FROM appointments AS appoint INNER JOIN contacts AS contact ON appoint.Contact_ID = contact.Contact_ID WHERE YEARWEEK(START) = YEARWEEK(Now());";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -120,7 +120,6 @@ public class DbAppointment {
             Contact contact = DbContact.selectContactId(contactName);
             String sqlQuery = "INSERT INTO appointments(Title, Description, Location, Type, Start, End, Customer_ID, Contact_ID, User_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
-
 
             preparedStatement.setString(1, title);
             preparedStatement.setString(2, description);
@@ -199,7 +198,7 @@ public class DbAppointment {
     public static ObservableList<Appointment> selectAppointmentsByCustomerId(int CustomerID) throws SQLException {
         ObservableList<Appointment> appointments = FXCollections.observableArrayList();
         try {
-            String sqlQuery = "SELECT * FROM appointments AS a INNER JOIN contacts AS b ON a.Contact_ID = b.Contact_ID WHERE Customer_ID = ?;";
+            String sqlQuery = "SELECT * FROM appointments AS appoint INNER JOIN contacts AS contact ON appoint.Contact_ID = contact.Contact_ID WHERE Customer_ID = ?;";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
             preparedStatement.setInt(1, CustomerID);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -234,7 +233,7 @@ public class DbAppointment {
     public static Appointment selectAppointmentById(int AppointmentID) throws SQLException {
         try {
             ObservableList<Appointment> appointments = FXCollections.observableArrayList();
-            String sqlQuery = "SELECT * FROM appointments AS a INNER JOIN contacts AS b ON a.Contact_ID = b.Contact_ID WHERE Appointment_ID = ?;";
+            String sqlQuery = "SELECT * FROM appointments AS appoint INNER JOIN contacts AS contact ON appoint.Contact_ID = contact.Contact_ID WHERE Appointment_ID = ?;";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
             preparedStatement.setInt(1, AppointmentID);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -258,6 +257,7 @@ public class DbAppointment {
                         resultSet.getInt("Contact_ID"),
                         resultSet.getString("Contact_Name")
                 );
+
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -268,7 +268,7 @@ public class DbAppointment {
     public static ObservableList<Appointment> selectAppointmentsByContactId(int contactID) throws SQLException {
         try {
             ObservableList<Appointment> appointments = FXCollections.observableArrayList();
-            String sqlQuery = "SELECT * FROM appointments AS a INNER JOIN contacts AS b ON a.Contact_ID = b.Contact_ID WHERE a.Contact_ID = ?;";
+            String sqlQuery = "SELECT * FROM appointments AS appoint INNER JOIN contacts AS contact ON appoint.Contact_ID = contact.Contact_ID WHERE appoint.Contact_ID = ?;";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
             preparedStatement.setInt(1, contactID);
             ResultSet resultSet = preparedStatement.executeQuery();

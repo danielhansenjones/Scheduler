@@ -83,7 +83,6 @@ public class AddAppointment implements Initializable {
         Integer appointmentCustomer = customerComboBox.getValue().getCustomerId();
         Integer appointmentUser = userComboBox.getValue().getUserId();
 
-
         ZonedDateTime zonedStartTimeLocal = startTime.atZone(ZoneId.systemDefault());
         ZonedDateTime startEst = zonedStartTimeLocal.withZoneSameInstant(ZoneId.of("America/New_York"));
         LocalTime  proposedStartEst = startEst.toLocalTime();
@@ -93,7 +92,7 @@ public class AddAppointment implements Initializable {
             ConfirmationScreens.warningScreen("Check Fields","Start Time Cannot be after or during end Time","Please choose a different Time");
             return;
         }
-     /*
+     /* if (proposedStartEst )
             ConfirmationScreens.warningScreen("Outside Of Business Hours","Business hours are 8AM to 10PM EST, including Weekends","Please choose a different Time");
             return;
 

@@ -1,5 +1,6 @@
 package controller;
 
+import database.DbAppointment;
 import database.DbCountry;
 import database.DbCustomer;
 import database.DbDivision;
@@ -13,10 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.ConfirmationScreens;
-import model.Country;
-import model.Customer;
-import model.Division;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +23,7 @@ import java.util.ResourceBundle;
 
 public class CustomerData implements Initializable {
 
+    @FXML
     private Label divisionLabel;
    @FXML
     private TableColumn divisonColumn;
@@ -108,10 +107,11 @@ public class CustomerData implements Initializable {
         String phone = phoneTextField.getText();
 
         DbCustomer.insertCustomer(customerName, address, postalCode, phone, String.valueOf(division));
+        //Lambda expression prints out message when adding the customer is successful.
+        new Thread(() -> System.out.println(customerName + "Added Successfully"));
+
         try {
             customerTableView.setItems(DbCustomer.selectCustomers());
-            //Lambda expression prints out message when adding the customer is successful.
-            new Thread(() -> System.out.println(customerName + "Added Successfully"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -129,13 +129,19 @@ public class CustomerData implements Initializable {
                 ConfirmationScreens.informationScreen("Customer Deleted", "" + selectedCustomer, "1 Line Updated");
                 customerTableView.setItems(DbCustomer.selectCustomers());
             } catch (SQLException e) {
-                e.printStackTrace();
+             ConfirmationScreens.warningScreen("Customer has booked appointments","Cannot Delete Customer", "Remove appointment first");
             }
+            ObservableList<Appointment> allAppointments = DbAppointment.selectAppointments();
 
+            for (Appointment appointment : allAppointments) {
+                if (appointment.getCustomerId() == selectedCustomer.getCustomerId()) {
+                    DbAppointment.deleteAppointment(appointment.getAppointmentId());
+
+                }
+
+            }
         }
-
     }
-
     @FXML
     private void cancelButtonHandler(ActionEvent actionEvent) {
         customerIDLabel.setText(String.valueOf(createId));
@@ -149,7 +155,6 @@ public class CustomerData implements Initializable {
         deleteButton.setVisible(true);
         addButton.setVisible(true);
     }
-
 
     public void modifyButtonHandler(ActionEvent actionEvent) throws SQLException {
         Customer customer = (Customer) customerTableView.getSelectionModel().getSelectedItem();

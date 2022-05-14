@@ -14,7 +14,7 @@ public class DbCustomer {
     public static ObservableList<Customer> selectCustomers() throws SQLException {
         try {
             ObservableList<Customer> customers = FXCollections.observableArrayList();
-            String sqlQuery = "SELECT * FROM customers AS c INNER JOIN first_level_divisions AS d ON c.Division_ID = d.Division_ID INNER JOIN countries AS co ON co.Country_ID = d.COUNTRY_ID;";
+            String sqlQuery = "SELECT * FROM customers AS customer INNER JOIN first_level_divisions AS division ON customer.Division_ID = division.Division_ID INNER JOIN countries AS country ON country.Country_ID = division.COUNTRY_ID;";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
             ResultSet resultSet = preparedStatement.executeQuery();
 

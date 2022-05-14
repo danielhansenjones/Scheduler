@@ -13,7 +13,7 @@ public class DbContact {
     public static ObservableList<Contact> selectContacts() throws SQLException {
         try {
             ObservableList<Contact> contacts = FXCollections.observableArrayList();
-            String sqlQuery = "SELECT * FROM contacts AS b INNER JOIN appointments AS a ON b.Contact_ID = a.Contact_ID;";
+            String sqlQuery = "SELECT * FROM contacts AS contact INNER JOIN appointments AS appoint ON contact.Contact_ID = appoint.Contact_ID;";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
             ResultSet resultSet = preparedStatement.executeQuery();
 

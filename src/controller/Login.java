@@ -1,5 +1,8 @@
 package controller;
 
+import database.DbAppointment;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,8 +14,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Appointment;
+import model.ConfirmationScreens;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -67,14 +71,19 @@ public class Login implements Initializable {
         boolean valid = database.DbUser.authentication(userIdTextField.getText(), passwordTextField.getText());
         try {
             if (valid) {
-                loginSuccessful(String.valueOf(userIdTextField));
+                if( upcomingAppointments().size()>=1){
+                    for (Appointment appointment: upcomingAppointments()){
+                        ConfirmationScreens.informationScreen("You have an upcoming appointment","Appointment ID #: " + appointment.getAppointmentId(),"Appointment in less than 15 minutes");
+                    }
+                }
+                loginSuccessful(String.valueOf(userIdTextField.getText()));
                 stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
                 scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
                 stage.setScene(new Scene(scene));
                 stage.show();
             }
             else {
-                loginFailed(String.valueOf(userIdTextField));
+                loginFailed(String.valueOf(userIdTextField.getText()));
                 if (Locale.getDefault().toString().equals("en_US"))
                     model.ConfirmationScreens.warningScreen("Incorrect Password", "Check caps lock", "Try again");
                 if (Locale.getDefault().toString().equals("fr_FR"))
@@ -92,13 +101,11 @@ public class Login implements Initializable {
 
         try {
             String activityLog = "login_activity.txt";
-            File file = new File(activityLog);
             FileWriter fw = new FileWriter(activityLog, true);
             PrintWriter results = new PrintWriter(fw);
             LocalDateTime localDateTime = LocalDateTime.now();
             results.println("User: " + username + " Successfully logged in at: " + Timestamp.valueOf(localDateTime));
             results.close();
-
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -109,7 +116,6 @@ public class Login implements Initializable {
 
             try {
                 String activityLog = "login_activity.txt";
-                File file = new File(activityLog);
                 FileWriter fw = new FileWriter(activityLog, true);
                 PrintWriter results = new PrintWriter(fw);
                 LocalDateTime localDateTime = LocalDateTime.now();
@@ -119,9 +125,26 @@ public class Login implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+    }
 
+    public ObservableList<Appointment> upcomingAppointments() throws SQLException {
+        ObservableList<Appointment> allAppointments = DbAppointment.selectAppointments();
+        ObservableList<Appointment> upcomingAppointments = FXCollections.observableArrayList();
+        if (allAppointments!= null){
+            for (Appointment appointment : allAppointments){
+                LocalDateTime start = appointment.getStartTime();
+                LocalDateTime now = LocalDateTime.now();
 
+                if (start.isBefore(now.plusMinutes(15))) {
+                    if (start.isAfter(now)){
+                        upcomingAppointments.add(appointment);
+                    }
+                }
+            }
         }
+        return upcomingAppointments;
+    }
+
 
 }
 

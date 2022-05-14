@@ -141,20 +141,24 @@ public class Schedule implements Initializable {
 
     public void deleteButtonHandler(ActionEvent actionEvent) throws IOException, SQLException {
         Appointment appointment = (Appointment) appointmentTableView.getSelectionModel().getSelectedItem();
+        if (appointment != null) {
+            if (ConfirmationScreens.confirmationScreen("You are about to delete: ", " Appointment ID: " + appointment.getAppointmentId() + " of type:  " + appointment.getType())) {
+                try {
+                    ConfirmationScreens.informationScreen("Appointment Deleted", "Appointment ID #  " + appointment.getAppointmentId(), "1 Line Updated");
+                    DbAppointment.deleteAppointment(appointment.getAppointmentId());
+                    appointmentTableView.setItems(DbAppointment.selectAppointments());
 
-        if (ConfirmationScreens.confirmationScreen("You are about to delete: ", " Appointment ID: " + appointment.getAppointmentId() + " of type:  " + appointment.getType())) {
-            try {
-                ConfirmationScreens.informationScreen("Appointment Deleted", "Appointment ID #  " + appointment.getAppointmentId(), "1 Line Updated");
-                DbAppointment.deleteAppointment(appointment.getAppointmentId());
-                appointmentTableView.setItems(DbAppointment.selectAppointments());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
 
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
 
         }
+        else {
+            ConfirmationScreens.warningScreen("No Appointment Selected", "You must Select an Appointment", "Please choose from table");
+        }
     }
-
     public void overviewTabHandler(Event event) throws SQLException {
         appointmentTableView.setItems(DbAppointment.selectAppointments());
 
