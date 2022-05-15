@@ -70,9 +70,19 @@ public class AddAppointment implements Initializable {
         stage.setScene(new Scene(scene));
         stage.show();
     }
-
+    private boolean fieldValidation() {
+        if (titleTextField.getText().isEmpty() || locationTextField.getText().isEmpty()|| descriptionTextField.getText().isEmpty()|| contactComboBox.getValue() == null|| startDatePicker.getValue() == null
+        || endDatePicker.getValue() == null  || typeChoiceBox.getValue() == null  || customerComboBox.getValue() == null || userComboBox.getValue() == null || startDateHour.getText().isEmpty()|| startDateMinute.getText().isEmpty() ||
+                endDateHour.getText().isEmpty() || endDateMinute.getText().isEmpty())
+                {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     public void addButtonHandler(ActionEvent event) throws IOException, SQLException {
+        if (fieldValidation()) {
         String appointmentTitle = titleTextField.getText();
         String appointmentLocation = locationTextField.getText();
         String appointmentDescription = descriptionTextField.getText();
@@ -85,36 +95,46 @@ public class AddAppointment implements Initializable {
 
         ZonedDateTime zonedStartTimeLocal = startTime.atZone(ZoneId.systemDefault());
         ZonedDateTime startEst = zonedStartTimeLocal.withZoneSameInstant(ZoneId.of("America/New_York"));
-        LocalTime  proposedStartEst = startEst.toLocalTime();
+        LocalTime proposedStartEst = startEst.toLocalTime();
 
+            ZonedDateTime zonedEndTimeLocal = endTime.atZone(ZoneId.systemDefault());
+            ZonedDateTime endEst = zonedEndTimeLocal.withZoneSameInstant(ZoneId.of("America/New_York"));
+            LocalTime proposedEndEst = endEst.toLocalTime();
 
-      if (startTime.isAfter(endTime) | (endTime.isEqual(startTime))){
-            ConfirmationScreens.warningScreen("Check Fields","Start Time Cannot be after or during end Time","Please choose a different Time");
-            return;
+            if (startTime.isAfter(endTime) | (endTime.isEqual(startTime))) {
+                ConfirmationScreens.warningScreen("Check Fields", "Start Time Cannot be after or during end Time", "Please choose a different Time");
+                return;
+            }
+            if (proposedEndEst.getHour() > 20 | proposedStartEst.getHour() < 8 ){
+                ConfirmationScreens.warningScreen("Outside Of Business Hours","Business hours are 8AM to 10PM EST, including Weekends","Please choose a different Time");
+                return;
+            }
+
+            try {
+                DbAppointment.insertAppointment(String.valueOf(contact), appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, startTime, endTime, appointmentCustomer, appointmentUser);
+                //Lambda expression prints out message when adding the appointment is successful.
+                new Thread(() -> System.out.println(appointmentTitle + "Added Successfully"));
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
         }
-     /* if (proposedStartEst )
-            ConfirmationScreens.warningScreen("Outside Of Business Hours","Business hours are 8AM to 10PM EST, including Weekends","Please choose a different Time");
-            return;
-
-        }*/
-
-        try {
-            DbAppointment.insertAppointment(String.valueOf(contact), appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, startTime, endTime, appointmentCustomer, appointmentUser);
-            //Lambda expression prints out message when adding the appointment is successful.
-            new Thread(() -> System.out.println(appointmentTitle + "Added Successfully"));
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-
+   else{
+            ConfirmationScreens.warningScreen("Check Fields", "One or More Fields are blank", "All Fields must be completed");
         }
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
-
     }
 
 
-    private void appointmentTypeComboBox() {
+           /* if (proposedStartEst )
+
+
+        }*/
+
+
+        private void appointmentTypeComboBox() {
         ObservableList<String> typeList = FXCollections.observableArrayList();
 
         typeList.addAll("Planning Session", "Debriefing", "Debugging", "Implementing", "On-boarding");

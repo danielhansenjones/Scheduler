@@ -118,11 +118,16 @@ public class Schedule implements Initializable {
     }
 
     public void updateButtonHandler(ActionEvent actionEvent) throws IOException {
-        UpdateAppointment.sendUpdateAppointment((Appointment) appointmentTableView.getSelectionModel().getSelectedItem());
-        scene = FXMLLoader.load(getClass().getResource("/view/UpdateAppointment.fxml"));
-        stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(scene));
-        stage.show();
+        if(appointmentTableView.getSelectionModel().getSelectedItem() != null) {
+            UpdateAppointment.sendUpdateAppointment((Appointment) appointmentTableView.getSelectionModel().getSelectedItem());
+            scene = FXMLLoader.load(getClass().getResource("/view/UpdateAppointment.fxml"));
+            stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+        else {
+            ConfirmationScreens.warningScreen("No Appointment Selected", "You must Select an Appointment", "Please choose from table");
+        }
     }
 
     public void customerButtonHandler(ActionEvent actionEvent) throws IOException {
@@ -147,18 +152,16 @@ public class Schedule implements Initializable {
                     ConfirmationScreens.informationScreen("Appointment Deleted", "Appointment ID #  " + appointment.getAppointmentId(), "1 Line Updated");
                     DbAppointment.deleteAppointment(appointment.getAppointmentId());
                     appointmentTableView.setItems(DbAppointment.selectAppointments());
-
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-
             }
-
         }
         else {
             ConfirmationScreens.warningScreen("No Appointment Selected", "You must Select an Appointment", "Please choose from table");
         }
     }
+
     public void overviewTabHandler(Event event) throws SQLException {
         appointmentTableView.setItems(DbAppointment.selectAppointments());
 

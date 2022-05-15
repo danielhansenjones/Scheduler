@@ -94,7 +94,14 @@ public class CustomerData implements Initializable {
             }
         }
     }
-
+    private boolean fieldValidation() {
+        if (nameTextField.getText().isEmpty() || divisionComboBox.getValue() == null|| countryComboBox.getValue() == null || postalTextField.getText().isEmpty()
+                || phoneTextField.getText().isEmpty()  || addressTextField.getText().isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     //combo boxes
     public void regionSelectionHandler(ActionEvent actionEvent) {
     }
@@ -105,23 +112,25 @@ public class CustomerData implements Initializable {
         String postalCode = postalTextField.getText();
         Division division = divisionComboBox.getValue();
         String phone = phoneTextField.getText();
+        if (fieldValidation()) {
+            DbCustomer.insertCustomer(customerName, address, postalCode, phone, String.valueOf(division));
+            //Lambda expression prints out message when adding the customer is successful.
+            new Thread(() -> System.out.println(customerName + "Added Successfully"));
 
-        DbCustomer.insertCustomer(customerName, address, postalCode, phone, String.valueOf(division));
-        //Lambda expression prints out message when adding the customer is successful.
-        new Thread(() -> System.out.println(customerName + "Added Successfully"));
-
-        try {
-            customerTableView.setItems(DbCustomer.selectCustomers());
-        } catch (SQLException e) {
-            e.printStackTrace();
+            try {
+                customerTableView.setItems(DbCustomer.selectCustomers());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+        else { ConfirmationScreens.warningScreen("Check Fields","One or More Fields are blank","All Fields must be completed");
     }
-
+    }
     public void deleteButtonHandler(ActionEvent actionEvent) throws SQLException {
         Customer selectedCustomer = (Customer) customerTableView.getSelectionModel().getSelectedItem();
-
         if (selectedCustomer == null) {
             ConfirmationScreens.warningScreen("Error", "A customer was not selected", "You must select a customer to delete");
+            return;
         }
         if (ConfirmationScreens.confirmationScreen("Delete Selected", "Are you sure you want to delete?  " + selectedCustomer)) {
             try {
@@ -132,18 +141,16 @@ public class CustomerData implements Initializable {
              ConfirmationScreens.warningScreen("Customer has booked appointments","Cannot Delete Customer", "Remove appointment first");
             }
             ObservableList<Appointment> allAppointments = DbAppointment.selectAppointments();
-
             for (Appointment appointment : allAppointments) {
                 if (appointment.getCustomerId() == selectedCustomer.getCustomerId()) {
                     DbAppointment.deleteAppointment(appointment.getAppointmentId());
-
                 }
-
             }
         }
     }
     @FXML
     private void cancelButtonHandler(ActionEvent actionEvent) {
+     ConfirmationScreens.confirmationScreen("Are you sure you want to Cancel?","This will clear all fields.");
         customerIDLabel.setText(String.valueOf(createId));
         nameTextField.clear();
         addressTextField.clear();
@@ -151,26 +158,29 @@ public class CustomerData implements Initializable {
         countryComboBox.getSelectionModel().clearSelection();
         divisionComboBox.getSelectionModel().clearSelection();
         phoneTextField.clear();
-
+        customerTableView.getSelectionModel().clearSelection();
         deleteButton.setVisible(true);
         addButton.setVisible(true);
     }
 
     public void modifyButtonHandler(ActionEvent actionEvent) throws SQLException {
         Customer customer = (Customer) customerTableView.getSelectionModel().getSelectedItem();
-        customerIDLabel.setText(String.valueOf(customer.getCustomerId()));
-        nameTextField.setText(String.valueOf((customer).getCustomerName()));
-        addressTextField.setText(String.valueOf((customer).getAddress()));
-        postalTextField.setText(String.valueOf((customer).getPostalCode()));
-        countryComboBox.setValue(DbCountry.selectCountryId(customer.getCountry()));
-        divisionComboBox.setValue(DbDivision.selectDivisionId(customer.getDivision()));
-        phoneTextField.setText(String.valueOf((customer).getPhoneNumber()));
+        if (customer != null) {
+            customerIDLabel.setText(String.valueOf(customer.getCustomerId()));
+            nameTextField.setText(String.valueOf((customer).getCustomerName()));
+            addressTextField.setText(String.valueOf((customer).getAddress()));
+            postalTextField.setText(String.valueOf((customer).getPostalCode()));
+            countryComboBox.setValue(DbCountry.selectCountryId(customer.getCountry()));
+            divisionComboBox.setValue(DbDivision.selectDivisionId(customer.getDivision()));
+            phoneTextField.setText(String.valueOf((customer).getPhoneNumber()));
 
-        saveButton.setVisible(true);
-        deleteButton.setVisible(false);
-        addButton.setVisible(false);
+            saveButton.setVisible(true);
+            deleteButton.setVisible(false);
+            addButton.setVisible(false);
+        } else {
+            ConfirmationScreens.warningScreen("No Customer Selected", "You must Select an Customer", "Please choose from table");
+        }
     }
-
     public void saveButtonHandler(ActionEvent actionEvent) throws SQLException {
         int customerId = Integer.parseInt(customerIDLabel.getText());
         String customerName = nameTextField.getText();

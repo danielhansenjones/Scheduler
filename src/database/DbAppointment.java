@@ -144,7 +144,6 @@ public class DbAppointment {
         }
     }
 
-
     public static boolean deleteAppointment(int appointmentId) throws SQLException {
         try {
             String sqlQuery = "DELETE from appointments WHERE Appointment_Id = ?";
@@ -162,7 +161,6 @@ public class DbAppointment {
             return false;
         }
     }
-
 
     public static boolean updateAppointment(String contactName, String title, String description, String location, String type, LocalDateTime start_time, LocalDateTime end, Integer customerId, Integer userID, Integer appointmentID) throws SQLException {
         try {
@@ -299,7 +297,6 @@ public class DbAppointment {
             return null;
         }
     }
-
 
 
 }

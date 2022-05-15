@@ -17,14 +17,14 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1046.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerData">
-    <ImageView fitHeight="600.0" fitWidth="900.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <ImageView fitHeight="600.0" fitWidth="1048.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
         <Image url="@../assets/black-background.jpg" />
     </ImageView>
     <AnchorPane prefHeight="600.0" prefWidth="1048.0" snapToPixel="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
         <ImageView fitHeight="75.0" fitWidth="231.0" layoutX="426.0" pickOnBounds="true" AnchorPane.bottomAnchor="525.0" AnchorPane.leftAnchor="426.0" AnchorPane.rightAnchor="391.0" AnchorPane.topAnchor="0.0">
             <Image url="@../assets/customerdata.png" />
         </ImageView>
-       <Button fx:id="backButton" layoutX="971.0" layoutY="558.0" mnemonicParsing="false" onAction="#backButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.5) , 0, 0.0 , 0 , 2); -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Back" AnchorPane.bottomAnchor="14.0" />
+       <Button fx:id="backButton" layoutX="971.0" layoutY="558.0" mnemonicParsing="false" onAction="#backButtonHandler" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: silver; -fx-background-radius: 3,2,2,2; -fx-text-fill: black;" text="Back" AnchorPane.bottomAnchor="14.0" />
     </AnchorPane>
     <AnchorPane layoutY="75.0" prefHeight="472.0" prefWidth="1046.0" style="-fx-background-color: dimgrey;" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="75.0">
         <SplitPane dividerPositions="0.5044543429844098" prefHeight="422.0" prefWidth="900.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

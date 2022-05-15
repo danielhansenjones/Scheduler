@@ -72,8 +72,19 @@ public class UpdateAppointment implements Initializable {
         stage.show();
     }
 
+    private boolean fieldValidation() {
+        if (titleTextField.getText().isEmpty() || locationTextField.getText().isEmpty()|| descriptionTextField.getText().isEmpty()|| contactComboBox.getValue() == null|| startDatePicker.getValue() == null
+                || endDatePicker.getValue() == null  || typeChoiceBox.getValue() == null  || customerComboBox.getValue() == null || userComboBox.getValue() == null || startDateHour.getText().isEmpty()|| startDateMinute.getText().isEmpty() ||
+                endDateHour.getText().isEmpty() || endDateMinute.getText().isEmpty())
+        {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     public void saveButtonHandler(ActionEvent actionEvent) throws SQLException {
+      if(fieldValidation()){
         int appointmentId = Integer.parseInt(appointmentIDLabel.getText());
         String appointmentTitle = titleTextField.getText();
         String appointmentLocation = locationTextField.getText();
@@ -89,12 +100,23 @@ public class UpdateAppointment implements Initializable {
         ZonedDateTime startEst = zonedStartTimeLocal.withZoneSameInstant(ZoneId.of("America/New_York"));
         LocalTime  proposedStartEst = startEst.toLocalTime();
 
+          ZonedDateTime zonedEndTimeLocal = endTime.atZone(ZoneId.systemDefault());
+          ZonedDateTime endEst = zonedEndTimeLocal.withZoneSameInstant(ZoneId.of("America/New_York"));
+          LocalTime proposedEndEst = endEst.toLocalTime();
+
         if (startTime.isAfter(endTime) | (endTime.isEqual(startTime))) {
             ConfirmationScreens.warningScreen("Check Fields", "Start Time Cannot be after or during end Time", "Please choose a different Time");
             return;
         }
-
+          if (proposedStartEst.getHour() < 8 || proposedEndEst.getHour() > 20 ){
+              ConfirmationScreens.warningScreen("Outside Of Business Hours","Business hours are 8AM to 10PM EST, including Weekends","Please choose a different Time");
+              return;
+          }
         DbAppointment.updateAppointment(String.valueOf(appointmentContact), appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, startTime, endTime, appointmentCustomer, appointmentUser, appointmentId);
+    }
+      else{
+          ConfirmationScreens.warningScreen("Check Fields", "One or More Fields are blank", "All Fields must be completed");
+      }
     }
 
     private void appointmentTypeComboBox() {
