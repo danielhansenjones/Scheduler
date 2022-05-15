@@ -7,9 +7,15 @@ import model.Country;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+/**
+ * SQL queries based on Country Model Object
+ */
 public class DbCountry {
-
+    /**
+     * Create a list of all countries
+     * @return List of all countries in the database
+     * @throws SQLException if database query fails
+     */
     public static ObservableList<Country> selectCountries() throws SQLException {
         try {
             ObservableList<Country> countries = FXCollections.observableArrayList();
@@ -34,7 +40,11 @@ public class DbCountry {
             return null;
         }
     }
-
+    /**
+     * Select a Country by ID
+     * @return List of all countries in the database matching given ID
+     * @throws SQLException if database query fails
+     */
     public static Country selectCountryId(String country) throws SQLException {
         try {
             String sqlQuery = "SELECT * FROM countries WHERE Country = ?";

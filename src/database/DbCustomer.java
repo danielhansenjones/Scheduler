@@ -10,7 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DbCustomer {
-
+    /**
+     * Create a list of all customers
+     * @return List of all customers in the database
+     * @throws SQLException if database query fails
+     */
     public static ObservableList<Customer> selectCustomers() throws SQLException {
         try {
             ObservableList<Customer> customers = FXCollections.observableArrayList();
@@ -40,7 +44,16 @@ public class DbCustomer {
             return null;
         }
     }
-
+    /**
+     * Adds a customer to the database using insert statement
+     * @param name of the customer
+     * @param address of the customer
+     * @param postalCode of the customer
+     * @param phone of the customer
+     * @param division division model associated with customer
+     * @return true/false if update is successful or fails
+     * @throws SQLException if database query fails
+     */
     public static boolean insertCustomer(String name, String address, String postalCode, String phone, String division) throws SQLException {
 
 
@@ -70,7 +83,17 @@ public class DbCustomer {
         }
     }
 
-
+    /**
+     * Modifies a customer model by using an SQL update in the SQL server.
+     * @param customerId ID of the customer
+     * @param name name of the customer
+     * @param address  of the customer
+     * @param postalCode of the customer
+     * @param phone of the customer
+     * @param division of the division model obj associated with customer
+     * @return List of all users in the database
+     * @throws SQLException if database query fails
+     */
     public static boolean updateCustomer(int customerId, String name, String address, String postalCode, String phone, String division) throws SQLException {
         try {
             Division newDivision = DbDivision.selectDivisionId(division);
@@ -98,7 +121,12 @@ public class DbCustomer {
             return false;
         }
     }
-
+    /**
+     * Deletes a customer based on customerId
+     * @param customerId of customer
+     * @return boolean true/false based on if record deleted
+     * @throws SQLException if database query fails
+     */
     public static boolean deleteCustomer(int customerId) throws SQLException {
         try {
             String sqlQuery = "DELETE from customers WHERE Customer_Id = ?";

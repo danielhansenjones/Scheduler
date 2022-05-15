@@ -9,7 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DbContact {
-
+    /**
+     * Create a list of all contacts
+     * @return List of all contacts in the database
+     * @throws SQLException if database query fails
+     */
     public static ObservableList<Contact> selectContacts() throws SQLException {
         try {
             ObservableList<Contact> contacts = FXCollections.observableArrayList();
@@ -34,8 +38,13 @@ public class DbContact {
             return null;
         }
     }
-
-    public static Contact selectContactId(String contactName) throws SQLException {
+    /**
+     * Create a list of all contacts matching a contact name
+     * @param contactName select contact based on name
+     * @return List of all contact matching name in database
+     * @throws SQLException if database query fails
+     */
+    public static Contact selectContact(String contactName) throws SQLException {
         try {
             String sqlQuery = "SELECT * FROM contacts WHERE Contact_Name = ?";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);

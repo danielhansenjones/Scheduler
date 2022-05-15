@@ -9,7 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DbDivision {
-
+    /**
+     * Create a list of all divisions
+     * @return List of all divisions in the database
+     * @throws SQLException if database query fails
+     */
     public static ObservableList<Division> selectDivisions() throws SQLException {
         ObservableList<Division> divisions = FXCollections.observableArrayList();
         try {
@@ -35,7 +39,11 @@ public class DbDivision {
         }
     }
 
-
+    /**
+     * Selects division based on ID
+     * @return division by ID
+     * @throws SQLException if database query fails
+     */
     public static Division selectDivisionId(String division) throws SQLException {
         try {
             String sqlQuery = "SELECT * FROM first_level_divisions WHERE Division = ?";
@@ -57,7 +65,12 @@ public class DbDivision {
         return null;
     }
 
-
+    /**
+     * Create a list of all divisions by country
+     * @param countryId select by country id
+     * @return List of all divisions based on selected country
+     * @throws SQLException if database query fails
+     */
     public static ObservableList<Division> selectDivisionsByCountry(int countryId) throws SQLException {
         ObservableList<Division> divisions = FXCollections.observableArrayList();
         try {

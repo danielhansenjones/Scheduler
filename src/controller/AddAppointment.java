@@ -14,10 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import model.ConfirmationScreens;
-import model.Contact;
-import model.Customer;
-import model.User;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -109,7 +106,22 @@ public class AddAppointment implements Initializable {
                 ConfirmationScreens.warningScreen("Outside Of Business Hours","Business hours are 8AM to 10PM EST, including Weekends","Please choose a different Time");
                 return;
             }
-
+            try {
+                ObservableList<Appointment> appointments = DbAppointment.selectAppointmentsByCustomerId(customerComboBox.getSelectionModel().getSelectedIndex());
+                for (Appointment appointment: appointments) {
+                    LocalDateTime overlapStartTime = appointment.getStartDate().atTime(appointment.getStartTime().toLocalTime());
+                    LocalDateTime overlapEndTime = appointment.getEndDate().atTime(appointment.getEndTime().toLocalTime());
+                    if (overlapStartTime.isAfter(startTime)|overlapStartTime.isEqual(startTime) && overlapStartTime.isBefore(endTime)) {
+                       ConfirmationScreens.warningScreen("Overlap","Customer appointments must not overlap","Selected a different time");
+                        return;
+                    } else if (overlapEndTime.isAfter(startTime) && overlapEndTime.isBefore(endTime)) {
+                        ConfirmationScreens.warningScreen("Overlap","Customer appointments must not overlap","Selected a different time");
+                        return;
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             try {
                 DbAppointment.insertAppointment(String.valueOf(contact), appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, startTime, endTime, appointmentCustomer, appointmentUser);
                 //Lambda expression prints out message when adding the appointment is successful.
@@ -127,13 +139,6 @@ public class AddAppointment implements Initializable {
         }
     }
 
-
-           /* if (proposedStartEst )
-
-
-        }*/
-
-
         private void appointmentTypeComboBox() {
         ObservableList<String> typeList = FXCollections.observableArrayList();
 
@@ -141,7 +146,6 @@ public class AddAppointment implements Initializable {
 
         typeChoiceBox.setItems(typeList);
     }
-
 
 
 

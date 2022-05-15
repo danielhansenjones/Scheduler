@@ -9,7 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DbUser {
-
+    /**
+     * Checks login against Database
+     * @return Returns a boolean on if the username password matches the database
+     * @throws SQLException if database query fails
+     */
     public static boolean authentication(String username, String password) throws SQLException {
         try {
             String sqlQuery = "SELECT * FROM users WHERE User_Name = ? AND Password = ?";
@@ -24,7 +28,11 @@ public class DbUser {
             return false;
         }
     }
-
+    /**
+     * Create a list of all users
+     * @return List of all users in the database
+     * @throws SQLException if database query fails
+     */
     public static ObservableList<User> selectUsers() throws SQLException {
         try {
             ObservableList<User> users = FXCollections.observableArrayList();
