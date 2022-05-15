@@ -61,23 +61,30 @@ public class AddAppointment implements Initializable {
     Stage stage;
     public static int createId;
 
+    /**
+     * returns to schedule screen
+     */
     public void cancelButtonHandler(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
-    private boolean fieldValidation() {
-        if (titleTextField.getText().isEmpty() || locationTextField.getText().isEmpty()|| descriptionTextField.getText().isEmpty()|| contactComboBox.getValue() == null|| startDatePicker.getValue() == null
-        || endDatePicker.getValue() == null  || typeChoiceBox.getValue() == null  || customerComboBox.getValue() == null || userComboBox.getValue() == null || startDateHour.getText().isEmpty()|| startDateMinute.getText().isEmpty() ||
-                endDateHour.getText().isEmpty() || endDateMinute.getText().isEmpty())
-                {
-            return false;
-        } else {
-            return true;
-        }
-    }
 
+    /**
+     * checks for blank fields
+     */
+    private boolean fieldValidation() {
+        return !titleTextField.getText().isEmpty() && !locationTextField.getText().isEmpty() && !descriptionTextField.getText().isEmpty() && contactComboBox.getValue() != null && startDatePicker.getValue() != null
+                && endDatePicker.getValue() != null && typeChoiceBox.getValue() != null && customerComboBox.getValue() != null && userComboBox.getValue() != null && !startDateHour.getText().isEmpty() && !startDateMinute.getText().isEmpty() &&
+                !endDateHour.getText().isEmpty() && !endDateMinute.getText().isEmpty();
+    }
+    /**
+     * Adds a new appointment
+     * checks against timezones to ensure appointment is within constraints not overlapping and not outside of business hours
+     * if successful returns to schedule screen
+     * @throws SQLException if database query fails
+     */
     public void addButtonHandler(ActionEvent event) throws IOException, SQLException {
         if (fieldValidation()) {
         String appointmentTitle = titleTextField.getText();
@@ -138,8 +145,10 @@ public class AddAppointment implements Initializable {
             ConfirmationScreens.warningScreen("Check Fields", "One or More Fields are blank", "All Fields must be completed");
         }
     }
-
-        private void appointmentTypeComboBox() {
+    /**
+     * generates appointment types for the type box
+     */
+    private void appointmentTypeComboBox() {
         ObservableList<String> typeList = FXCollections.observableArrayList();
 
         typeList.addAll("Planning Session", "Debriefing", "Debugging", "Implementing", "On-boarding");
@@ -147,7 +156,9 @@ public class AddAppointment implements Initializable {
         typeChoiceBox.setItems(typeList);
     }
 
-
+    /**
+     * Builds data into the view
+     */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

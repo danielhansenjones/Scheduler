@@ -101,14 +101,20 @@ public class Reports implements Initializable {
     Parent scene;
     Stage stage;
 
-
+    /**
+     *return the user to the schedule screen
+     */
     public void backButtonHandler(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
-
+    /**
+     * Checks all appointments by type and counts them based on SQL query in database
+     * to create a list showing all appointments by type counted within the month
+     * @param event when tab clicked
+     */
     public void totalTabHandler(Event event) throws SQLException {
         try {
             ObservableList<Appointment> typeMonthReport = FXCollections.observableArrayList();
@@ -136,9 +142,10 @@ public class Reports implements Initializable {
         }
     }
 
-    public void individualTabHandler(Event event) {
-    }
-
+    /**
+     * Filters all appointments by contact combo box
+     * @throws SQLException if database query fails
+     */
     public void contactComboSelected(ActionEvent actionEvent) throws SQLException {
         {
             if (contactComboBox.getValue() == null) {
@@ -154,7 +161,11 @@ public class Reports implements Initializable {
                 }
         }
     }
-
+    /**
+     * Shows appointments by customer
+     *
+     * @param event when tab clicked
+     */
     public void customerTabHandler(Event event) {
         try {
 
@@ -174,7 +185,10 @@ public class Reports implements Initializable {
         customerIDColumn1.setCellValueFactory(new PropertyValueFactory<>("customerId"));
     }
 
-
+    /**
+     * Filters all appointments by customer combo box
+     * @throws SQLException if database query fails
+     */
     public void customerComboBoxSelected(ActionEvent actionEvent) throws SQLException {
        {
             if (customerComboBox1.getValue() == null) {
@@ -186,7 +200,9 @@ public class Reports implements Initializable {
             }
         }
     }
-
+    /**
+     * Builds data into the view
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

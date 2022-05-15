@@ -207,7 +207,9 @@ public class Schedule implements Initializable {
         weekCustomerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         weekUserIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
-
+    /**
+     * Builds data into the view
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

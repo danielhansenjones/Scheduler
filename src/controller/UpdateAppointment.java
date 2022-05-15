@@ -132,7 +132,9 @@ public class UpdateAppointment implements Initializable {
         updateAppointment = appointment;
     }
 
-
+    /**
+     * Builds data into the view
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         appointmentTypeComboBox();

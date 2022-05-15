@@ -74,6 +74,9 @@ public class CustomerData implements Initializable {
     public static int createId;
     static ObservableList<Country> country;
 
+    /**
+     * returns to schedule view
+     */
     public void backButtonHandler(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/Schedule.fxml"));
@@ -81,8 +84,9 @@ public class CustomerData implements Initializable {
         stage.show();
     }
 
-
-    // combo boxes
+    /**
+     * when country is selected divisions are set to only be within that country
+     */
     public void countrySelectionHandler(ActionEvent actionEvent) throws SQLException {
         {
             if (countryComboBox.getValue() == null) {
@@ -94,18 +98,23 @@ public class CustomerData implements Initializable {
             }
         }
     }
+
+    /**
+     * checks fields to make sure they are not empty
+     */
     private boolean fieldValidation() {
-        if (nameTextField.getText().isEmpty() || divisionComboBox.getValue() == null|| countryComboBox.getValue() == null || postalTextField.getText().isEmpty()
-                || phoneTextField.getText().isEmpty()  || addressTextField.getText().isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
+        return !nameTextField.getText().isEmpty() && divisionComboBox.getValue() != null && countryComboBox.getValue() != null && !postalTextField.getText().isEmpty()
+                && !phoneTextField.getText().isEmpty() && !addressTextField.getText().isEmpty();
     }
     //combo boxes
     public void regionSelectionHandler(ActionEvent actionEvent) {
     }
 
+    /**
+     *
+     * @return List of all appointments in the database matching given contact ID
+     * @throws SQLException if database query fails
+     */
     public void addButtonHandler(ActionEvent actionEvent) throws SQLException {
         String customerName = nameTextField.getText();
         String address = addressTextField.getText();
@@ -124,8 +133,16 @@ public class CustomerData implements Initializable {
             }
         }
         else { ConfirmationScreens.warningScreen("Check Fields","One or More Fields are blank","All Fields must be completed");
+        }
     }
-    }
+
+    /**
+     * Deletes a selected customer
+     * checks to see if the customer can be deleted however if it is restricted based on FK constraints it will throw a warning screen
+     * after all checks are completed it will delete the customer.
+     * @throws SQLException if database query fails
+     */
+
     public void deleteButtonHandler(ActionEvent actionEvent) throws SQLException {
         Customer selectedCustomer = (Customer) customerTableView.getSelectionModel().getSelectedItem();
         if (selectedCustomer == null) {
@@ -148,6 +165,11 @@ public class CustomerData implements Initializable {
             }
         }
     }
+
+
+    /**
+     * Clears all fields including selections
+     */
     @FXML
     private void cancelButtonHandler(ActionEvent actionEvent) {
      ConfirmationScreens.confirmationScreen("Are you sure you want to Cancel?","This will clear all fields.");
@@ -162,6 +184,11 @@ public class CustomerData implements Initializable {
         deleteButton.setVisible(true);
         addButton.setVisible(true);
     }
+
+    /**
+     * Adds all information about a selected customer to the modified fields to allow for changes.
+     * @throws SQLException if database query fails
+     */
 
     public void modifyButtonHandler(ActionEvent actionEvent) throws SQLException {
         Customer customer = (Customer) customerTableView.getSelectionModel().getSelectedItem();
@@ -178,9 +205,15 @@ public class CustomerData implements Initializable {
             deleteButton.setVisible(false);
             addButton.setVisible(false);
         } else {
-            ConfirmationScreens.warningScreen("No Customer Selected", "You must Select an Customer", "Please choose from table");
+            ConfirmationScreens.warningScreen("No Customer Selected", "You must Select a Customer", "Please choose from table");
         }
     }
+
+
+    /**
+     * Saves all fields to update a customer either modified or new.
+     * @throws SQLException if database query fails
+     */
     public void saveButtonHandler(ActionEvent actionEvent) throws SQLException {
         int customerId = Integer.parseInt(customerIDLabel.getText());
         String customerName = nameTextField.getText();
@@ -196,7 +229,9 @@ public class CustomerData implements Initializable {
         }
     }
 
-
+    /**
+     * Builds data into the view
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         customerIDLabel.setText(String.valueOf(createId));

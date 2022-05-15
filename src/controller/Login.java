@@ -30,6 +30,8 @@ import java.util.ResourceBundle;
 
 public class Login implements Initializable {
     @FXML
+    private Label locationTextField;
+    @FXML
     private Label passwordLabel;
     @FXML
     private Label userIdLabel;
@@ -48,9 +50,10 @@ public class Login implements Initializable {
 
     Parent scene;
     Stage stage;
-    private ResourceBundle resourceBundle;
 
-
+    /**
+     * Builds data into the view
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Locale locale = resourceBundle.getLocale();
@@ -58,6 +61,7 @@ public class Login implements Initializable {
         System.out.println(Locale.getDefault());
         ZoneId id = ZoneId.systemDefault();
 
+        locationTextField.setText(resourceBundle.getString("location")+ ":");
         passwordLabel.setText(resourceBundle.getString("password")+ ":");
         userIdLabel.setText(resourceBundle.getString("username")+ ":");
         locationLabel.setText(id.toString());
@@ -66,7 +70,13 @@ public class Login implements Initializable {
         loginButton.setText(resourceBundle.getString("login"));
 
     }
-
+    /**
+     * First checks to see if the users it authenticated.
+     * Then warns of the user has an upcoming appointment in 15 minutes.
+     * if successful loads the schedule screen
+     * logs all attempts based on username and time regardless of success or failure and notes which occurred.
+     * @throws SQLException if database query fails
+     */
     public void loginButtonHandler(ActionEvent actionEvent) throws IOException, SQLException {
         boolean valid = database.DbUser.authentication(userIdTextField.getText(), passwordTextField.getText());
         try {
@@ -96,13 +106,16 @@ public class Login implements Initializable {
 
         }
 
-
+    /**
+     * Checks if login was successful.
+     * @param username writes name of user who attempted to log in to login_activity .txt
+     */
     public static void loginSuccessful(String username) {
 
         try {
             String activityLog = "login_activity.txt";
-            FileWriter fw = new FileWriter(activityLog, true);
-            PrintWriter results = new PrintWriter(fw);
+            FileWriter fileWriter = new FileWriter(activityLog, true);
+            PrintWriter results = new PrintWriter(fileWriter);
             LocalDateTime localDateTime = LocalDateTime.now();
             results.println("User: " + username + " Successfully logged in at: " + Timestamp.valueOf(localDateTime));
             results.close();
@@ -111,15 +124,18 @@ public class Login implements Initializable {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Checks if login was failed.
+     * @param username writes name of user who attempted to log in to login_activity .txt
+     */
         public static void loginFailed(String username) {
 
             try {
                 String activityLog = "login_activity.txt";
-                FileWriter fw = new FileWriter(activityLog, true);
-                PrintWriter results = new PrintWriter(fw);
+                FileWriter fileWriter = new FileWriter(activityLog, true);
+                PrintWriter results = new PrintWriter(fileWriter);
                 LocalDateTime localDateTime = LocalDateTime.now();
-                results.println("User: " + username +  " Unsuccessful log in at: " + Timestamp.valueOf(localDateTime) );
+                results.println("User: " + username +  " Unsuccessful log in at: " + Timestamp.valueOf(localDateTime));
                 results.close();
 
             } catch (IOException e) {
@@ -127,6 +143,12 @@ public class Login implements Initializable {
             }
     }
 
+    /**
+     * Creates a list of all appointments.
+     * Then checks against all appointments within 15 of start time.
+     * if the user has an appointment within timeframe add to second list upcoming-appointments.
+     * @throws SQLException if database query fails
+     */
     public ObservableList<Appointment> upcomingAppointments() throws SQLException {
         ObservableList<Appointment> allAppointments = DbAppointment.selectAppointments();
         ObservableList<Appointment> upcomingAppointments = FXCollections.observableArrayList();
@@ -134,7 +156,6 @@ public class Login implements Initializable {
             for (Appointment appointment : allAppointments){
                 LocalDateTime start = appointment.getStartTime();
                 LocalDateTime now = LocalDateTime.now();
-
                 if (start.isBefore(now.plusMinutes(15))) {
                     if (start.isAfter(now)){
                         upcomingAppointments.add(appointment);
@@ -144,7 +165,6 @@ public class Login implements Initializable {
         }
         return upcomingAppointments;
     }
-
 
 }
 

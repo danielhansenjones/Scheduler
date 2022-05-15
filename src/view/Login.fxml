@@ -32,12 +32,12 @@
         <PasswordField fx:id="passwordTextField" layoutX="150.0" layoutY="90.0" prefHeight="25.0" prefWidth="420.0" style="-fx-background-color: white; -fx-border-color: black;" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="30.0" />
     </AnchorPane>
     <AnchorPane layoutY="370.0" prefHeight="6.0" prefWidth="600.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-        <Label fx:id="locationLabel" layoutX="73.0" layoutY="7.0" prefHeight="21.0" prefWidth="290.0" text="North America" AnchorPane.bottomAnchor="3.0" AnchorPane.topAnchor="7.0">
+        <Label fx:id="locationLabel" layoutX="98.0" layoutY="6.0" prefHeight="21.0" prefWidth="290.0" text="North America" AnchorPane.bottomAnchor="4.0" AnchorPane.topAnchor="6.0">
             <font>
                 <Font size="13.0" />
             </font>
         </Label>
-        <Label layoutY="7.0" text="Location:" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="7.0">
+        <Label fx:id="locationTextField" layoutY="7.0" text="Location:" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="7.0">
             <font>
                 <Font size="13.0" />
             </font>
