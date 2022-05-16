@@ -114,7 +114,7 @@ public class UpdateAppointment implements Initializable {
               ConfirmationScreens.warningScreen("Outside Of Business Hours", "Business hours are 8AM to 10PM EST, including Weekends", "Please choose a different Time");
               return;
           }
-          try {
+       /*   try {
               ObservableList<Appointment> appointments = DbAppointment.selectAppointmentsByCustomerId(customerComboBox.getValue().getCustomerId());
               for (Appointment appointment: appointments) {
                   LocalDateTime overlapStartTime = appointment.getStartDate().atTime(appointment.getStartTime().toLocalTime());
@@ -132,7 +132,7 @@ public class UpdateAppointment implements Initializable {
               }
           } catch (SQLException e) {
               e.printStackTrace();
-          }
+          }*/
           try {
               DbAppointment.updateAppointment(String.valueOf(appointmentContact), appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, startTime, endTime, appointmentCustomer, appointmentUser, appointmentId);
           } catch (Exception e) {
