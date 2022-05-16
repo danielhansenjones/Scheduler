@@ -123,9 +123,6 @@ public class CustomerData implements Initializable {
         String phone = phoneTextField.getText();
         if (fieldValidation()) {
             DbCustomer.insertCustomer(customerName, address, postalCode, phone, String.valueOf(division));
-            //Lambda expression prints out message when adding the customer is successful.
-            new Thread(() -> System.out.println(customerName + "Added Successfully"));
-
             try {
                 customerTableView.setItems(DbCustomer.selectCustomers());
             } catch (SQLException e) {

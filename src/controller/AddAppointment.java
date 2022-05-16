@@ -114,14 +114,17 @@ public class AddAppointment implements Initializable {
                 return;
             }
             try {
-                ObservableList<Appointment> appointments = DbAppointment.selectAppointmentsByCustomerId(customerComboBox.getSelectionModel().getSelectedIndex());
+                ObservableList<Appointment> appointments = DbAppointment.selectAppointmentsByCustomerId(customerComboBox.getValue().getCustomerId());
                 for (Appointment appointment: appointments) {
                     LocalDateTime overlapStartTime = appointment.getStartDate().atTime(appointment.getStartTime().toLocalTime());
                     LocalDateTime overlapEndTime = appointment.getEndDate().atTime(appointment.getEndTime().toLocalTime());
                     if (overlapStartTime.isAfter(startTime)|overlapStartTime.isEqual(startTime) && overlapStartTime.isBefore(endTime)) {
                        ConfirmationScreens.warningScreen("Overlap","Customer appointments must not overlap","Selected a different time");
-                        return;
-                    } else if (overlapEndTime.isAfter(startTime) && overlapEndTime.isBefore(endTime)) {
+                        return; }
+                        if (overlapStartTime.isBefore(startTime)|overlapStartTime.isEqual(startTime) && overlapEndTime.isAfter(endTime)| overlapEndTime.isEqual(endTime)) {
+                            ConfirmationScreens.warningScreen("Overlap","Customer appointments must not overlap","Selected a different time");
+                            return;
+                    } else if (overlapEndTime.isAfter(startTime) && overlapEndTime.isBefore(endTime)| overlapEndTime.isEqual(endTime)) {
                         ConfirmationScreens.warningScreen("Overlap","Customer appointments must not overlap","Selected a different time");
                         return;
                     }
@@ -131,8 +134,6 @@ public class AddAppointment implements Initializable {
             }
             try {
                 DbAppointment.insertAppointment(String.valueOf(contact), appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, startTime, endTime, appointmentCustomer, appointmentUser);
-                //Lambda expression prints out message when adding the appointment is successful.
-                new Thread(() -> System.out.println(appointmentTitle + "Added Successfully"));
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
             }

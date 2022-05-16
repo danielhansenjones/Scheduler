@@ -109,14 +109,18 @@ public class Schedule implements Initializable {
 
     Parent scene;
     Stage stage;
-
+    /**
+     * loads add appointment screen
+     */
     public void addButtonHandler(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/AddAppointment.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
-
+    /**
+     * loads update appointment screen  if an appointment is selected
+     */
     public void updateButtonHandler(ActionEvent actionEvent) throws IOException {
         if(appointmentTableView.getSelectionModel().getSelectedItem() != null) {
             UpdateAppointment.sendUpdateAppointment((Appointment) appointmentTableView.getSelectionModel().getSelectedItem());
@@ -129,14 +133,18 @@ public class Schedule implements Initializable {
             ConfirmationScreens.warningScreen("No Appointment Selected", "You must Select an Appointment", "Please choose from table");
         }
     }
-
+    /**
+     * loads customer data screen
+     */
     public void customerButtonHandler(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/CustomerData.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
-
+    /**
+     * loads report data screen
+     */
     public void reportsButtonHandler(ActionEvent actionEvent) throws IOException {
         stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/Reports.fxml"));
@@ -144,6 +152,11 @@ public class Schedule implements Initializable {
         stage.show();
     }
 
+
+    /**
+     * Deletes a selected customer.
+     * @param actionEvent delete a selected customer on button press
+     */
     public void deleteButtonHandler(ActionEvent actionEvent) throws IOException, SQLException {
         Appointment appointment = (Appointment) appointmentTableView.getSelectionModel().getSelectedItem();
         if (appointment != null) {
@@ -161,7 +174,9 @@ public class Schedule implements Initializable {
             ConfirmationScreens.warningScreen("No Appointment Selected", "You must Select an Appointment", "Please choose from table");
         }
     }
-
+    /**
+     * Shows all appointments
+     */
     public void overviewTabHandler(Event event) throws SQLException {
         appointmentTableView.setItems(DbAppointment.selectAppointments());
 
@@ -176,7 +191,9 @@ public class Schedule implements Initializable {
         customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
-
+    /**
+     * shows all appointments this month
+     */
     public void monthTabHandler(Event event) throws SQLException {
 
         appointmentMonthTableview.setItems(DbAppointment.selectAppointmentsByMonth());
@@ -193,6 +210,9 @@ public class Schedule implements Initializable {
         monthUserIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
 
+    /**
+     * shows all appointments within one week
+     */
     public void weekTabHandler(Event event) throws SQLException {
         appointmentWeekTableview.setItems(DbAppointment.selectAppointmentsByWeek());
 
