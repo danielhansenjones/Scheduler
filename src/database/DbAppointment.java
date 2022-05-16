@@ -159,7 +159,7 @@ public class DbAppointment {
             if (preparedStatement.getUpdateCount() > 0) {
                 System.out.println("Rows affected: " + preparedStatement.getUpdateCount());
             } else {
-                System.out.println("No change");
+                System.out.println("No Database Changes");
             }
             return true;
         } catch (Exception e) {
@@ -181,7 +181,7 @@ public class DbAppointment {
             if (preparedStatement.getUpdateCount() > 0) {
                 System.out.println("Rows affected: " + preparedStatement.getUpdateCount());
             } else {
-                System.out.println("No change");
+                System.out.println("No Database Changes");
             }
             return true;
         } catch (Exception e) {
@@ -226,7 +226,7 @@ public class DbAppointment {
             if (preparedStatement.getUpdateCount() > 0) {
                 System.out.println("Rows affected: " + preparedStatement.getUpdateCount());
             } else {
-                System.out.println("No change");
+                System.out.println("No Database Changes");
             }
             return true;
         } catch (Exception e) {

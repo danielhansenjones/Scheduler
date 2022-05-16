@@ -139,7 +139,6 @@ public class CustomerData implements Initializable {
      * after all checks are completed it will delete the customer.
      * @throws SQLException if database query fails
      */
-
     public void deleteButtonHandler(ActionEvent actionEvent) throws SQLException {
         Customer selectedCustomer = (Customer) customerTableView.getSelectionModel().getSelectedItem();
         if (selectedCustomer == null) {
@@ -162,8 +161,6 @@ public class CustomerData implements Initializable {
             }
         }
     }
-
-
     /**
      * Clears all fields including selections
      */
@@ -186,7 +183,6 @@ public class CustomerData implements Initializable {
      * Adds all information about a selected customer to the modified fields to allow for changes.
      * @throws SQLException if database query fails
      */
-
     public void modifyButtonHandler(ActionEvent actionEvent) throws SQLException {
         Customer customer = (Customer) customerTableView.getSelectionModel().getSelectedItem();
         if (customer != null) {
@@ -205,7 +201,6 @@ public class CustomerData implements Initializable {
             ConfirmationScreens.warningScreen("No Customer Selected", "You must Select a Customer", "Please choose from table");
         }
     }
-
 
     /**
      * Saves all fields to update a customer either modified or new.

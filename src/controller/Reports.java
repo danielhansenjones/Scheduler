@@ -118,15 +118,15 @@ public class Reports implements Initializable {
     public void totalTabHandler(Event event) throws SQLException {
         try {
             ObservableList<Appointment> typeMonthReport = FXCollections.observableArrayList();
-            String sqlQuery = "SELECT MonthName(Start) AS monthName , Type AS typeName, COUNT(*) AS amount FROM appointments GROUP BY MONTHNAME (Start), Type";
+            String sqlQuery = "SELECT MonthName(Start) AS month , Type AS type, COUNT(*) AS amount FROM appointments GROUP BY MONTHNAME(Start), Type";
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
 
-                String month = resultSet.getString("monthName");
+                String month = resultSet.getString("month");
 
-                String type = resultSet.getString("typeName");
+                String type = resultSet.getString("type");
 
                 String amount = resultSet.getString("amount");
 
@@ -147,6 +147,12 @@ public class Reports implements Initializable {
      * @throws SQLException if database query fails
      */
     public void contactComboSelected(ActionEvent actionEvent) throws SQLException {
+        // Lambda expression checks to ensure that combo box selection is not a null value if it is it clears the table.
+        contactScheduleTableview.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection == null) {
+                contactScheduleTableview.getSelectionModel().clearSelection();
+            }
+        });
         {
             if (contactComboBox.getValue() == null) {
                 contactScheduleTableview.getSelectionModel().clearSelection();
@@ -155,7 +161,6 @@ public class Reports implements Initializable {
                     Contact aContact = contactComboBox.getValue();
                     int contactId = aContact.getContactId();
                     contactScheduleTableview.setItems(DbAppointment.selectAppointmentsByContactId(contactId));
-
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -190,7 +195,13 @@ public class Reports implements Initializable {
      * @throws SQLException if database query fails
      */
     public void customerComboBoxSelected(ActionEvent actionEvent) throws SQLException {
-       {
+        // Lambda expression checks to ensure that combo box selection is not a null value if it is it clears the table.
+        contactScheduleTableview1.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection == null) {
+                contactScheduleTableview1.getSelectionModel().clearSelection();
+            }
+        });
+        {
             if (customerComboBox1.getValue() == null) {
                 contactScheduleTableview1.getSelectionModel().clearSelection();
             } else {

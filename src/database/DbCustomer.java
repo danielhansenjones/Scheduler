@@ -74,7 +74,7 @@ public class DbCustomer {
             if (preparedStatement.getUpdateCount() > 0) {
                 System.out.println("Rows affected: " + preparedStatement.getUpdateCount());
             } else {
-                System.out.println("No change");
+                System.out.println("No Database Changes");
             }
             return true;
         } catch (Exception e) {
@@ -113,7 +113,7 @@ public class DbCustomer {
             if (preparedStatement.getUpdateCount() > 0) {
                 System.out.println("Rows affected: " + preparedStatement.getUpdateCount());
             } else {
-                System.out.println("No change");
+                System.out.println("No Database Changes");
             }
             return true;
         } catch (Exception e) {
@@ -134,12 +134,11 @@ public class DbCustomer {
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
             preparedStatement.setInt(1, customerId);
             preparedStatement.execute();
-
-
+            
             if (preparedStatement.getUpdateCount() > 0) {
                 System.out.println("Rows affected: " + preparedStatement.getUpdateCount());
             } else {
-                System.out.println("No change");
+                System.out.println("No Database Changes");
             }
             return true;
         } catch (Exception e) {

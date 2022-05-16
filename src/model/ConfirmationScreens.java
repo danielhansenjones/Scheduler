@@ -18,7 +18,6 @@ public class ConfirmationScreens {
         Optional<ButtonType> result = alert.showAndWait();
         return result.get() == ButtonType.OK;
     }
-
     /**
      * Warning screen function designed to allow different warnings based on the error or to inform the user what inputs are required for validations this function massively reduced repeating lines of code.
      */

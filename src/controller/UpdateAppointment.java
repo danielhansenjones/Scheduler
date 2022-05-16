@@ -114,7 +114,8 @@ public class UpdateAppointment implements Initializable {
               ConfirmationScreens.warningScreen("Outside Of Business Hours", "Business hours are 8AM to 10PM EST, including Weekends", "Please choose a different Time");
               return;
           }
-       /*   try {
+       /*  block removed as it will cause conflicts for appointment if updating to the same time.
+        try {
               ObservableList<Appointment> appointments = DbAppointment.selectAppointmentsByCustomerId(customerComboBox.getValue().getCustomerId());
               for (Appointment appointment: appointments) {
                   LocalDateTime overlapStartTime = appointment.getStartDate().atTime(appointment.getStartTime().toLocalTime());

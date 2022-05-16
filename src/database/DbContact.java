@@ -21,7 +21,6 @@ public class DbContact {
             PreparedStatement preparedStatement = DatabaseAccess.getConnection().prepareStatement(sqlQuery);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-
             // Forward scroll resultSet
             while (resultSet.next()) {
                 Contact newContact = new Contact(

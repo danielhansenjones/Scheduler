@@ -81,7 +81,7 @@ public class Login implements Initializable {
         boolean valid = database.DbUser.authentication(userIdTextField.getText(), passwordTextField.getText());
         try {
             if (valid) {
-                if( upcomingAppointments().size()>=1){
+                if(upcomingAppointments().size()>=1){
                     for (Appointment appointment: upcomingAppointments()){
                         ConfirmationScreens.informationScreen("You have an upcoming appointment","Appointment ID #: " + appointment.getAppointmentId(),"Appointment in less than 15 minutes");
                     }
