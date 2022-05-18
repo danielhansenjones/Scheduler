@@ -186,8 +186,8 @@ public class Schedule implements Initializable {
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         contactColumn.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
@@ -204,8 +204,8 @@ public class Schedule implements Initializable {
         monthLocationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         monthContactColumn.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         monthTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        monthStartDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        monthEndDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        monthStartDateColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        monthEndDateColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         monthCustomerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         monthUserIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
@@ -222,8 +222,8 @@ public class Schedule implements Initializable {
         weekLocationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         weekContactColumn.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         weekTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        weekStartDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        weekEndDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        weekStartDateColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        weekEndDateColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         weekCustomerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         weekUserIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
@@ -242,8 +242,8 @@ public class Schedule implements Initializable {
             locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
             contactColumn.setCellValueFactory(new PropertyValueFactory<>("contactName"));
             typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-            startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-            endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+            startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+            endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
             customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
             userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
         } catch (SQLException e) {

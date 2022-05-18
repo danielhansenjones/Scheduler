@@ -185,8 +185,8 @@ public class Reports implements Initializable {
         locationColumn1.setCellValueFactory(new PropertyValueFactory<>("description"));
         contactColumn1.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         typeColumn1.setCellValueFactory(new PropertyValueFactory<>("type"));
-        startDateColumn1.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        endDateColumn1.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        startDateColumn1.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        endDateColumn1.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         customerIDColumn1.setCellValueFactory(new PropertyValueFactory<>("customerId"));
     }
 
@@ -217,7 +217,6 @@ public class Reports implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-
             contactComboBox.setItems(DbContact.selectContacts());
             contactScheduleTableview.setItems(DbAppointment.selectAppointments());
         } catch (SQLException e) {
@@ -230,8 +229,8 @@ public class Reports implements Initializable {
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         contactColumn.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
 
     }

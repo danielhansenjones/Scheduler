@@ -4,7 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="972.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Schedule">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="972.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Schedule">
     <ImageView fitHeight="615.0" fitWidth="973.0" pickOnBounds="true" AnchorPane.topAnchor="0.0">
         <Image url="@../assets/black-background.jpg" />
     </ImageView>
@@ -63,7 +63,7 @@
                                 <TableColumn fx:id="weekStartDateColumn" prefWidth="115.0" text="Start Date/Time" />
                                 <TableColumn fx:id="weekEndDateColumn" prefWidth="115.0" text="End Date/Time" />
                                 <TableColumn fx:id="weekCustomerIDColumn" text="Customer ID" />
-                        <TableColumn fx:id="weekUserIdColumn" text=" User ID" />
+                        <TableColumn fx:id="weekUserIdColumn" prefWidth="74.0" text=" User ID" />
                             </columns>
                         </TableView>
                     </AnchorPane>

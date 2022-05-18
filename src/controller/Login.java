@@ -83,7 +83,7 @@ public class Login implements Initializable {
             if (valid) {
                 if(upcomingAppointments().size()>=1){
                     for (Appointment appointment: upcomingAppointments()){
-                        ConfirmationScreens.informationScreen("You have an upcoming appointment","Appointment ID #: " + appointment.getAppointmentId(),"Appointment in less than 15 minutes");
+                        ConfirmationScreens.informationScreen("You have an upcoming appointment","Appointment ID #: " + appointment.getAppointmentId(),"Appointment in less than 15 minutes" + appointment.getStartTime());
                     }
                 }
                 loginSuccessful(String.valueOf(userIdTextField.getText()));
